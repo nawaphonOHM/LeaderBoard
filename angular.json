@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "test": {
+    "xaidas-assignment2": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -62,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "test:build:production"
+              "buildTarget": "xaidas-assignment2:build:production"
             },
             "development": {
-              "buildTarget": "test:build:development"
+              "buildTarget": "xaidas-assignment2:build:development"
             }
           },
           "defaultConfiguration": "development"
