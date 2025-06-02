@@ -37,7 +37,7 @@ export class DashboardTable {
     {
       firstName: 'John',
       lastName: 'Doe',
-      nationality: 'USA',
+      nationalityUrlImage: 'https://flagsapi.com/US/flat/32.png',
       timeUsedInMillisecond: 1000
     },
   ]

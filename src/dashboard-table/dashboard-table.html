@@ -12,7 +12,10 @@
 
   <ng-container matColumnDef="nationality">
     <th mat-header-cell *matHeaderCellDef>Nationality</th>
-    <td mat-cell *matCellDef="let element ">{{element.nationality}}</td>
+    <td mat-cell *matCellDef="let element ">
+      <img [ngSrc]="element.nationalityUrlImage"
+           alt="flag" width="32" height="32">
+    </td>
   </ng-container>
 
 
