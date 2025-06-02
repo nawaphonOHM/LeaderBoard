@@ -55,7 +55,12 @@ export class DashboardTable implements AfterViewInit, OnDestroy{
     readonly changeDetectorRef: ChangeDetectorRef,
     readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
     this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
-      .pipe(filter(messages => messages.state === 'SEND_REQUEST')).subscribe()
+      .pipe(filter(messages => messages.state === 'SEND_REQUEST'))
+      .subscribe((result) => {
+        this.data.push(result.data as DashboardTableData)
+
+        this.sortedData.data = this.data
+      })
   }
 
   ngOnDestroy(): void {
