@@ -13,6 +13,9 @@ import {FulNamePipe} from '../pipes/fulName-pipe';
 import {NgOptimizedImage} from '@angular/common';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {TimeMinSecondMilliSecondPipe} from '../pipes/time-min-second-milli-second-pipe';
+import {
+  DashBoardAddNewRunnerCoordinatorRadioTower
+} from '../services/dash-board-add-new-runner-coordinator-radio-tower';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -58,7 +61,9 @@ export class DashboardTable implements AfterViewInit{
 
   protected readonly sortedData = new MatTableDataSource(this.data);
 
-  constructor(readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    readonly changeDetectorRef: ChangeDetectorRef,
+    readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {}
 
 
   ngAfterViewInit(): void {
