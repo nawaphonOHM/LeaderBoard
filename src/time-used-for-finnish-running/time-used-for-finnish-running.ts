@@ -39,6 +39,12 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
   })
 
   private readonly subscription = this.inputGroup.valueChanges.subscribe(value => {
+
+    if (this.inputGroup.invalid) {
+      this.input.setValue(-1)
+    }
+
+
     const seconds = parseInt(value.seconds || '0')
     const minutes = parseInt(value.minutes || '0')
     const milliseconds = parseInt(value.milliseconds || '0')
