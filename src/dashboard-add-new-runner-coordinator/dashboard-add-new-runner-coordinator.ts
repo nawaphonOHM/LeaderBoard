@@ -28,7 +28,7 @@ export class DashboardAddNewRunnerCoordinator implements OnDestroy{
 
   openNewRunnerDialog() {
     this.matDialog.open(NewRunnerRegister, { disableClose: true }).afterClosed().subscribe((result: DashBoardAddNewRunnerData) => {
-      console.log(`Dialog is closed: ${result}`)
+      console.log(`Dialog is closed: ${JSON.stringify(result)}`)
       this.dashBoardAddNewRunnerCoordinatorRadioTower.emitMessage({
         state: 'SEND_REQUEST',
         data: result
