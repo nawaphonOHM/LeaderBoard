@@ -12,6 +12,7 @@ import {
 import {FulNamePipe} from '../pipes/fulName-pipe';
 import {NgOptimizedImage} from '@angular/common';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
+import {TimeMinSecondMilliSecondPipe} from '../pipes/time-min-second-milli-second-pipe';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -29,7 +30,8 @@ import {MatSort, MatSortHeader} from '@angular/material/sort';
     MatRowDef,
     NgOptimizedImage,
     MatSortHeader,
-    MatSort
+    MatSort,
+    TimeMinSecondMilliSecondPipe
   ],
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
