@@ -1,1 +1,11 @@
-<p>new-runner-register works!</p>
+<h2 mat-dialog-title>Add Runner who finishes line. here</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="firstName">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="cancelCallback()">Next time</button>
+  <button matButton [mat-dialog-close]="firstName" >Save</button>
+</mat-dialog-actions>
