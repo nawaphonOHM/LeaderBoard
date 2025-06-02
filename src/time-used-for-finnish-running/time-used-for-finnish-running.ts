@@ -49,7 +49,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
     const minutes = parseInt(value.minutes || '0')
     const milliseconds = parseInt(value.milliseconds || '0')
 
-    this.input.setValue(minutes * 60 * 1000 + seconds * 1000 + milliseconds)
+    this.input.setValue((minutes * 60 * 1000) + (seconds * 1000) + milliseconds)
   })
 
   ngOnDestroy(): void {
