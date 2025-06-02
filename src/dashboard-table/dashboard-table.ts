@@ -45,20 +45,7 @@ export class DashboardTable implements AfterViewInit, OnDestroy{
 
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
-  protected readonly data: DashboardTableData[] = [
-    {
-      firstName: 'Nawaphon',
-      lastName: 'Isarathanachaikul',
-      nationalityUrlImage: 'https://flagsapi.com/TH/flat/32.png',
-      timeUsedInMillisecond: 9000
-    },
-    {
-      firstName: 'John',
-      lastName: 'Doe',
-      nationalityUrlImage: 'https://flagsapi.com/US/flat/32.png',
-      timeUsedInMillisecond: 1000
-    },
-  ]
+  protected readonly data: DashboardTableData[] = []
 
   protected readonly sortedData = new MatTableDataSource(this.data);
 
