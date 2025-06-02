@@ -1,9 +1,9 @@
 
 
-app-general-input:nth-child(even) {
+mat-form-field:nth-child(even) {
   margin-left: 0.5rem;
 }
 
-app-general-input:nth-child(odd) {
+mat-form-field:nth-child(odd) {
   margin-right: 0.5rem;
 }

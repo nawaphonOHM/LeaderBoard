@@ -7,6 +7,7 @@ import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner
 import {GeneralInput} from '../general-input/general-input';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
 import {TimeUsedForFinnishRunning} from '../time-used-for-finnish-running/time-used-for-finnish-running';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -21,6 +22,7 @@ import {TimeUsedForFinnishRunning} from '../time-used-for-finnish-running/time-u
     GeneralInput,
     CountrySelectComponent,
     TimeUsedForFinnishRunning,
+    NgClass,
   ],
   templateUrl: './new-runner-register.html',
   styleUrl: './new-runner-register.scss'
