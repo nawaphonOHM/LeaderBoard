@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
