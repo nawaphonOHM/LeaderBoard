@@ -10,6 +10,7 @@ import {
   MatTable
 } from '@angular/material/table';
 import {FulNamePipe} from '../pipes/fulName-pipe';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -24,7 +25,8 @@ import {FulNamePipe} from '../pipes/fulName-pipe';
     MatHeaderRow,
     MatRow,
     MatHeaderRowDef,
-    MatRowDef
+    MatRowDef,
+    NgOptimizedImage
   ],
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
