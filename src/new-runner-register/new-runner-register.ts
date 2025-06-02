@@ -5,6 +5,7 @@ import {MatButton} from '@angular/material/button';
 import {MatDialogRef} from '@angular/material/dialog';
 import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner-data';
 import {GeneralInput} from '../general-input/general-input';
+import {CountrySelectComponent} from '@wlucha/ng-country-select';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -17,6 +18,7 @@ import {GeneralInput} from '../general-input/general-input';
     MatDialogClose,
     ReactiveFormsModule,
     GeneralInput,
+    CountrySelectComponent,
   ],
   templateUrl: './new-runner-register.html',
   styleUrl: './new-runner-register.scss'
