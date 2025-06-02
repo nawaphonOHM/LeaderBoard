@@ -54,11 +54,21 @@ export class NewRunnerRegister {
       }
     }
 
+    if (rawInput.nationality?.alpha2 === undefined) {
+      console.log('invalid nationality')
+      return {
+        firstName: '',
+        lastName: '',
+        nationalityUrlImage: '',
+        timeUsedInMillisecond: -1
+      }
+    }
+
 
     return {
       firstName: rawInput.firstName || '',
       lastName: rawInput.lastName || '',
-      nationalityUrlImage: rawInput.nationality?.alpha2 || '',
+      nationalityUrlImage: `https://flagsapi.com/${rawInput.nationality?.alpha2.toUpperCase()}/flat/32.png` || '',
       timeUsedInMillisecond: rawInput.timeUsedInMillisecond || -1
 
     }
