@@ -58,6 +58,11 @@ export class DashboardTable implements AfterViewInit{
 
   ngAfterViewInit(): void {
     this.sortedData.sort = this.sort;
+    this.sortedData.sort?.sort({
+      id: 'timeUsedInMillisecond',
+      start: 'asc',
+      disableClear: true
+    })
   }
 
 }
