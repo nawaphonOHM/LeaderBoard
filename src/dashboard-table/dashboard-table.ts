@@ -27,11 +27,13 @@ import {NgOptimizedImage} from '@angular/common';
     MatHeaderRowDef,
     MatRowDef,
     NgOptimizedImage
+    MatSort
   ],
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
 })
 export class DashboardTable {
+  @ViewChild(MatSort) sort: MatSort | null = null;
 
   protected columnDefs: string[] = ['no', 'fullName', 'nationality', 'time'];
 
