@@ -17,4 +17,8 @@ export class DashboardAddNewRunnerButton {
   constructor(readonly dashBoardAddNewRunnerButtonRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
   }
 
+  askForNewRunner() {
+    this.dashBoardAddNewRunnerButtonRadioTower.emitMessage(null)
+  }
+
 }
