@@ -23,7 +23,12 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class NewRunnerRegister {
 
-  protected readonly firstName = model('')
+  protected readonly inputGroup = new FormGroup({
+    firstName: new FormControl('', [ Validators.required ]),
+    lastName: new FormControl('', [ Validators.required ]),
+    nationality: new FormControl('', [ Validators.required ]),
+    timeUsedInMillisecond: new FormControl('', [ Validators.required ])
+  })
 
   constructor(readonly matDialog: MatDialogRef<NewRunnerRegister>) {
   }
