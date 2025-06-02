@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
 } from '../services/dash-board-add-new-runner-coordinator-radio-tower';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard-add-new-runner-coordinator',
@@ -14,7 +15,10 @@ export class DashboardAddNewRunnerCoordinator implements OnDestroy{
 
   private readonly requestNewDialogListener: Subscription
 
-  constructor(readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
+  constructor(
+    readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower,
+    readonly matDialog: MatDialog
+  ) {
     this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable().subscribe()
   }
 
