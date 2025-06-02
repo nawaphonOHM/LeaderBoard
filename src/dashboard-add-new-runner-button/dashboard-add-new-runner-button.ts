@@ -18,7 +18,10 @@ export class DashboardAddNewRunnerButton {
   }
 
   askForNewRunner() {
-    this.dashBoardAddNewRunnerButtonRadioTower.emitMessage(null)
+    this.dashBoardAddNewRunnerButtonRadioTower.emitMessage({
+      state: 'RESPONSE_DATA',
+      data: null
+    })
   }
 
 }
