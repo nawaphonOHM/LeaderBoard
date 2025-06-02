@@ -46,4 +46,6 @@ export class DashboardTable {
     },
   ]
 
+  protected sortedData = new MatTableDataSource(this.data);
+
 }
