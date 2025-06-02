@@ -1,6 +1,7 @@
 import {Component, Input, OnDestroy} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MILLISECONDS_IN_SECOND, SECOND_IN_MINUTE} from '../variables/timeUnit';
 
 @Component({
   selector: 'app-time-used-for-finnish-running',
@@ -49,7 +50,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
     const minutes = parseInt(value.minutes || '0')
     const milliseconds = parseInt(value.milliseconds || '0')
 
-    this.input.setValue((minutes * 60 * 1000) + (seconds * 1000) + milliseconds)
+    this.input.setValue((minutes * SECOND_IN_MINUTE * MILLISECONDS_IN_SECOND) + (seconds * MILLISECONDS_IN_SECOND) + milliseconds)
   })
 
   ngOnDestroy(): void {
