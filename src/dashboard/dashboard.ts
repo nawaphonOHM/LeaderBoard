@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {DashboardHeader} from '../dashboard-header/dashboard-header';
 import {DashboardTable} from '../dashboard-table/dashboard-table';
-import {DashboardAddNewRunner} from '../dashboard-add-new-runner/dashboard-add-new-runner';
+import {DashboardAddNewRunnerButton} from '../dashboard-add-new-runner-button/dashboard-add-new-runner-button';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,7 @@ import {DashboardAddNewRunner} from '../dashboard-add-new-runner/dashboard-add-n
     MatCardHeader,
     MatCardContent,
     MatCardActions,
-    DashboardAddNewRunner
+    DashboardAddNewRunnerButton
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
