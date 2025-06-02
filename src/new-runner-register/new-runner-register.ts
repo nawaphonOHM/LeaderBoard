@@ -31,7 +31,7 @@ export class NewRunnerRegister {
     firstName: new FormControl('', [ Validators.required ]),
     lastName: new FormControl('', [ Validators.required ]),
     nationality: new FormControl<Country | null>(null, [ Validators.required ]),
-    timeUsedInMillisecond: new FormControl('', [ Validators.required ])
+    timeUsedInMillisecond: new FormControl(0, [ Validators.min(0) ])
   })
 
   constructor(readonly matDialog: MatDialogRef<NewRunnerRegister>) {
@@ -49,7 +49,7 @@ export class NewRunnerRegister {
         firstName: '',
         lastName: '',
         nationalityUrlImage: '',
-        timeUsedInMillisecond: 0
+        timeUsedInMillisecond: -1
       }
     }
 
@@ -58,7 +58,7 @@ export class NewRunnerRegister {
       firstName: rawInput.firstName || '',
       lastName: rawInput.lastName || '',
       nationalityUrlImage: rawInput.nationality?.alpha2 || '',
-      timeUsedInMillisecond: Number.parseInt(rawInput.timeUsedInMillisecond || '0')
+      timeUsedInMillisecond: rawInput.timeUsedInMillisecond || -1
 
     }
   }
