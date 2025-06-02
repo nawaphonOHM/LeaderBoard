@@ -19,7 +19,9 @@ export class DashboardAddNewRunnerCoordinator implements OnDestroy{
     readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower,
     readonly matDialog: MatDialog
   ) {
-    this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable().subscribe()
+    this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
+      .pipe(filter(message => message.state === 'RESPONSE_DATA'))
+      .subscribe(this.openNewRunnerDialog.bind(this))
   }
 
   ngOnDestroy(): void {
