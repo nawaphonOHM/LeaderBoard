@@ -3,6 +3,9 @@ import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from '@angular/m
 import {DashboardHeader} from '../dashboard-header/dashboard-header';
 import {DashboardTable} from '../dashboard-table/dashboard-table';
 import {DashboardAddNewRunnerButton} from '../dashboard-add-new-runner-button/dashboard-add-new-runner-button';
+import {
+  DashboardAddNewRunnerCoordinator
+} from '../dashboard-add-new-runner-coordinator/dashboard-add-new-runner-coordinator';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +16,8 @@ import {DashboardAddNewRunnerButton} from '../dashboard-add-new-runner-button/da
     MatCardHeader,
     MatCardContent,
     MatCardActions,
-    DashboardAddNewRunnerButton
+    DashboardAddNewRunnerButton,
+    DashboardAddNewRunnerCoordinator
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
