@@ -4,6 +4,9 @@
     <mat-form-field>
       <mat-label>First Name</mat-label>
       <input matInput formControlName="firstName">
+      @if (inputGroup.controls.firstName.invalid) {
+        <mat-error>I need first name</mat-error>
+      }
     </mat-form-field>
   </form>
 </mat-dialog-content>
