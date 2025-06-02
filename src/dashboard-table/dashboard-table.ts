@@ -6,7 +6,7 @@ import {
   MatColumnDef,
   MatHeaderCell,
   MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatHeaderRow, MatHeaderRowDef, MatNoDataRow, MatRow, MatRowDef,
   MatTable, MatTableDataSource
 } from '@angular/material/table';
 import {FulNamePipe} from '../pipes/fulName-pipe';
@@ -35,7 +35,8 @@ import {filter, Subscription} from 'rxjs';
     NgOptimizedImage,
     MatSortHeader,
     MatSort,
-    TimeMinSecondMilliSecondPipe
+    TimeMinSecondMilliSecondPipe,
+    MatNoDataRow
   ],
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'

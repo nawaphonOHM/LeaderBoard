@@ -26,6 +26,9 @@
 
   <tr mat-header-row *matHeaderRowDef="columnDefs"></tr>
   <tr mat-row *matRowDef="let row; columns: columnDefs;"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell">Nothing in here</td>
+  </tr>
 
 
 </table>
