@@ -37,9 +37,9 @@ import {MatSort, MatSortHeader} from '@angular/material/sort';
 export class DashboardTable implements AfterViewInit{
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  protected columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
+  protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
-  protected data: DashboardTableData[] = [
+  protected readonly data: DashboardTableData[] = [
     {
       firstName: 'Nawaphon',
       lastName: 'Isarathanachaikul',
@@ -54,7 +54,7 @@ export class DashboardTable implements AfterViewInit{
     },
   ]
 
-  protected sortedData = new MatTableDataSource(this.data);
+  protected readonly sortedData = new MatTableDataSource(this.data);
 
   constructor(readonly changeDetectorRef: ChangeDetectorRef) {}
 
