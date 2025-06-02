@@ -1,11 +1,46 @@
 import { Component } from '@angular/core';
+import {DashboardTableData} from '../interfaces/dashboard-table-data';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from '@angular/material/table';
+import {FulNamePipe} from '../pipes/fulName-pipe';
 
 @Component({
   selector: 'app-dashboard-table',
-  imports: [],
+  imports: [
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatCell,
+    MatCellDef,
+    FulNamePipe,
+    MatHeaderRow,
+    MatRow,
+    MatHeaderRowDef,
+    MatRowDef
+  ],
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
 })
 export class DashboardTable {
+
+  protected columnDefs: string[] = ['no', 'fullName', 'nationality', 'time'];
+
+  protected data: DashboardTableData[] = [
+    {
+      no: 1,
+      firstName: 'John',
+      lastName: 'Doe',
+      nationality: 'USA',
+      timeUsedInMillisecond: 1000
+    },
+  ]
 
 }
