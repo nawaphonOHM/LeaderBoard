@@ -4,7 +4,6 @@ import {MatCardHeader, MatCardTitle} from "@angular/material/card";
 @Component({
   selector: 'app-dashboard-header',
     imports: [
-        MatCardHeader,
         MatCardTitle
     ],
   templateUrl: './dashboard-header.html',
