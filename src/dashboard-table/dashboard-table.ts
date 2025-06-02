@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
@@ -40,7 +40,7 @@ import {filter, Subscription} from 'rxjs';
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
 })
-export class DashboardTable implements AfterViewInit{
+export class DashboardTable implements AfterViewInit, OnDestroy{
   @ViewChild(MatSort) sort: MatSort | null = null;
 
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
@@ -70,6 +70,10 @@ export class DashboardTable implements AfterViewInit{
     this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
       .pipe(filter(messages => messages.state === 'SEND_REQUEST')).subscribe()
   }
+
+  ngOnDestroy(): void {
+        this.requestNewDialogListener.unsubscribe()
+    }
 
 
   ngAfterViewInit(): void {
