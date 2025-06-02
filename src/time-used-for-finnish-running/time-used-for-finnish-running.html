@@ -1,0 +1,46 @@
+<form [formGroup]="inputGroup">
+  <mat-form-field>
+    <mat-label>Time used (mins)</mat-label>
+    <input matInput formControlName="minutes">
+    @if (inputGroup.controls.minutes.hasError('min')) {
+      <mat-error>You entered invalid minutes. A valid minute should be a number which is not more than or equal 0
+      </mat-error>
+    }
+    @if (inputGroup.controls.minutes.hasError('pattern')) {
+      <mat-error>What did you enter. You need provide a number</mat-error>
+    }
+    @if (inputGroup.controls.minutes.hasError('required')) {
+      <mat-error>I need this</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Time used (second)</mat-label>
+    <input matInput formControlName="seconds">
+    @if (inputGroup.controls.seconds.hasError('min') || inputGroup.controls.seconds.hasError('max')) {
+      <mat-error>You entered invalid second. A valid second should be a number which is not less than 59 and and more
+        than or equal 0
+      </mat-error>
+    }
+    @if (inputGroup.controls.seconds.hasError('pattern')) {
+      <mat-error>What did you enter. You need provide a number</mat-error>
+    }
+    @if (inputGroup.controls.seconds.hasError('required')) {
+      <mat-error>I need this</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Time used (millisecond)</mat-label>
+    <input matInput formControlName="milliseconds">
+    @if (inputGroup.controls.milliseconds.hasError('min') || inputGroup.controls.milliseconds.hasError('max')) {
+      <mat-error>You entered invalid millisecond. A valid millisecond should be a number which is not less than 999 and
+        and more than or equal 0
+      </mat-error>
+    }
+    @if (inputGroup.controls.milliseconds.hasError('pattern')) {
+      <mat-error>What did you enter. You need provide a number</mat-error>
+    }
+    @if (inputGroup.controls.milliseconds.hasError('required')) {
+      <mat-error>I need this</mat-error>
+    }
+  </mat-form-field>
+</form>
