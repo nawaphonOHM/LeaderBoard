@@ -1,25 +1,22 @@
-import {Component, model} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
-import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {MatDialogRef} from '@angular/material/dialog';
 import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner-data';
+import {GeneralInput} from '../general-input/general-input';
 
 @Component({
   selector: 'app-new-runner-register',
   imports: [
     MatDialogTitle,
     MatDialogContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
     FormsModule,
     MatDialogActions,
     MatButton,
     MatDialogClose,
     ReactiveFormsModule,
-    MatError,
+    GeneralInput,
   ],
   templateUrl: './new-runner-register.html',
   styleUrl: './new-runner-register.scss'
