@@ -35,7 +35,6 @@ export class DashboardTable {
 
   protected data: DashboardTableData[] = [
     {
-      no: 1,
       firstName: 'John',
       lastName: 'Doe',
       nationality: 'USA',
