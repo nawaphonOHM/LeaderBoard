@@ -56,6 +56,9 @@ export class DashboardTable implements AfterViewInit{
 
   protected sortedData = new MatTableDataSource(this.data);
 
+  constructor(readonly changeDetectorRef: ChangeDetectorRef) {}
+
+
   ngAfterViewInit(): void {
     this.sortedData.sort = this.sort;
     this.sortedData.sort?.sort({
@@ -63,6 +66,8 @@ export class DashboardTable implements AfterViewInit{
       start: 'asc',
       disableClear: true
     })
+
+    this.changeDetectorRef.detectChanges();
   }
 
 }
