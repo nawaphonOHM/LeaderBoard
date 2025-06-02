@@ -24,6 +24,15 @@ export class DashboardAddNewRunnerCoordinator implements OnDestroy{
       .subscribe(this.openNewRunnerDialog.bind(this))
   }
 
+  openNewRunnerDialog() {
+    this.matDialog.open(NewRunnerRegister).afterClosed().subscribe((result: DashBoardAddNewRunnerData) => {
+      this.dashBoardAddNewRunnerCoordinatorRadioTower.emitMessage({
+        state: 'SEND_REQUEST',
+        data: result
+      })
+    })
+  }
+
   ngOnDestroy(): void {
         this.requestNewDialogListener.unsubscribe()
     }
