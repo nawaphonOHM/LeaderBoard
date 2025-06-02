@@ -1,13 +1,7 @@
 <h2 mat-dialog-title>Add Runner who finishes line. here</h2>
 <mat-dialog-content>
   <form [formGroup]="inputGroup">
-    <mat-form-field>
-      <mat-label>First Name</mat-label>
-      <input matInput formControlName="firstName">
-      @if (inputGroup.controls.firstName.invalid) {
-        <mat-error>I need first name</mat-error>
-      }
-    </mat-form-field>
+    <app-general-input [input]="inputGroup.controls.firstName" [label]="'First Name'" errorMessage="I need first name" />
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
