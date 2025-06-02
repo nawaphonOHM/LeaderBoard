@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
@@ -7,10 +7,11 @@ import {
   MatHeaderCell,
   MatHeaderCellDef,
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
-  MatTable
+  MatTable, MatTableDataSource
 } from '@angular/material/table';
 import {FulNamePipe} from '../pipes/fulName-pipe';
 import {NgOptimizedImage} from '@angular/common';
+import {MatSort, MatSortHeader} from '@angular/material/sort';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -26,7 +27,8 @@ import {NgOptimizedImage} from '@angular/common';
     MatRow,
     MatHeaderRowDef,
     MatRowDef,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatSortHeader,
     MatSort
   ],
   templateUrl: './dashboard-table.html',
