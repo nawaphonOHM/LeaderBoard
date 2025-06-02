@@ -6,6 +6,7 @@
     <ng-country-select requiredErrorMessage="Runner should has a nationality" [showRequiredErrorMessage]="true"
                        [required]="true" [formControl]="inputGroup.controls.nationality"
                        placeholder="What is runner nationality?"/>
+    <app-time-used-for-finnish-running [input]="inputGroup.controls.timeUsedInMillisecond"/>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

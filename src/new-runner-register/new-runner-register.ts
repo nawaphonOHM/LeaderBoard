@@ -6,6 +6,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner-data';
 import {GeneralInput} from '../general-input/general-input';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
+import {TimeUsedForFinnishRunning} from '../time-used-for-finnish-running/time-used-for-finnish-running';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -19,6 +20,7 @@ import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
     ReactiveFormsModule,
     GeneralInput,
     CountrySelectComponent,
+    TimeUsedForFinnishRunning,
   ],
   templateUrl: './new-runner-register.html',
   styleUrl: './new-runner-register.scss'
