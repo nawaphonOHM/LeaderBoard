@@ -39,6 +39,12 @@ export class DashboardTable implements AfterViewInit{
 
   protected data: DashboardTableData[] = [
     {
+      firstName: 'Nawaphon',
+      lastName: 'Isarathanachaikul',
+      nationalityUrlImage: 'https://flagsapi.com/TH/flat/32.png',
+      timeUsedInMillisecond: 9000
+    },
+    {
       firstName: 'John',
       lastName: 'Doe',
       nationalityUrlImage: 'https://flagsapi.com/US/flat/32.png',
