@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>Add Runner who finishes line. here</h2>
 <mat-dialog-content>
   <form [formGroup]="inputGroup">
-    <app-general-input [input]="inputGroup.controls.firstName" label="First Name" errorMessage="I need first name"/>
-    <app-general-input [input]="inputGroup.controls.lastName" label="Last Name" errorMessage="I need last name"/>
-    <ng-country-select requiredErrorMessage="Runner should has nationality" [showRequiredErrorMessage]="true"
+    <app-general-input [input]="inputGroup.controls.firstName" label="First Name" errorMessage="You must to give a first name"/>
+    <app-general-input [input]="inputGroup.controls.lastName" label="Last Name" errorMessage="You must to give a last name"/>
+    <ng-country-select requiredErrorMessage="Runner should has a nationality" [showRequiredErrorMessage]="true"
                        [required]="true" [formControl]="inputGroup.controls.nationality"
                        placeholder="What is runner nationality?"/>
   </form>
