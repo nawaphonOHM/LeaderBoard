@@ -6,7 +6,7 @@ import {Observable, Subject} from 'rxjs';
 })
 export class DashBoardAddNewRunnerCoordinatorRadioTower {
 
-  public readonly radio = new Subject<unknown>()
+  private readonly radio = new Subject<unknown>()
 
   requestNewObservable(): Observable<unknown> {
     return this.radio.asObservable()
