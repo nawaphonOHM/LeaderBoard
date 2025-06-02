@@ -1,0 +1,7 @@
+<mat-form-field>
+  <mat-label>{{ label }}</mat-label>
+  <input matInput [formControl]="input">
+  @if (input.invalid) {
+    <mat-error>{{ errorMessage }}</mat-error>
+  }
+</mat-form-field>
