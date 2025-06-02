@@ -64,8 +64,8 @@ export class DashboardTable implements AfterViewInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-        this.requestNewDialogListener.unsubscribe()
-    }
+    this.requestNewDialogListener.unsubscribe()
+  }
 
 
   ngAfterViewInit(): void {
