@@ -32,7 +32,7 @@ import {NgOptimizedImage} from '@angular/common';
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
 })
-export class DashboardTable {
+export class DashboardTable implements AfterViewInit{
   @ViewChild(MatSort) sort: MatSort | null = null;
 
   protected columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
@@ -47,5 +47,9 @@ export class DashboardTable {
   ]
 
   protected sortedData = new MatTableDataSource(this.data);
+
+  ngAfterViewInit(): void {
+    this.sortedData.sort = this.sort;
+  }
 
 }
