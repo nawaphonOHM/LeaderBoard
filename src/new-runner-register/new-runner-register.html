@@ -1,9 +1,11 @@
 <h2 mat-dialog-title>Add Runner who finishes line. here</h2>
 <mat-dialog-content>
-  <mat-form-field>
-    <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="firstName">
-  </mat-form-field>
+  <form [formGroup]="inputGroup">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button matButton (click)="cancelCallback()">Next time</button>
