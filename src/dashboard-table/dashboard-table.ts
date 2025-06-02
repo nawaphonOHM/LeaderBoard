@@ -16,6 +16,7 @@ import {TimeMinSecondMilliSecondPipe} from '../pipes/time-min-second-milli-secon
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
 } from '../services/dash-board-add-new-runner-coordinator-radio-tower';
+import {filter, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -61,9 +62,14 @@ export class DashboardTable implements AfterViewInit{
 
   protected readonly sortedData = new MatTableDataSource(this.data);
 
+  private readonly requestNewDialogListener: Subscription;
+
   constructor(
     readonly changeDetectorRef: ChangeDetectorRef,
-    readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {}
+    readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
+    this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
+      .pipe(filter(messages => messages.state === 'SEND_REQUEST')).subscribe()
+  }
 
 
   ngAfterViewInit(): void {
