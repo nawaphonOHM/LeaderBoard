@@ -3,7 +3,7 @@
   <form [formGroup]="inputGroup">
     <app-general-input [input]="inputGroup.controls.firstName" label="First Name" errorMessage="I need first name" />
     <app-general-input [input]="inputGroup.controls.lastName" label="Last Name" errorMessage="I need last name" />
-    <ng-country-select/>
+    <ng-country-select requiredErrorMessage="Runner should has nationality" [showRequiredErrorMessage]="true" [required]="true" [formControl]="inputGroup.controls.nationality" placeholder="What is runner nationality?"/>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
