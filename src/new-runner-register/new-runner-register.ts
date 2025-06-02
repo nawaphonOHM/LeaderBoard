@@ -37,4 +37,33 @@ export class NewRunnerRegister {
     this.matDialog.close()
   }
 
+  save(): DashBoardAddNewRunnerData {
+    const rawInput = this.inputGroup.getRawValue()
+
+    if (rawInput.firstName === null) {
+      throw new Error('First name should not be null')
+    }
+
+    if (rawInput.lastName === null) {
+      throw new Error('Last name should not be null')
+    }
+
+    if (rawInput.nationality === null) {
+      throw new Error('Nationality should not be null')
+    }
+
+    if (rawInput.timeUsedInMillisecond === null) {
+      throw new Error('Time used in millisecond should not be null')
+    }
+
+
+    return {
+      firstName: rawInput.firstName,
+      lastName: rawInput.lastName,
+      nationalityUrlImage: rawInput.nationality,
+      timeUsedInMillisecond: Number.parseInt(rawInput.timeUsedInMillisecond)
+
+    }
+  }
+
 }
