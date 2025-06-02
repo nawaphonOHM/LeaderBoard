@@ -35,7 +35,7 @@ import {NgOptimizedImage} from '@angular/common';
 export class DashboardTable {
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  protected columnDefs: string[] = ['no', 'fullName', 'nationality', 'time'];
+  protected columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
   protected data: DashboardTableData[] = [
     {
