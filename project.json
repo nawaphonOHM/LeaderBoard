@@ -54,11 +54,7 @@
           "outputHashing": "media"
         }
       },
-      "defaultConfiguration": "production",
-      "deploy": {
-        "builder": "@jefiozie/ngx-aws-deploy:deploy",
-        "options": {}
-      }
+      "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@angular/build:dev-server",

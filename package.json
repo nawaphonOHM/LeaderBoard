@@ -23,9 +23,8 @@
     "zone.js": "~0.15.0",
     "@wlucha/ng-country-select": "^2.2.1",
     "flag-icons": "^7.5.0",
-    "@angular/animations": "^20.0.0",
-    "@jefiozie/ngx-aws-deploy": "^5.1.0"
-  },
+    "@angular/animations": "^20.0.0"
+},
   "devDependencies": {
     "@angular-devkit/core": "^20.0.0",
     "@angular-devkit/schematics": "^20.0.0",
