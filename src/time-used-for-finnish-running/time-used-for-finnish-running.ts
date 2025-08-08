@@ -43,6 +43,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
 
     if (this.inputGroup.invalid) {
       this.input.setValue(-1)
+      return
     }
 
 
