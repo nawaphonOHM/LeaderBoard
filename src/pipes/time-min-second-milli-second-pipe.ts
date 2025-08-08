@@ -9,12 +9,21 @@ export class TimeMinSecondMilliSecondPipe implements PipeTransform {
 
 
   transform(value: number, ...args: unknown[]): string {
+    // Ensure non-negative input and normalize null/undefined
+    const totalMs = Math.max(value || 0, 0);
 
-    const minutes = Math.floor(value / (MILLISECONDS_IN_SECOND * SECOND_IN_MINUTE));
-    const seconds = Math.floor(value / MILLISECONDS_IN_SECOND);
-    const milliseconds = value % SECOND_IN_MINUTE;
+    const msPerMinute = MILLISECONDS_IN_SECOND * SECOND_IN_MINUTE;
 
-    return `${minutes}.${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(3, '0')}`;
+    const minutes = Math.floor(totalMs / msPerMinute);
+    const remainingAfterMinutes = totalMs % msPerMinute;
+
+    const seconds = Math.floor(remainingAfterMinutes / MILLISECONDS_IN_SECOND);
+    const milliseconds = remainingAfterMinutes % MILLISECONDS_IN_SECOND;
+
+    // Format as minutes:seconds.milliseconds (e.g., 1:05.123)
+    return `${minutes}:${seconds.toString().padStart(2, '0')}.${milliseconds
+      .toString()
+      .padStart(3, '0')}`;
   }
 
 }
