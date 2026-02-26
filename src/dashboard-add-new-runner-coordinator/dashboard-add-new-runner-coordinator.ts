@@ -1,4 +1,4 @@
-import {Component, effect, OnDestroy} from '@angular/core';
+import {Component, effect} from '@angular/core';
 import {filter} from 'rxjs';
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
@@ -13,7 +13,7 @@ import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner
   templateUrl: './dashboard-add-new-runner-coordinator.html',
   styleUrl: './dashboard-add-new-runner-coordinator.scss'
 })
-export class DashboardAddNewRunnerCoordinator implements OnDestroy{
+export class DashboardAddNewRunnerCoordinator{
 
   constructor(
     readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower,
@@ -40,9 +40,5 @@ export class DashboardAddNewRunnerCoordinator implements OnDestroy{
       })
     })
   }
-
-  ngOnDestroy(): void {
-        this.requestNewDialogListener.unsubscribe()
-    }
 
 }
