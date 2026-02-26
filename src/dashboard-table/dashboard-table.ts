@@ -40,7 +40,7 @@ import {
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
 })
-export class DashboardTable implements AfterViewInit, OnDestroy{
+export class DashboardTable implements AfterViewInit{
   @ViewChild(MatSort) sort: MatSort | null = null;
 
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
@@ -68,10 +68,7 @@ export class DashboardTable implements AfterViewInit, OnDestroy{
     });
   }
 
-  ngOnDestroy(): void {
-  }
-
-
+  
   ngAfterViewInit(): void {
     this.sortedData.sort = this.sort;
     this.sortedData.sort?.sort({
