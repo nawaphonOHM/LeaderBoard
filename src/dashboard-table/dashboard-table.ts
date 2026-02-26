@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, effect, OnDestroy, ViewChild} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
@@ -16,7 +16,6 @@ import {TimeMinSecondMilliSecondPipe} from '../pipes/time-min-second-milli-secon
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
 } from '../services/dash-board-add-new-runner-coordinator-radio-tower';
-import {filter, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -50,22 +49,26 @@ export class DashboardTable implements AfterViewInit, OnDestroy{
 
   protected readonly sortedData = new MatTableDataSource(this.data);
 
-  private readonly requestNewDialogListener: Subscription;
-
   constructor(
     readonly changeDetectorRef: ChangeDetectorRef,
     readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
-    this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
-      .pipe(filter(messages => messages.state === 'SEND_REQUEST'))
-      .subscribe((result) => {
-        this.data.push(result.data as DashboardTableData)
 
-        this.sortedData.data = this.data
-      })
+    effect(() => {
+      const signal = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
+
+      const dataFromSignal = signal()
+
+      if (dataFromSignal?.state !== 'SEND_REQUEST') {
+        return
+      }
+
+      this.data.push(dataFromSignal.data as DashboardTableData)
+
+      this.sortedData.data = this.data
+    });
   }
 
   ngOnDestroy(): void {
-    this.requestNewDialogListener.unsubscribe()
   }
 
 
