@@ -1,5 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
-import {filter, Subscription} from 'rxjs';
+import {Component, effect, OnDestroy} from '@angular/core';
+import {filter} from 'rxjs';
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
 } from '../services/dash-board-add-new-runner-coordinator-radio-tower';
@@ -15,15 +15,20 @@ import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner
 })
 export class DashboardAddNewRunnerCoordinator implements OnDestroy{
 
-  private readonly requestNewDialogListener: Subscription
-
   constructor(
     readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower,
     readonly matDialog: MatDialog
   ) {
-    this.requestNewDialogListener = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
-      .pipe(filter(message => message.state === 'RESPONSE_DATA'))
-      .subscribe(this.openNewRunnerDialog.bind(this))
+
+    effect(() => {
+      const signal = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
+
+      if (signal()?.state !== 'RESPONSE_DATA') {
+        return
+      }
+
+      this.openNewRunnerDialog()
+    });
   }
 
   openNewRunnerDialog() {
