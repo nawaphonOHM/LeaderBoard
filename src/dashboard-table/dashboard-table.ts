@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, effect, OnDestroy, ViewChild} from '@angular/core';
+import {Component, effect, ViewChild} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
@@ -40,44 +40,44 @@ import {
   templateUrl: './dashboard-table.html',
   styleUrl: './dashboard-table.scss'
 })
-export class DashboardTable implements AfterViewInit{
-  @ViewChild(MatSort) sort: MatSort | null = null;
+export class DashboardTable {
 
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
-  protected readonly data: DashboardTableData[] = []
+  protected readonly data: DashboardTableData[] = [];
 
   protected readonly sortedData = new MatTableDataSource(this.data);
 
   constructor(
-    readonly changeDetectorRef: ChangeDetectorRef,
     readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
 
     effect(() => {
-      const signal = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
+      const signal = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable();
 
-      const dataFromSignal = signal()
+      const dataFromSignal = signal();
 
       if (dataFromSignal?.state !== 'SEND_REQUEST') {
-        return
+        return;
       }
 
-      this.data.push(dataFromSignal.data as DashboardTableData)
+      this.data.push(dataFromSignal.data as DashboardTableData);
 
-      this.sortedData.data = this.data
+      this.sortedData.data = this.data;
     });
   }
 
+  @ViewChild(MatSort)
+  set matSort(sort: MatSort | null) {
+    if (sort === undefined || sort === null) {
+      return;
+    }
 
-  ngAfterViewInit(): void {
-    this.sortedData.sort = this.sort;
-    this.sortedData.sort?.sort({
+    this.sortedData.sort = sort;
+
+    sort.sort({
       id: 'timeUsedInMillisecond',
       start: 'asc',
       disableClear: true
-    })
-
-    this.changeDetectorRef.detectChanges();
+    });
   }
-
 }
