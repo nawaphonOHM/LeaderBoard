@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/nx/schemas/project-schema.json",
-  "name": "xaidas-assignment2",
+  "name": "LeaderBoard",
   "projectType": "application",
   "generators": {
     "@schematics/angular:component": {
@@ -60,10 +60,10 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "xaidas-assignment2:build:production"
+          "buildTarget": "LeaderBoard:build:production"
         },
         "development": {
-          "buildTarget": "xaidas-assignment2:build:development"
+          "buildTarget": "LeaderBoard:build:development"
         }
       },
       "defaultConfiguration": "development"
