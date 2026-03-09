@@ -1,4 +1,4 @@
-import {Component, effect, ViewChild} from '@angular/core';
+import {Component, effect, viewChild, ViewChild} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
@@ -48,6 +48,8 @@ export class DashboardTable {
 
   protected readonly sortedData = new MatTableDataSource(this.data);
 
+  protected readonly matSortSignal = viewChild.required(MatSort);
+
   constructor(
     readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
 
@@ -64,20 +66,20 @@ export class DashboardTable {
 
       this.sortedData.data = this.data;
     });
-  }
 
-  @ViewChild(MatSort)
-  set matSort(sort: MatSort | null) {
-    if (sort === undefined || sort === null) {
-      return;
-    }
+    effect(() => {
 
-    this.sortedData.sort = sort;
+      const matsort = this.matSortSignal();
 
-    sort.sort({
-      id: 'timeUsedInMillisecond',
-      start: 'asc',
-      disableClear: true
+      matsort.sort({
+        id: 'timeUsedInMillisecond',
+        start: 'asc',
+        disableClear: true
+      });
+
+      this.sortedData.sort = matsort
+
+
     });
   }
 }
