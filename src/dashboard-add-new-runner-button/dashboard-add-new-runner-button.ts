@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
@@ -14,7 +14,9 @@ import {
 })
 export class DashboardAddNewRunnerButton {
 
-  constructor(readonly dashBoardAddNewRunnerButtonRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
+  private readonly dashBoardAddNewRunnerButtonRadioTower = inject(DashBoardAddNewRunnerCoordinatorRadioTower);
+
+  constructor() {
   }
 
   askForNewRunner() {

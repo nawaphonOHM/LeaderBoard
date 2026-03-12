@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
@@ -35,7 +35,9 @@ export class NewRunnerRegister {
     timeUsedInMillisecond: new FormControl(0, [ Validators.min(0) ])
   })
 
-  constructor(readonly matDialog: MatDialogRef<NewRunnerRegister>) {
+  private readonly matDialog = inject(MatDialogRef<NewRunnerRegister>);
+
+  constructor() {
   }
 
   cancelCallback() {

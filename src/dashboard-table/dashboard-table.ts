@@ -1,4 +1,4 @@
-import {Component, effect, viewChild} from '@angular/core';
+import {Component, effect, viewChild, inject} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
@@ -50,11 +50,12 @@ export class DashboardTable {
 
   protected readonly matSortSignal = viewChild.required(MatSort);
 
-  constructor(
-    readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower) {
+  private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(DashBoardAddNewRunnerCoordinatorRadioTower);
+
+  constructor() {
 
     effect(() => {
-      const signal = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable();
+      const signal = this.dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable();
 
       const dataFromSignal = signal();
 

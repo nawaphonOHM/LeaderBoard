@@ -1,4 +1,4 @@
-import {Component, effect} from '@angular/core';
+import {Component, effect, inject} from '@angular/core';
 import {filter} from 'rxjs';
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
@@ -15,13 +15,13 @@ import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner
 })
 export class DashboardAddNewRunnerCoordinator{
 
-  constructor(
-    readonly dashBoardAddNewRunnerCoordinatorRadioTower: DashBoardAddNewRunnerCoordinatorRadioTower,
-    readonly matDialog: MatDialog
-  ) {
+  private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(DashBoardAddNewRunnerCoordinatorRadioTower);
+  private readonly matDialog = inject(MatDialog);
+
+  constructor() {
 
     effect(() => {
-      const signal = dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
+      const signal = this.dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable()
 
       if (signal()?.state !== 'RESPONSE_DATA') {
         return
