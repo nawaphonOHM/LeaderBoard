@@ -1,4 +1,4 @@
-import {Component, effect, viewChild, ViewChild} from '@angular/core';
+import {Component, effect, viewChild} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 import {
   MatCell,
