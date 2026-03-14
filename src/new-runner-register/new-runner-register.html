@@ -19,5 +19,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button matButton (click)="cancelCallback()">Next time</button>
-  <button matButton [mat-dialog-close]="save()" [disabled]="inputGroup.invalid">Save</button>
+  <button matButton (click)="save()" mat-dialog-close [disabled]="inputGroup.invalid">Save</button>
 </mat-dialog-actions>
