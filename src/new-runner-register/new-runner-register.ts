@@ -48,7 +48,7 @@ export class NewRunnerRegister {
     this.matDialog.close()
   }
 
-  save(): DashBoardAddNewRunnerData {
+  save() {
     const rawInput = this.inputGroup.getRawValue()
 
     if (this.inputGroup.invalid) {
@@ -60,14 +60,13 @@ export class NewRunnerRegister {
       throw new UnexpectedToReachHere("nationality should has a value as it should be validated before calling this method.")
     }
 
-
-    return {
+    this.matDialog.close({
       firstName: rawInput.firstName || '',
       lastName: rawInput.lastName || '',
       nationalityUrlImage: this.configuration.flagUrl.replaceAll("__nationality__", rawInput.nationality?.alpha2.toUpperCase()),
       timeUsedInMillisecond: rawInput.timeUsedInMillisecond || -1
 
-    }
+    })
   }
 
 }
