@@ -8,6 +8,7 @@ import {GeneralInput} from '../general-input/general-input';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
 import {TimeUsedForFinnishRunning} from '../time-used-for-finnish-running/time-used-for-finnish-running';
 import {CONFIGURATION} from '../configurations';
+import {UnexpectedToReachHere} from '../errors/UnexpectedToReachHere';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -51,22 +52,12 @@ export class NewRunnerRegister {
     const rawInput = this.inputGroup.getRawValue()
 
     if (this.inputGroup.invalid) {
-      return {
-        firstName: '',
-        lastName: '',
-        nationalityUrlImage: '',
-        timeUsedInMillisecond: -1
-      }
+      throw new UnexpectedToReachHere("inputGroup should be valid as input should be validated before calling this method.")
     }
 
     if (rawInput.nationality?.alpha2 === undefined) {
       console.log('invalid nationality')
-      return {
-        firstName: '',
-        lastName: '',
-        nationalityUrlImage: '',
-        timeUsedInMillisecond: -1
-      }
+      throw new UnexpectedToReachHere("nationality should has a value as it should be validated before calling this method.")
     }
 
 
