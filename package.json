@@ -6,7 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
-    "test": "nx test"
+    "test": "nx test",
+    "analyze-source-map": "source-map-explorer dist/**/*.js --no-border-checks"
   },
   "private": true,
   "dependencies": {
