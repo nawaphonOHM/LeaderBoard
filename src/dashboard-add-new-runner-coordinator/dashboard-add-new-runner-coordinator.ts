@@ -4,7 +4,6 @@ import {
   DashBoardAddNewRunnerCoordinatorRadioTower
 } from '../services/dash-board-add-new-runner-coordinator-radio-tower';
 import {MatDialog} from '@angular/material/dialog';
-import {NewRunnerRegister} from '../new-runner-register/new-runner-register';
 import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner-data';
 
 @Component({
@@ -31,7 +30,9 @@ export class DashboardAddNewRunnerCoordinator{
     });
   }
 
-  openNewRunnerDialog() {
+  async openNewRunnerDialog() {
+    const {NewRunnerRegister} = await import('../new-runner-register/new-runner-register');
+
     this.matDialog.open(NewRunnerRegister, { disableClose: true }).afterClosed().pipe(filter(it => it !== undefined && it !== null)).subscribe((result: DashBoardAddNewRunnerData) => {
       console.log(`Dialog is closed: ${JSON.stringify(result)}`)
       this.dashBoardAddNewRunnerCoordinatorRadioTower.emitMessage({
