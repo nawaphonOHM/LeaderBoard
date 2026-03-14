@@ -7,6 +7,7 @@ import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner
 import {GeneralInput} from '../general-input/general-input';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
 import {TimeUsedForFinnishRunning} from '../time-used-for-finnish-running/time-used-for-finnish-running';
+import {CONFIGURATION} from '../configurations';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -36,6 +37,8 @@ export class NewRunnerRegister {
   })
 
   private readonly matDialog = inject(MatDialogRef<NewRunnerRegister>);
+
+  private readonly configuration = inject(CONFIGURATION)
 
   constructor() {
   }
