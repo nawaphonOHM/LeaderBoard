@@ -73,7 +73,7 @@ export class NewRunnerRegister {
     return {
       firstName: rawInput.firstName || '',
       lastName: rawInput.lastName || '',
-      nationalityUrlImage: `https://flagsapi.com/${rawInput.nationality?.alpha2.toUpperCase()}/flat/32.png` || '',
+      nationalityUrlImage: this.configuration.flagUrl.replaceAll("__nationality__", rawInput.nationality?.alpha2.toUpperCase()),
       timeUsedInMillisecond: rawInput.timeUsedInMillisecond || -1
 
     }
