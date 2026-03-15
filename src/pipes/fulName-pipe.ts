@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {DashboardTableData} from '../interfaces/dashboard-table-data';
 
 @Pipe({

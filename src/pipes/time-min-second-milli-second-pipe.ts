@@ -9,7 +9,6 @@ export class TimeMinSecondMilliSecondPipe implements PipeTransform {
   private readonly TIME_UNIT = inject(TIME_UNIT)
 
 
-
   transform(value: number, ...args: unknown[]): string {
     // Ensure non-negative input and normalize null/undefined
     const totalMs = Math.max(value || 0, 0);

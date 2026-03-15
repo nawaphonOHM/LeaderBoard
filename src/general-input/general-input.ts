@@ -19,8 +19,8 @@ export class GeneralInput {
 
   @Input({required: true}) input!: FormControl;
 
-  @Input({ required: false }) errorMessage: string | null = null;
+  @Input({required: false}) errorMessage: string | null = null;
 
-  @Input({ required: true }) label!: string;
+  @Input({required: true}) label!: string;
 
 }

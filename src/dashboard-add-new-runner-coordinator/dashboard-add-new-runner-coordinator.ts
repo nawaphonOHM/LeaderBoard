@@ -12,7 +12,7 @@ import {DashBoardAddNewRunnerData} from '../interfaces/dash-board-add-new-runner
   templateUrl: './dashboard-add-new-runner-coordinator.html',
   styleUrl: './dashboard-add-new-runner-coordinator.scss'
 })
-export class DashboardAddNewRunnerCoordinator{
+export class DashboardAddNewRunnerCoordinator {
 
   private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(DashBoardAddNewRunnerCoordinatorRadioTower);
   private readonly matDialog = inject(MatDialog);
@@ -33,7 +33,7 @@ export class DashboardAddNewRunnerCoordinator{
   async openNewRunnerDialog() {
     const {NewRunnerRegister} = await import('../new-runner-register/new-runner-register');
 
-    this.matDialog.open(NewRunnerRegister, { disableClose: true }).afterClosed().pipe(filter(it => it !== undefined && it !== null)).subscribe((result: DashBoardAddNewRunnerData) => {
+    this.matDialog.open(NewRunnerRegister, {disableClose: true}).afterClosed().pipe(filter(it => it !== undefined && it !== null)).subscribe((result: DashBoardAddNewRunnerData) => {
       console.log(`Dialog is closed: ${JSON.stringify(result)}`)
       this.dashBoardAddNewRunnerCoordinatorRadioTower.emitMessage({
         state: 'SEND_REQUEST',
