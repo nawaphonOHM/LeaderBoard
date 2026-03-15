@@ -26,7 +26,7 @@ export class DashboardAddNewRunnerCoordinator{
         return
       }
 
-      this.openNewRunnerDialog()
+      this.openNewRunnerDialog().then(() => console.log('NewRunnerRegister works'))
     });
   }
 
