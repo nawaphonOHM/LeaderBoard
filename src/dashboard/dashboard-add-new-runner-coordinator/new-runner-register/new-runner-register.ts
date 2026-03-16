@@ -7,7 +7,7 @@ import {DashBoardAddNewRunnerData} from '../../../interfaces/dash-board-add-new-
 import {GeneralInput} from './general-input/general-input';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
 import {TimeUsedForFinnishRunning} from './time-used-for-finnish-running/time-used-for-finnish-running';
-import {CONFIGURATION} from '../../../configurations';
+import {CONFIGURATION} from '../../../variables/configurations';
 import {UnexpectedToReachHere} from '../../../errors/UnexpectedToReachHere';
 
 @Component({
