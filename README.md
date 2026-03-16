@@ -69,9 +69,16 @@ npm test
 
 ## Project Structure
 
-- `src/dashboard`: Main container for the leaderboard.
-- `src/dashboard-table`: Component for displaying runner data in a table.
-- `src/new-runner-register`: Registration form for new runners.
-- `src/services`: Communication services (e.g., `DashBoardAddNewRunnerCoordinatorRadioTower`).
-- `src/pipes`: Custom data transformation pipes for names and time formatting.
-- `src/interfaces`: TypeScript interfaces for data models.
+- `src/dashboard`: Root component and container for the leaderboard view.
+  - `dashboard-header`: Dashboard header component.
+  - `dashboard-add-new-runner-coordinator`: Orchestrates runner addition and table updates.
+    - `dashboard-add-new-runner-button`: Triggers the registration dialog.
+    - `dashboard-table`: Displays sorted runner data.
+    - `new-runner-register`: Form for new runner registration.
+      - `general-input`: Reusable input field component.
+      - `time-used-for-finnish-running`: Specialized input for time.
+- `src/services`: Communication services using Angular Signals.
+- `src/pipes`: Custom data transformation pipes (e.g., names, time formatting).
+- `src/interfaces`: TypeScript interfaces and data models.
+- `src/variables`: Configuration constants and shared values.
+- `src/errors`: Custom error types for better debugging.
