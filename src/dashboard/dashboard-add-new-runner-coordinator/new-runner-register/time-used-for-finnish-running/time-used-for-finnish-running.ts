@@ -1,7 +1,7 @@
 import {Component, inject, Input, OnDestroy} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TIME_UNIT} from '../variables/timeUnit';
+import {TIME_UNIT} from '../../../../variables/timeUnit';
 
 @Component({
   selector: 'app-time-used-for-finnish-running',

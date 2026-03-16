@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {
   DashBoardAddNewRunnerCoordinatorRadioTower
-} from '../services/dash-board-add-new-runner-coordinator-radio-tower';
+} from '../../../services/dash-board-add-new-runner-coordinator-radio-tower';
 
 @Component({
   selector: 'app-dashboard-add-new-runner-button',
