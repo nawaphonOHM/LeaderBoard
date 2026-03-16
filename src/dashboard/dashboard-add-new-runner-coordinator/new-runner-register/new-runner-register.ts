@@ -3,7 +3,6 @@ import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {MatDialogRef} from '@angular/material/dialog';
-import {DashBoardAddNewRunnerData} from '../../../interfaces/dash-board-add-new-runner-data';
 import {GeneralInput} from './general-input/general-input';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
 import {TimeUsedForFinnishRunning} from './time-used-for-finnish-running/time-used-for-finnish-running';
