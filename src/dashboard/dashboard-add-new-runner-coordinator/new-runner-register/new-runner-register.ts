@@ -8,6 +8,7 @@ import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
 import {TimeUsedForFinnishRunning} from './time-used-for-finnish-running/time-used-for-finnish-running';
 import {CONFIGURATION} from '../../../variables/configurations';
 import {UnexpectedToReachHere} from '../../../errors/UnexpectedToReachHere';
+import {AddNewRunnerModalRadioTower} from '../../../services/add-new-runner-modal-radio-tower';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -51,6 +52,8 @@ export class NewRunnerRegister {
   private readonly matDialog = inject(MatDialogRef<NewRunnerRegister>);
 
   private readonly configuration = inject(CONFIGURATION)
+
+  private readonly radioTower = inject(AddNewRunnerModalRadioTower)
 
   constructor() {
   }
