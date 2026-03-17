@@ -11,7 +11,7 @@ import {MatButton} from '@angular/material/button';
 import {GeneralInput} from './general-input/general-input';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
 import {TimeUsedForFinnishRunning} from './time-used-for-finnish-running/time-used-for-finnish-running';
-import {CONFIGURATION} from '../../../variables/configurations';
+import {CONFIGURATION, ConfigurationMain} from '../../../variables/configurations';
 import {UnexpectedToReachHere} from '../../../errors/UnexpectedToReachHere';
 import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../services/add-new-runner-modal-radio-tower';
 
@@ -32,7 +32,7 @@ import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../services/add-new
   ],
   templateUrl: './new-runner-register.html',
   styleUrl: './new-runner-register.scss',
-  providers: [AddNewRunnerModalRadioTower]
+  providers: [AddNewRunnerModalRadioTower, { provide: CONFIGURATION, useValue: ConfigurationMain }]
 })
 export class NewRunnerRegister {
 
