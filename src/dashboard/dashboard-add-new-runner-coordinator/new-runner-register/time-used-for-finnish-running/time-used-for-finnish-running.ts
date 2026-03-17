@@ -2,7 +2,7 @@ import {Component, inject, Input, OnDestroy} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TIME_UNIT} from '../../../../variables/timeUnit';
-import {AddNewRunnerModalRadioTower} from '../../../../services/add-new-runner-modal-radio-tower';
+import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../../services/add-new-runner-modal-radio-tower';
 
 @Component({
   selector: 'app-time-used-for-finnish-running',
@@ -21,23 +21,32 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
   @Input({required: true}) input!: FormControl;
 
   protected readonly inputGroup = new FormGroup({
-    minutes: new FormControl<string>('0', [
-      Validators.required,
-      Validators.pattern('[0-9]*'),
-      Validators.min(0)
-    ]),
-    seconds: new FormControl<string>('0', [
-      Validators.required,
-      Validators.pattern('[0-9]*'),
-      Validators.min(0),
-      Validators.max(59)
-    ]),
-    milliseconds: new FormControl<string>('0', [
-      Validators.required,
-      Validators.pattern('[0-9]*'),
-      Validators.min(0),
-      Validators.max(999)
-    ]),
+    minutes: new FormControl<string>('0', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern('[0-9]*'),
+        Validators.min(0)
+      ]
+    }),
+    seconds: new FormControl<string>('0', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern('[0-9]*'),
+        Validators.min(0),
+        Validators.max(59)
+      ]
+    }),
+    milliseconds: new FormControl<string>('0', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern('[0-9]*'),
+        Validators.min(0),
+        Validators.max(999)
+      ]
+    }),
   })
 
   private readonly TIME_UNIT = inject(TIME_UNIT)
