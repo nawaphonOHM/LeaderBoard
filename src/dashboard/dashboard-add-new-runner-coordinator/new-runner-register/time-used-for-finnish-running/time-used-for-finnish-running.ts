@@ -21,7 +21,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
   @Input({required: true}) input!: FormControl;
 
   protected readonly inputGroup = new FormGroup({
-    minutes: new FormControl<string>('0', {
+    minutes: new FormControl<number>(0, {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -29,7 +29,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
         Validators.min(0)
       ]
     }),
-    seconds: new FormControl<string>('0', {
+    seconds: new FormControl<number>(0, {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -38,7 +38,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
         Validators.max(59)
       ]
     }),
-    milliseconds: new FormControl<string>('0', {
+    milliseconds: new FormControl<number>(0, {
       nonNullable: true,
       validators: [
         Validators.required,
