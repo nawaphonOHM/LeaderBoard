@@ -92,24 +92,8 @@ export class NewRunnerRegister {
   }
 
   save() {
-    const rawInput = this.inputGroup.getRawValue()
 
-    if (this.inputGroup.invalid) {
-      throw new UnexpectedToReachHere("inputGroup should be valid as input should be validated before calling this method.")
-    }
-
-    if (rawInput.nationality?.alpha2 === undefined) {
-      console.log('invalid nationality')
-      throw new UnexpectedToReachHere("nationality should has a value as it should be validated before calling this method.")
-    }
-
-    this.matDialog.close({
-      firstName: rawInput.firstName,
-      lastName: rawInput.lastName,
-      nationalityUrlImage: this.configuration.flagUrl.replaceAll("__nationality__", rawInput.nationality?.alpha2.toUpperCase()),
-      timeUsedInMillisecond: rawInput.timeUsedInMillisecond
-
-    })
+    this.radioTower.emitMessage(FORM_STATE.SAVING)
   }
 
 }
