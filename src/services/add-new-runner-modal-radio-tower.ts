@@ -8,9 +8,7 @@ export enum FORM_STATE {
   NOP
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AddNewRunnerModalRadioTower {
 
   private readonly radio = signal<FORM_STATE>(FORM_STATE.NOP)
