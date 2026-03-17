@@ -1,4 +1,4 @@
-import {Component, effect, inject, Input, OnDestroy} from '@angular/core';
+import {Component, effect, inject, Input} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TIME_UNIT} from '../../../../variables/timeUnit';
@@ -17,7 +17,7 @@ import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../../services/add-
   templateUrl: './time-used-for-finnish-running.html',
   styleUrl: './time-used-for-finnish-running.scss'
 })
-export class TimeUsedForFinnishRunning implements OnDestroy {
+export class TimeUsedForFinnishRunning {
   @Input({required: true}) input!: FormControl;
 
   protected readonly inputGroup = new FormGroup({
@@ -69,25 +69,6 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
       this.radioTower.emitMessage(FORM_STATE.DONE)
     });
 
-  }
-
-  private readonly subscription = this.inputGroup.valueChanges.subscribe(value => {
-
-    if (this.inputGroup.invalid) {
-      this.input.setValue(-1)
-      return
-    }
-
-
-    const seconds = parseInt(value.seconds || '0')
-    const minutes = parseInt(value.minutes || '0')
-    const milliseconds = parseInt(value.milliseconds || '0')
-
-    this.input.setValue((minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + (seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + milliseconds)
-  })
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe()
   }
 
 }
