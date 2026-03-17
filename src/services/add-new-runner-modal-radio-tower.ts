@@ -19,4 +19,8 @@ export class AddNewRunnerModalRadioTower {
     return this.radio.asReadonly()
   }
 
+  emitMessage(message: FORM_STATE) {
+    this.radio.set(message);
+  }
+
 }
