@@ -31,7 +31,8 @@ import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../services/add-new
 
   ],
   templateUrl: './new-runner-register.html',
-  styleUrl: './new-runner-register.scss'
+  styleUrl: './new-runner-register.scss',
+  providers: [AddNewRunnerModalRadioTower]
 })
 export class NewRunnerRegister {
 
