@@ -13,4 +13,16 @@ describe('DashBoardAddNewRunnerCoordinatorRadioTower', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should initialize with null', () => {
+    const signalValue = service.requestNewObservable();
+    expect(signalValue()).toBeNull();
+  });
+
+  it('should emit messages', () => {
+    const message = { type: 'TEST', data: 123 } as any;
+    const signalValue = service.requestNewObservable();
+    service.emitMessage(message);
+    expect(signalValue()).toBe(message);
+  });
 });
