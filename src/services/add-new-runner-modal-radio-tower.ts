@@ -1,4 +1,4 @@
-import {Injectable, signal} from '@angular/core';
+import {Injectable, Signal, signal} from '@angular/core';
 
 
 export enum FORM_STATE {
@@ -14,5 +14,9 @@ export enum FORM_STATE {
 export class AddNewRunnerModalRadioTower {
 
   private readonly radio = signal<FORM_STATE>(FORM_STATE.NOP)
+
+  requestNewObservable(): Signal<FORM_STATE> {
+    return this.radio.asReadonly()
+  }
 
 }
