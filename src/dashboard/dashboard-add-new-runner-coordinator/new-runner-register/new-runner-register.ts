@@ -30,10 +30,22 @@ import {UnexpectedToReachHere} from '../../../errors/UnexpectedToReachHere';
 export class NewRunnerRegister {
 
   protected readonly inputGroup = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    nationality: new FormControl<Country | null>(null, [Validators.required]),
-    timeUsedInMillisecond: new FormControl(0, [Validators.min(0)])
+    firstName: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    lastName: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    nationality: new FormControl<Country | null>(null, {
+      nonNullable: false,
+      validators: [Validators.required]
+    }),
+    timeUsedInMillisecond: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.min(0)]
+    })
   })
 
   private readonly matDialog = inject(MatDialogRef<NewRunnerRegister>);
@@ -60,10 +72,10 @@ export class NewRunnerRegister {
     }
 
     this.matDialog.close({
-      firstName: rawInput.firstName || '',
-      lastName: rawInput.lastName || '',
+      firstName: rawInput.firstName,
+      lastName: rawInput.lastName,
       nationalityUrlImage: this.configuration.flagUrl.replaceAll("__nationality__", rawInput.nationality?.alpha2.toUpperCase()),
-      timeUsedInMillisecond: rawInput.timeUsedInMillisecond || -1
+      timeUsedInMillisecond: rawInput.timeUsedInMillisecond
 
     })
   }
