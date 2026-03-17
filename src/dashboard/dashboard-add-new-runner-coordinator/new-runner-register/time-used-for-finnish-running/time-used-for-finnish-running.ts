@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnDestroy} from '@angular/core';
+import {Component, effect, inject, Input, OnDestroy} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TIME_UNIT} from '../../../../variables/timeUnit';
@@ -52,6 +52,24 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
   private readonly TIME_UNIT = inject(TIME_UNIT)
 
   private readonly radioTower = inject(AddNewRunnerModalRadioTower)
+
+  constructor() {
+
+    effect(() => {
+      const signal = this.radioTower.requestNewObservable()
+
+      if (signal() !== FORM_STATE.SAVING) {
+        return
+      }
+
+      const value = this.inputGroup.getRawValue();
+
+      this.input.setValue((value.minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + (value.seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + value.milliseconds)
+
+      this.radioTower.emitMessage(FORM_STATE.DONE)
+    });
+
+  }
 
   private readonly subscription = this.inputGroup.valueChanges.subscribe(value => {
 
