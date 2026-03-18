@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from "@angular/material/input";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
@@ -17,10 +17,10 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
 })
 export class GeneralInput {
 
-  @Input({required: true}) input!: FormControl;
+  inputSignal = input.required<FormControl>({ alias: 'input' });
 
-  @Input({required: false}) errorMessage: string | null = null;
+  errorMessage = input<string>();
 
-  @Input({required: true}) label!: string;
+  label = input.required<string>();
 
 }

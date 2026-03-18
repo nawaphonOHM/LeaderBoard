@@ -1,4 +1,4 @@
-import {Component, effect, inject, Input} from '@angular/core';
+import {Component, effect, inject, input} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TIME_UNIT} from '../../../../variables/timeUnit';
@@ -18,7 +18,8 @@ import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../../services/add-
   styleUrl: './time-used-for-finnish-running.scss'
 })
 export class TimeUsedForFinnishRunning {
-  @Input({required: true}) input!: FormControl;
+
+  inputSignal = input.required<FormControl<number>>({ alias: 'input' });
 
   protected readonly inputGroup = new FormGroup({
     minutes: new FormControl<number>(0, {
@@ -64,7 +65,7 @@ export class TimeUsedForFinnishRunning {
 
       const value = this.inputGroup.getRawValue();
 
-      this.input.setValue((value.minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + (value.seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + value.milliseconds)
+      this.inputSignal().setValue((value.minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + (value.seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + value.milliseconds)
 
       this.radioTower.emitMessage(FORM_STATE.DONE)
     });
