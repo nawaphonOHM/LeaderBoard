@@ -14,6 +14,7 @@ import {TimeUsedForFinnishRunning} from './time-used-for-finnish-running/time-us
 import {CONFIGURATION, ConfigurationMain} from '../../../variables/configurations';
 import {UnexpectedToReachHere} from '../../../errors/UnexpectedToReachHere';
 import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../services/add-new-runner-modal-radio-tower';
+import {TimeUsedForFinnishRunningEvent} from '../../../interfaces/time-used-for-finnish-running-event';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -95,6 +96,14 @@ export class NewRunnerRegister {
   save() {
 
     this.radioTower.emitMessage(FORM_STATE.SAVING)
+  }
+
+  onTimeChange(newValue: TimeUsedForFinnishRunningEvent) {
+    if (!newValue.valid) {
+      this.inputGroup.controls.timeUsedInMillisecond.setValue(-1)
+    } else {
+      this.inputGroup.controls.timeUsedInMillisecond.setValue(newValue.time)
+    }
   }
 
 }
