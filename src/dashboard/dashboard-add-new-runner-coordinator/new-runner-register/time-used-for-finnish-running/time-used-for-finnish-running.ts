@@ -22,7 +22,7 @@ export class TimeUsedForFinnishRunning {
   inputSignal = input.required<FormControl<number>>({ alias: 'input' });
 
   protected readonly inputGroup = new FormGroup({
-    minutes: new FormControl<number>(0, {
+    minutes: new FormControl<string>('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -30,7 +30,7 @@ export class TimeUsedForFinnishRunning {
         Validators.min(0)
       ]
     }),
-    seconds: new FormControl<number>(0, {
+    seconds: new FormControl<string>('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -39,7 +39,7 @@ export class TimeUsedForFinnishRunning {
         Validators.max(59)
       ]
     }),
-    milliseconds: new FormControl<number>(0, {
+    milliseconds: new FormControl<string>('', {
       nonNullable: true,
       validators: [
         Validators.required,
@@ -65,7 +65,13 @@ export class TimeUsedForFinnishRunning {
 
       const value = this.inputGroup.getRawValue();
 
-      this.inputSignal().setValue((value.minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + (value.seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + value.milliseconds)
+      const valueAsNumber = {
+        minutes: parseInt(value.minutes),
+        seconds: parseInt(value.seconds),
+        milliseconds: parseInt(value.milliseconds)
+      }
+
+      this.inputSignal().setValue((valueAsNumber.minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + (valueAsNumber.seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + valueAsNumber.milliseconds)
 
       this.radioTower.emitMessage(FORM_STATE.DONE)
     });
