@@ -1,9 +1,15 @@
-import {Component, effect, inject, input} from '@angular/core';
+import {Component, inject, output} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import {TIME_UNIT} from '../../../../variables/timeUnit';
-import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../../services/add-new-runner-modal-radio-tower';
 import {TimeUsedForFinnishRunningEvent} from '../../../../interfaces/time-used-for-finnish-running-event';
+import {combineLatest, filter, map, Subscription} from 'rxjs';
+import {Time} from '../../../../interfaces/time';
 
 @Component({
   selector: 'app-time-used-for-finnish-running',
@@ -53,29 +59,41 @@ export class TimeUsedForFinnishRunning {
 
   private readonly TIME_UNIT = inject(TIME_UNIT)
 
-  private readonly radioTower = inject(AddNewRunnerModalRadioTower)
+  private readonly subscriptions: Subscription[] = []
 
   constructor() {
 
-    effect(() => {
-      const signal = this.radioTower.requestNewObservable()
+    const isValidStatus = this.inputGroup.statusChanges.pipe(map(it => it === 'VALID'))
+    const valueChanges = this.inputGroup.valueChanges.pipe(
+      filter(it => it.minutes !== undefined && it.seconds !== undefined && it.milliseconds !== undefined),
+      map(it => ({ minutes: it.minutes as string, seconds: it.seconds as string, milliseconds: it.milliseconds as string })),
+      map((it): Time  => {
+        return {
+          minutes: parseInt(it.minutes),
+          seconds: parseInt(it.seconds),
+          milliseconds: parseInt(it.milliseconds)
+        }
+      })
+    )
 
-      if (signal() !== FORM_STATE.SAVING) {
-        return
+    const expectedObserver = combineLatest([isValidStatus, valueChanges])
+
+    const expectedSubscribes = expectedObserver.subscribe((it) => {
+      if (it[0] === false) {
+        this.somethingChange.emit({valid: false, time: -1})
       }
 
-      const value = this.inputGroup.getRawValue();
+      const time = (it[1].minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) +
+        (it[1].seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) +
+        it[1].milliseconds
 
-      const valueAsNumber = {
-        minutes: parseInt(value.minutes),
-        seconds: parseInt(value.seconds),
-        milliseconds: parseInt(value.milliseconds)
-      }
+      this.somethingChange.emit({
+        valid: true,
+        time: time
+      })
+    })
 
-      this.inputSignal().setValue((valueAsNumber.minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + (valueAsNumber.seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND) + valueAsNumber.milliseconds)
-
-      this.radioTower.emitMessage(FORM_STATE.DONE)
-    });
+    this.subscriptions.push(expectedSubscribes)
 
   }
 
