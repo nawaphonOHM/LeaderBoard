@@ -85,6 +85,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
     const expectedSubscribes = expectedObserver.subscribe((it) => {
       if (it[0] === false) {
         this.somethingChange.emit({valid: false, time: -1})
+        return
       }
 
       const time = (it[1].minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND) +
