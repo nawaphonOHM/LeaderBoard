@@ -33,7 +33,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern('[0-9]*'),
+        Validators.pattern('^0{1}$|^([1-9][0-9]*)$|^-{1}([1-9][0-9]*)$'),
         Validators.min(0)
       ]
     }),
@@ -41,7 +41,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern('[0-9]*'),
+        Validators.pattern('^0{1}$|^([1-9][0-9]*)$|^-{1}([1-9][0-9]*)$'),
         Validators.min(0),
         Validators.max(59)
       ]
@@ -50,7 +50,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern('[0-9]*'),
+        Validators.pattern('^0{1}$|^([1-9][0-9]*)$|^-{1}([1-9][0-9]*)$'),
         Validators.min(0),
         Validators.max(999)
       ]
