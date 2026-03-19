@@ -3,6 +3,7 @@ import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/inpu
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TIME_UNIT} from '../../../../variables/timeUnit';
 import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../../services/add-new-runner-modal-radio-tower';
+import {TimeUsedForFinnishRunningEvent} from '../../../../interfaces/time-used-for-finnish-running-event';
 
 @Component({
   selector: 'app-time-used-for-finnish-running',
@@ -19,7 +20,7 @@ import {AddNewRunnerModalRadioTower, FORM_STATE} from '../../../../services/add-
 })
 export class TimeUsedForFinnishRunning {
 
-  inputSignal = input.required<FormControl<number>>({ alias: 'input' });
+  somethingChange = output<TimeUsedForFinnishRunningEvent>()
 
   protected readonly inputGroup = new FormGroup({
     minutes: new FormControl<string>('', {
