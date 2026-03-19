@@ -4,7 +4,6 @@ import { NewRunnerRegister } from './new-runner-register';
 import { MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { CONFIGURATION } from '../../../variables/configurations';
 import { UnexpectedToReachHere } from '../../../errors/UnexpectedToReachHere';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Country } from '@wlucha/ng-country-select';
 import { TIME_UNIT } from '../../../variables/timeUnit';
 import { ReactiveFormsModule, FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
@@ -65,8 +64,7 @@ describe('NewRunnerRegister', () => {
 
     await TestBed.configureTestingModule({
       imports: [
-        NewRunnerRegister,
-        NoopAnimationsModule
+        NewRunnerRegister
       ],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefMock },
