@@ -50,7 +50,7 @@ export class NewRunnerRegister {
       nonNullable: false,
       validators: [Validators.required]
     }),
-    timeUsedInMillisecond: new FormControl(0, {
+    timeUsedInMillisecond: new FormControl(-1, {
       nonNullable: true,
       validators: [Validators.min(0)]
     })
