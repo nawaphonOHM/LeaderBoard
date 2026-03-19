@@ -1,4 +1,4 @@
-import {Component, inject, output} from '@angular/core';
+import {Component, inject, OnDestroy, output} from '@angular/core';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {
   FormControl,
@@ -24,7 +24,7 @@ import {Time} from '../../../../interfaces/time';
   templateUrl: './time-used-for-finnish-running.html',
   styleUrl: './time-used-for-finnish-running.scss'
 })
-export class TimeUsedForFinnishRunning {
+export class TimeUsedForFinnishRunning implements OnDestroy{
 
   somethingChange = output<TimeUsedForFinnishRunningEvent>()
 
@@ -96,5 +96,9 @@ export class TimeUsedForFinnishRunning {
     this.subscriptions.push(expectedSubscribes)
 
   }
+
+  ngOnDestroy(): void {
+        this.subscriptions.forEach(it => it.unsubscribe())
+    }
 
 }
