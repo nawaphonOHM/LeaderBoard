@@ -24,7 +24,7 @@ import {Time} from '../../../../interfaces/time';
   templateUrl: './time-used-for-finnish-running.html',
   styleUrl: './time-used-for-finnish-running.scss'
 })
-export class TimeUsedForFinnishRunning implements OnDestroy{
+export class TimeUsedForFinnishRunning implements OnDestroy {
 
   somethingChange = output<TimeUsedForFinnishRunningEvent>()
 
@@ -66,8 +66,12 @@ export class TimeUsedForFinnishRunning implements OnDestroy{
     const isValidStatus = this.inputGroup.statusChanges.pipe(map(it => it === 'VALID'))
     const valueChanges = this.inputGroup.valueChanges.pipe(
       filter(it => it.minutes !== undefined && it.seconds !== undefined && it.milliseconds !== undefined),
-      map(it => ({ minutes: it.minutes as string, seconds: it.seconds as string, milliseconds: it.milliseconds as string })),
-      map((it): Time  => {
+      map(it => ({
+        minutes: it.minutes as string,
+        seconds: it.seconds as string,
+        milliseconds: it.milliseconds as string
+      })),
+      map((it): Time => {
         return {
           minutes: parseInt(it.minutes),
           seconds: parseInt(it.seconds),
@@ -98,7 +102,7 @@ export class TimeUsedForFinnishRunning implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-        this.subscriptions.forEach(it => it.unsubscribe())
-    }
+    this.subscriptions.forEach(it => it.unsubscribe())
+  }
 
 }
