@@ -53,7 +53,7 @@ describe('DashboardAddNewRunnerCoordinator', () => {
     expect(matDialog.open).toHaveBeenCalled();
     expect(radioTower.emitMessage).toHaveBeenCalledWith({
       state: 'SEND_REQUEST',
-      data: dialogResult as any
+      data: dialogResult as unknown
     });
   });
 });

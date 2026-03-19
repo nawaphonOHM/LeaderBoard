@@ -48,20 +48,20 @@ describe('DashboardTable', () => {
 
     fixture.detectChanges();
 
-    expect((component as any).data).toContain(newData);
-    expect((component as any).sortedData.data).toContain(newData);
+    expect((component as unknown as { data: DashboardTable['data'] }).data).toContain(newData);
+    expect((component as unknown as { sortedData: DashboardTable['sortedData'] }).sortedData.data).toContain(newData);
   });
 
   it('should not add data when state is not SEND_REQUEST', () => {
-    const initialCount = (component as any).data.length;
+    const initialCount = (component as unknown as { data: DashboardTable['data'] }).data.length;
 
     radioTower.emitMessage({
-      state: 'OTHER',
-      data: {}
-    } as any);
+      state: 'RESPONSE_DATA',
+      data: null
+    });
 
     fixture.detectChanges();
 
-    expect((component as any).data.length).toBe(initialCount);
+    expect((component as unknown as { data: DashboardTable['data'] }).data.length).toBe(initialCount);
   });
 });

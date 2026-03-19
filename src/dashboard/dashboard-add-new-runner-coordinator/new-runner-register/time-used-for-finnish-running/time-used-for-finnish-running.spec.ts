@@ -29,7 +29,7 @@ describe('TimeUsedForFinnishRunning', () => {
 
   it('should emit somethingChange when input values change and are valid', () => {
     const spy = spyOn(component.somethingChange, 'emit');
-    const inputGroup = (component as any).inputGroup;
+    const inputGroup = (component as unknown as { inputGroup: TimeUsedForFinnishRunning['inputGroup'] }).inputGroup;
 
     inputGroup.patchValue({
       minutes: '1',
@@ -48,7 +48,7 @@ describe('TimeUsedForFinnishRunning', () => {
 
   it('should emit somethingChange with valid: false when input values are invalid', () => {
     const spy = spyOn(component.somethingChange, 'emit');
-    const inputGroup = (component as any).inputGroup;
+    const inputGroup = (component as unknown as { inputGroup: TimeUsedForFinnishRunning['inputGroup'] }).inputGroup;
 
     inputGroup.patchValue({
       minutes: '-1',

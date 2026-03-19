@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, input, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewRunnerRegister } from './new-runner-register';
 import { MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
@@ -16,9 +16,9 @@ import { MatButton } from '@angular/material/button';
   template: ''
 })
 class MockGeneralInput {
-  @Input({required: true}) input!: FormControl;
-  @Input({required: false}) errorMessage: string | null = null;
-  @Input({required: true}) label!: string;
+  input = input.required<FormControl>();
+  errorMessage = input<string | null>(null);
+  label = input.required<string>();
 }
 
 @Component({
@@ -27,7 +27,7 @@ class MockGeneralInput {
   template: ''
 })
 class MockTimeUsedForFinnishRunning {
-  @Input({required: true}) input!: FormControl;
+  input = input.required<FormControl>();
 }
 
 @Component({
@@ -43,15 +43,15 @@ class MockTimeUsedForFinnishRunning {
   ]
 })
 class MockCountrySelect implements ControlValueAccessor {
-  @Input() requiredErrorMessage: any;
-  @Input() showRequiredErrorMessage: any;
-  @Input() required: any;
-  @Input() formControl: any;
-  @Input() placeholder: any;
+  requiredErrorMessage = input<string | null>(null);
+  showRequiredErrorMessage = input<boolean>(false);
+  required = input<boolean>(false);
+  formControl = input<FormControl | null>(null);
+  placeholder = input<string | null>(null);
 
-  writeValue(obj: any): void {}
-  registerOnChange(fn: any): void {}
-  registerOnTouched(fn: any): void {}
+  writeValue(obj: unknown): void {}
+  registerOnChange(fn: (value: unknown) => void): void {}
+  registerOnTouched(fn: () => void): void {}
   setDisabledState?(isDisabled: boolean): void {}
 }
 
@@ -107,7 +107,7 @@ describe('NewRunnerRegister', () => {
 
   describe('Form Initialization', () => {
     it('should initialize inputGroup with default values', () => {
-      const inputGroup = (component as any).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
       expect(inputGroup.getRawValue()).toEqual({
         firstName: '',
         lastName: '',
@@ -117,7 +117,7 @@ describe('NewRunnerRegister', () => {
     });
 
     it('should have required validators on all fields except timeUsedInMillisecond', () => {
-      const inputGroup = (component as any).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
 
       inputGroup.controls.firstName.setValue('');
       expect(inputGroup.controls.firstName.valid).toBeFalse();
@@ -130,7 +130,7 @@ describe('NewRunnerRegister', () => {
     });
 
     it('should have min(0) validator on timeUsedInMillisecond', () => {
-      const inputGroup = (component as any).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
       inputGroup.controls.timeUsedInMillisecond.setValue(-2);
       expect(inputGroup.controls.timeUsedInMillisecond.valid).toBeFalse();
     });
@@ -145,7 +145,7 @@ describe('NewRunnerRegister', () => {
 
   describe('save', () => {
     it('should close the dialog with runner data when nationality is valid', () => {
-      const inputGroup = (component as any).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
         lastName: 'Doe',
@@ -164,11 +164,11 @@ describe('NewRunnerRegister', () => {
     });
 
     it('should throw UnexpectedToReachHere when nationality is missing alpha2', () => {
-      const inputGroup = (component as any).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
         lastName: 'Doe',
-        nationality: {} as any,
+        nationality: {} as unknown as Country,
         timeUsedInMillisecond: 12345
       });
 
