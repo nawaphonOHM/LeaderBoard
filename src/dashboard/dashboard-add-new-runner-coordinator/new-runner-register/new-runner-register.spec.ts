@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewRunnerRegister } from './new-runner-register';
 import { MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { CONFIGURATION } from '../../../variables/configurations';
-import { AddNewRunnerModalRadioTower, FORM_STATE } from '../../../services/add-new-runner-modal-radio-tower';
 import { UnexpectedToReachHere } from '../../../errors/UnexpectedToReachHere';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Country } from '@wlucha/ng-country-select';
@@ -60,7 +59,6 @@ describe('NewRunnerRegister', () => {
   let component: NewRunnerRegister;
   let fixture: ComponentFixture<NewRunnerRegister>;
   let matDialogRefMock: jasmine.SpyObj<MatDialogRef<NewRunnerRegister>>;
-  let radioTower: AddNewRunnerModalRadioTower;
 
   beforeEach(async () => {
     matDialogRefMock = jasmine.createSpyObj('MatDialogRef', ['close']);
@@ -99,7 +97,6 @@ describe('NewRunnerRegister', () => {
 
     fixture = TestBed.createComponent(NewRunnerRegister);
     component = fixture.componentInstance;
-    radioTower = fixture.debugElement.injector.get(AddNewRunnerModalRadioTower);
 
     fixture.detectChanges();
   });
@@ -115,7 +112,7 @@ describe('NewRunnerRegister', () => {
         firstName: '',
         lastName: '',
         nationality: null,
-        timeUsedInMillisecond: 0
+        timeUsedInMillisecond: -1
       });
     });
 
@@ -134,7 +131,7 @@ describe('NewRunnerRegister', () => {
 
     it('should have min(0) validator on timeUsedInMillisecond', () => {
       const inputGroup = (component as any).inputGroup;
-      inputGroup.controls.timeUsedInMillisecond.setValue(-1);
+      inputGroup.controls.timeUsedInMillisecond.setValue(-2);
       expect(inputGroup.controls.timeUsedInMillisecond.valid).toBeFalse();
     });
   });
@@ -147,15 +144,7 @@ describe('NewRunnerRegister', () => {
   });
 
   describe('save', () => {
-    it('should emit SAVING message to radioTower', () => {
-      spyOn(radioTower, 'emitMessage').and.callThrough();
-      component.save();
-      expect(radioTower.emitMessage).toHaveBeenCalledWith(FORM_STATE.SAVING);
-    });
-  });
-
-  describe('effect logic', () => {
-    it('should close the dialog with runner data when radioTower emits DONE and nationality is valid', () => {
+    it('should close the dialog with runner data when nationality is valid', () => {
       const inputGroup = (component as any).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
@@ -164,8 +153,7 @@ describe('NewRunnerRegister', () => {
         timeUsedInMillisecond: 12345
       });
 
-      radioTower.emitMessage(FORM_STATE.DONE);
-      fixture.detectChanges();
+      component.save();
 
       expect(matDialogRefMock.close).toHaveBeenCalledWith({
         firstName: 'John',
@@ -175,7 +163,7 @@ describe('NewRunnerRegister', () => {
       });
     });
 
-    it('should throw UnexpectedToReachHere when DONE is emitted but nationality is missing alpha2', () => {
+    it('should throw UnexpectedToReachHere when nationality is missing alpha2', () => {
       const inputGroup = (component as any).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
@@ -185,23 +173,8 @@ describe('NewRunnerRegister', () => {
       });
 
       expect(() => {
-        radioTower.emitMessage(FORM_STATE.DONE);
-        fixture.detectChanges();
+        component.save();
       }).toThrowError(UnexpectedToReachHere, "nationality should has a value.");
-    });
-
-    it('should not close the dialog if signal is not DONE', () => {
-      radioTower.emitMessage(FORM_STATE.SAVING);
-      fixture.detectChanges();
-      expect(matDialogRefMock.close).not.toHaveBeenCalled();
-
-      radioTower.emitMessage(FORM_STATE.INPUTTING);
-      fixture.detectChanges();
-      expect(matDialogRefMock.close).not.toHaveBeenCalled();
-
-      radioTower.emitMessage(FORM_STATE.NOP);
-      fixture.detectChanges();
-      expect(matDialogRefMock.close).not.toHaveBeenCalled();
     });
   });
 });

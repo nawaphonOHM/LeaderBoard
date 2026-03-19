@@ -15,8 +15,8 @@ describe('GeneralInput', () => {
 
     fixture = TestBed.createComponent(GeneralInput);
     component = fixture.componentInstance;
-    component.input = new FormControl('') as any;
-    component.label = 'Test Label';
+    fixture.componentRef.setInput('input', new FormControl(''));
+    fixture.componentRef.setInput('label', 'Test Label');
     fixture.detectChanges();
   });
 
@@ -30,9 +30,10 @@ describe('GeneralInput', () => {
   });
 
   it('should show error message when control is invalid and touched', () => {
-    component.input = new FormControl('', { validators: [() => ({ required: true })] });
-    component.errorMessage = 'Required field';
-    component.input.markAsTouched();
+    const control = new FormControl('', { validators: [() => ({ required: true })] });
+    fixture.componentRef.setInput('input', control);
+    fixture.componentRef.setInput('errorMessage', 'Required field');
+    control.markAsTouched();
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

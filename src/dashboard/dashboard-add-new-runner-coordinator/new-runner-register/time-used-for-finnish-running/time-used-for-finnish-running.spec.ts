@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TimeUsedForFinnishRunning } from './time-used-for-finnish-running';
-import { AddNewRunnerModalRadioTower, FORM_STATE } from '../../../../services/add-new-runner-modal-radio-tower';
 import { TIME_UNIT } from '../../../../variables/timeUnit';
-import { FormControl } from '@angular/forms';
 
 describe('TimeUsedForFinnishRunning', () => {
   let component: TimeUsedForFinnishRunning;
@@ -12,7 +10,6 @@ describe('TimeUsedForFinnishRunning', () => {
     await TestBed.configureTestingModule({
       imports: [TimeUsedForFinnishRunning],
       providers: [
-        AddNewRunnerModalRadioTower,
         {
           provide: TIME_UNIT,
           useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 }
@@ -23,7 +20,6 @@ describe('TimeUsedForFinnishRunning', () => {
 
     fixture = TestBed.createComponent(TimeUsedForFinnishRunning);
     component = fixture.componentInstance;
-    component.input = new FormControl(0) as any;
     fixture.detectChanges();
   });
 
@@ -31,30 +27,40 @@ describe('TimeUsedForFinnishRunning', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should update input control when radioTower emits SAVING', () => {
-    const radioTower = TestBed.inject(AddNewRunnerModalRadioTower);
+  it('should emit somethingChange when input values change and are valid', () => {
+    const spy = spyOn(component.somethingChange, 'emit');
     const inputGroup = (component as any).inputGroup;
 
     inputGroup.patchValue({
-      minutes: 1,
-      seconds: 30,
-      milliseconds: 500
+      minutes: '1',
+      seconds: '30',
+      milliseconds: '500'
     });
 
-    radioTower.emitMessage(FORM_STATE.SAVING);
     fixture.detectChanges();
 
     // 1 min * 60 sec * 1000 ms + 30 sec * 1000 ms + 500 ms = 60000 + 30000 + 500 = 90500
-    expect(component.input.value).toBe(90500);
+    expect(spy).toHaveBeenCalledWith({
+      valid: true,
+      time: 90500
+    });
   });
 
-  it('should emit DONE after calculation', () => {
-    const radioTower = TestBed.inject(AddNewRunnerModalRadioTower);
-    spyOn(radioTower, 'emitMessage').and.callThrough();
+  it('should emit somethingChange with valid: false when input values are invalid', () => {
+    const spy = spyOn(component.somethingChange, 'emit');
+    const inputGroup = (component as any).inputGroup;
 
-    radioTower.emitMessage(FORM_STATE.SAVING);
+    inputGroup.patchValue({
+      minutes: '-1',
+      seconds: '30',
+      milliseconds: '500'
+    });
+
     fixture.detectChanges();
 
-    expect(radioTower.emitMessage).toHaveBeenCalledWith(FORM_STATE.DONE);
+    expect(spy).toHaveBeenCalledWith({
+      valid: false,
+      time: -1
+    });
   });
 });
