@@ -15,7 +15,7 @@
                          placeholder="What is runner nationality?"/>
     </div>
     <div>
-      <app-time-used-for-finnish-running [input]="inputGroup.controls.timeUsedInMillisecond"/>
+      <app-time-used-for-finnish-running (somethingChange)="onTimeChange($event)"/>
     </div>
   </form>
 </mat-dialog-content>
