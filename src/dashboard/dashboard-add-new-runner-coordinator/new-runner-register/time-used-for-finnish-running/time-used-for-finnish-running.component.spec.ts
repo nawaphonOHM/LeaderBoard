@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TimeUsedForFinnishRunning } from './time-used-for-finnish-running';
-import { TIME_UNIT } from '../../../../variables/timeUnit';
+import { TimeUsedForFinnishRunningComponent } from './time-used-for-finnish-running.component';
+import { TIME_UNIT } from '../../../../variables/time-unit';
 
-describe('TimeUsedForFinnishRunning', () => {
-  let component: TimeUsedForFinnishRunning;
-  let fixture: ComponentFixture<TimeUsedForFinnishRunning>;
+describe('TimeUsedForFinnishRunningComponent', () => {
+  let component: TimeUsedForFinnishRunningComponent;
+  let fixture: ComponentFixture<TimeUsedForFinnishRunningComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TimeUsedForFinnishRunning],
+      imports: [TimeUsedForFinnishRunningComponent],
       providers: [
         {
           provide: TIME_UNIT,
@@ -18,7 +18,7 @@ describe('TimeUsedForFinnishRunning', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TimeUsedForFinnishRunning);
+    fixture = TestBed.createComponent(TimeUsedForFinnishRunningComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -29,7 +29,7 @@ describe('TimeUsedForFinnishRunning', () => {
 
   it('should emit somethingChange when input values change and are valid', () => {
     const spy = spyOn(component.somethingChange, 'emit');
-    const inputGroup = (component as unknown as { inputGroup: TimeUsedForFinnishRunning['inputGroup'] }).inputGroup;
+    const inputGroup = (component as unknown as { inputGroup: TimeUsedForFinnishRunningComponent['inputGroup'] }).inputGroup;
 
     inputGroup.patchValue({
       minutes: '1',
@@ -48,7 +48,7 @@ describe('TimeUsedForFinnishRunning', () => {
 
   it('should emit somethingChange with valid: false when input values are invalid', () => {
     const spy = spyOn(component.somethingChange, 'emit');
-    const inputGroup = (component as unknown as { inputGroup: TimeUsedForFinnishRunning['inputGroup'] }).inputGroup;
+    const inputGroup = (component as unknown as { inputGroup: TimeUsedForFinnishRunningComponent['inputGroup'] }).inputGroup;
 
     inputGroup.patchValue({
       minutes: '-1',

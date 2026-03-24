@@ -4,7 +4,7 @@ import {DashBoardAddNewRunnerInformationEnvelop} from '../interfaces/dash-board-
 @Injectable({
   providedIn: 'root'
 })
-export class DashBoardAddNewRunnerCoordinatorRadioTower {
+export class DashBoardAddNewRunnerCoordinatorRadioTowerService {
 
   private readonly radio = signal<DashBoardAddNewRunnerInformationEnvelop<unknown> | null>(null)
 

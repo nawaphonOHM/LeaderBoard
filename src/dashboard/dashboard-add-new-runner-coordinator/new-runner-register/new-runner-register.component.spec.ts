@@ -1,11 +1,11 @@
 import { Component, input, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NewRunnerRegister } from './new-runner-register';
+import { NewRunnerRegisterComponent } from './new-runner-register.component';
 import { MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { CONFIGURATION } from '../../../variables/configurations';
-import { UnexpectedToReachHere } from '../../../errors/UnexpectedToReachHere';
+import { UnexpectedToReachHere } from '../../../errors/unexpected-to-reach-here';
 import { Country } from '@wlucha/ng-country-select';
-import { TIME_UNIT } from '../../../variables/timeUnit';
+import { TIME_UNIT } from '../../../variables/time-unit';
 import { ReactiveFormsModule, FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 
@@ -54,17 +54,17 @@ class MockCountrySelect implements ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {}
 }
 
-describe('NewRunnerRegister', () => {
-  let component: NewRunnerRegister;
-  let fixture: ComponentFixture<NewRunnerRegister>;
-  let matDialogRefMock: jasmine.SpyObj<MatDialogRef<NewRunnerRegister>>;
+describe('NewRunnerRegisterComponent', () => {
+  let component: NewRunnerRegisterComponent;
+  let fixture: ComponentFixture<NewRunnerRegisterComponent>;
+  let matDialogRefMock: jasmine.SpyObj<MatDialogRef<NewRunnerRegisterComponent>>;
 
   beforeEach(async () => {
     matDialogRefMock = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     await TestBed.configureTestingModule({
       imports: [
-        NewRunnerRegister
+        NewRunnerRegisterComponent
       ],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefMock },
@@ -77,7 +77,7 @@ describe('NewRunnerRegister', () => {
           useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 }
         }
       ]
-    }).overrideComponent(NewRunnerRegister, {
+    }).overrideComponent(NewRunnerRegisterComponent, {
       set: {
         imports: [
           ReactiveFormsModule,
@@ -93,7 +93,7 @@ describe('NewRunnerRegister', () => {
       }
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NewRunnerRegister);
+    fixture = TestBed.createComponent(NewRunnerRegisterComponent);
     component = fixture.componentInstance;
 
     fixture.detectChanges();
@@ -105,7 +105,7 @@ describe('NewRunnerRegister', () => {
 
   describe('Form Initialization', () => {
     it('should initialize inputGroup with default values', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
       expect(inputGroup.getRawValue()).toEqual({
         firstName: '',
         lastName: '',
@@ -115,7 +115,7 @@ describe('NewRunnerRegister', () => {
     });
 
     it('should have required validators on all fields except timeUsedInMillisecond', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
 
       inputGroup.controls.firstName.setValue('');
       expect(inputGroup.controls.firstName.valid).toBeFalse();
@@ -128,7 +128,7 @@ describe('NewRunnerRegister', () => {
     });
 
     it('should have min(0) validator on timeUsedInMillisecond', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
       inputGroup.controls.timeUsedInMillisecond.setValue(-2);
       expect(inputGroup.controls.timeUsedInMillisecond.valid).toBeFalse();
     });
@@ -143,7 +143,7 @@ describe('NewRunnerRegister', () => {
 
   describe('save', () => {
     it('should close the dialog with runner data when nationality is valid', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
         lastName: 'Doe',
@@ -162,7 +162,7 @@ describe('NewRunnerRegister', () => {
     });
 
     it('should throw UnexpectedToReachHere when nationality is missing alpha2', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegister['inputGroup'] }).inputGroup;
+      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
         lastName: 'Doe',

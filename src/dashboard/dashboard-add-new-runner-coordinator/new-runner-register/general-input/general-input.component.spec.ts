@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GeneralInput } from './general-input';
+import { GeneralInputComponent } from './general-input.component';
 import { FormControl } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-describe('GeneralInput', () => {
-  let component: GeneralInput;
-  let fixture: ComponentFixture<GeneralInput>;
+describe('GeneralInputComponent', () => {
+  let component: GeneralInputComponent;
+  let fixture: ComponentFixture<GeneralInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GeneralInput, NoopAnimationsModule]
+      imports: [GeneralInputComponent, NoopAnimationsModule]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GeneralInput);
+    fixture = TestBed.createComponent(GeneralInputComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('input', new FormControl(''));
     fixture.componentRef.setInput('label', 'Test Label');

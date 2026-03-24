@@ -4,7 +4,7 @@ import {DashboardTableData} from '../interfaces/dashboard-table-data';
 @Pipe({
   name: 'fullName'
 })
-export class FulNamePipe implements PipeTransform {
+export class FullNamePipe implements PipeTransform {
 
   transform(value: DashboardTableData, ...args: unknown[]): string {
     return [value.firstName, value.lastName].join(' ');

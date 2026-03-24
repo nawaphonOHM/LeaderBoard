@@ -9,13 +9,13 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatNoDataRow, MatRow, MatRowDef,
   MatTable, MatTableDataSource
 } from '@angular/material/table';
-import {FulNamePipe} from '../../../pipes/fulName-pipe';
+import {FullNamePipe} from '../../../pipes/full-name.pipe';
 import {NgOptimizedImage} from '@angular/common';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
-import {TimeMinSecondMilliSecondPipe} from '../../../pipes/time-min-second-milli-second-pipe';
+import {TimeMinSecondMilliSecondPipe} from '../../../pipes/time-min-second-milli-second.pipe';
 import {
-  DashBoardAddNewRunnerCoordinatorRadioTower
-} from '../../../services/dash-board-add-new-runner-coordinator-radio-tower';
+  DashBoardAddNewRunnerCoordinatorRadioTowerService
+} from '../../../services/dash-board-add-new-runner-coordinator-radio-tower.service';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -26,7 +26,7 @@ import {
     MatHeaderCellDef,
     MatCell,
     MatCellDef,
-    FulNamePipe,
+    FullNamePipe,
     MatHeaderRow,
     MatRow,
     MatHeaderRowDef,
@@ -37,10 +37,10 @@ import {
     TimeMinSecondMilliSecondPipe,
     MatNoDataRow
   ],
-  templateUrl: './dashboard-table.html',
-  styleUrl: './dashboard-table.scss'
+  templateUrl: './dashboard-table.component.html',
+  styleUrl: './dashboard-table.component.scss'
 })
-export class DashboardTable {
+export class DashboardTableComponent {
 
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
@@ -50,7 +50,7 @@ export class DashboardTable {
 
   protected readonly matSortSignal = viewChild.required(MatSort);
 
-  private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(DashBoardAddNewRunnerCoordinatorRadioTower);
+  private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(DashBoardAddNewRunnerCoordinatorRadioTowerService);
 
   constructor() {
 

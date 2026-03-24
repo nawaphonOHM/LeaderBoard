@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DashboardAddNewRunnerButton } from './dashboard-add-new-runner-button';
-import { DashBoardAddNewRunnerCoordinatorRadioTower } from '../../../services/dash-board-add-new-runner-coordinator-radio-tower';
+import { DashboardAddNewRunnerButtonComponent } from './dashboard-add-new-runner-button.component';
+import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../../../services/dash-board-add-new-runner-coordinator-radio-tower.service';
 
-describe('DashboardAddNewRunnerButton', () => {
-  let component: DashboardAddNewRunnerButton;
-  let fixture: ComponentFixture<DashboardAddNewRunnerButton>;
-  let radioTower: DashBoardAddNewRunnerCoordinatorRadioTower;
+describe('DashboardAddNewRunnerButtonComponent', () => {
+  let component: DashboardAddNewRunnerButtonComponent;
+  let fixture: ComponentFixture<DashboardAddNewRunnerButtonComponent>;
+  let radioTower: DashBoardAddNewRunnerCoordinatorRadioTowerService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardAddNewRunnerButton],
-      providers: [DashBoardAddNewRunnerCoordinatorRadioTower]
+      imports: [DashboardAddNewRunnerButtonComponent],
+      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DashboardAddNewRunnerButton);
+    fixture = TestBed.createComponent(DashboardAddNewRunnerButtonComponent);
     component = fixture.componentInstance;
-    radioTower = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTower);
+    radioTower = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTowerService);
     fixture.detectChanges();
   });
 

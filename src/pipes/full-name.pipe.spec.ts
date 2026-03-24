@@ -1,11 +1,11 @@
-import { FulNamePipe } from './fulName-pipe';
+import { FullNamePipe } from './full-name.pipe';
 import { DashboardTableData } from '../interfaces/dashboard-table-data';
 
-describe('FulNamePipe', () => {
-  let pipe: FulNamePipe;
+describe('FullNamePipe', () => {
+  let pipe: FullNamePipe;
 
   beforeEach(() => {
-    pipe = new FulNamePipe();
+    pipe = new FullNamePipe();
   });
 
   it('create an instance', () => {

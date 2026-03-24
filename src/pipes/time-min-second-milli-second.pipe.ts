@@ -1,5 +1,5 @@
 import {inject, Pipe, PipeTransform} from '@angular/core';
-import {TIME_UNIT} from '../variables/timeUnit';
+import {TIME_UNIT} from '../variables/time-unit';
 
 @Pipe({
   name: 'timeMinSecondMilliSecond'

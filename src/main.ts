@@ -1,5 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import {Dashboard} from './dashboard/dashboard';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
-bootstrapApplication(Dashboard)
+bootstrapApplication(DashboardComponent)
   .catch((err) => console.error(err));

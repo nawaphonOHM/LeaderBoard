@@ -6,13 +6,13 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
-import {GeneralInput} from './general-input/general-input';
+import {GeneralInputComponent} from './general-input/general-input.component';
 import {Country, CountrySelectComponent} from '@wlucha/ng-country-select';
-import {TimeUsedForFinnishRunning} from './time-used-for-finnish-running/time-used-for-finnish-running';
+import {TimeUsedForFinnishRunningComponent} from './time-used-for-finnish-running/time-used-for-finnish-running.component';
 import {CONFIGURATION, ConfigurationMain} from '../../../variables/configurations';
-import {UnexpectedToReachHere} from '../../../errors/UnexpectedToReachHere';
+import {UnexpectedToReachHere} from '../../../errors/unexpected-to-reach-here';
 import {TimeUsedForFinnishRunningEvent} from '../../../interfaces/time-used-for-finnish-running-event';
 
 @Component({
@@ -20,21 +20,20 @@ import {TimeUsedForFinnishRunningEvent} from '../../../interfaces/time-used-for-
   imports: [
     MatDialogTitle,
     MatDialogContent,
-    FormsModule,
     MatDialogActions,
     MatButton,
     MatDialogClose,
     ReactiveFormsModule,
-    GeneralInput,
+    GeneralInputComponent,
     CountrySelectComponent,
-    TimeUsedForFinnishRunning,
+    TimeUsedForFinnishRunningComponent,
 
   ],
-  templateUrl: './new-runner-register.html',
-  styleUrl: './new-runner-register.scss',
+  templateUrl: './new-runner-register.component.html',
+  styleUrl: './new-runner-register.component.scss',
   providers: [{ provide: CONFIGURATION, useValue: ConfigurationMain }]
 })
-export class NewRunnerRegister {
+export class NewRunnerRegisterComponent {
 
   protected readonly inputGroup = new FormGroup({
     firstName: new FormControl('', {
@@ -55,12 +54,9 @@ export class NewRunnerRegister {
     })
   })
 
-  private readonly matDialog = inject(MatDialogRef<NewRunnerRegister>);
+  private readonly matDialog = inject(MatDialogRef<NewRunnerRegisterComponent>);
 
   private readonly configuration = inject(CONFIGURATION)
-
-  constructor() {
-  }
 
   cancelCallback() {
     this.matDialog.close()

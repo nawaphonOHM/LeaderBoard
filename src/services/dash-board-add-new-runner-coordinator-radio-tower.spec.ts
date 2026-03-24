@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DashBoardAddNewRunnerInformationEnvelop } from '../interfaces/dash-board-add-new-runner-information-envelop';
-import { DashBoardAddNewRunnerCoordinatorRadioTower } from './dash-board-add-new-runner-coordinator-radio-tower';
+import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from './dash-board-add-new-runner-coordinator-radio-tower.service';
 
-describe('DashBoardAddNewRunnerCoordinatorRadioTower', () => {
-  let service: DashBoardAddNewRunnerCoordinatorRadioTower;
+describe('DashBoardAddNewRunnerCoordinatorRadioTowerService', () => {
+  let service: DashBoardAddNewRunnerCoordinatorRadioTowerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTower);
+    service = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTowerService);
   });
 
   it('should be created', () => {

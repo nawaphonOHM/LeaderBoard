@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { DashboardAddNewRunnerCoordinator } from './dashboard-add-new-runner-coordinator';
+import { DashboardAddNewRunnerCoordinatorComponent } from './dashboard-add-new-runner-coordinator.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DashBoardAddNewRunnerCoordinatorRadioTower } from '../../services/dash-board-add-new-runner-coordinator-radio-tower';
+import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../../services/dash-board-add-new-runner-coordinator-radio-tower.service';
 import { of } from 'rxjs';
 
-describe('DashboardAddNewRunnerCoordinator', () => {
-  let component: DashboardAddNewRunnerCoordinator;
-  let fixture: ComponentFixture<DashboardAddNewRunnerCoordinator>;
-  let radioTower: DashBoardAddNewRunnerCoordinatorRadioTower;
+describe('DashboardAddNewRunnerCoordinatorComponent', () => {
+  let component: DashboardAddNewRunnerCoordinatorComponent;
+  let fixture: ComponentFixture<DashboardAddNewRunnerCoordinatorComponent>;
+  let radioTower: DashBoardAddNewRunnerCoordinatorRadioTowerService;
   let matDialog: MatDialog;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardAddNewRunnerCoordinator, MatDialogModule],
-      providers: [DashBoardAddNewRunnerCoordinatorRadioTower]
+      imports: [DashboardAddNewRunnerCoordinatorComponent, MatDialogModule],
+      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DashboardAddNewRunnerCoordinator);
+    fixture = TestBed.createComponent(DashboardAddNewRunnerCoordinatorComponent);
     component = fixture.componentInstance;
-    radioTower = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTower);
+    radioTower = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTowerService);
     matDialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
   });

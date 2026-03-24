@@ -1,4 +1,5 @@
-import {Component, inject, OnDestroy, output} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit, output} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {MatError, MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {
   FormControl,
@@ -6,9 +7,9 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import {TIME_UNIT} from '../../../../variables/timeUnit';
+import {TIME_UNIT} from '../../../../variables/time-unit';
 import {TimeUsedForFinnishRunningEvent} from '../../../../interfaces/time-used-for-finnish-running-event';
-import {combineLatest, filter, map, Subscription} from 'rxjs';
+import {combineLatest, filter, map} from 'rxjs';
 import {Time} from '../../../../interfaces/time';
 
 @Component({
@@ -18,13 +19,12 @@ import {Time} from '../../../../interfaces/time';
     MatInput,
     MatLabel,
     ReactiveFormsModule,
-    MatFormField,
     MatError
   ],
-  templateUrl: './time-used-for-finnish-running.html',
-  styleUrl: './time-used-for-finnish-running.scss'
+  templateUrl: './time-used-for-finnish-running.component.html',
+  styleUrl: './time-used-for-finnish-running.component.scss'
 })
-export class TimeUsedForFinnishRunning implements OnDestroy {
+export class TimeUsedForFinnishRunningComponent implements OnInit {
 
   somethingChange = output<TimeUsedForFinnishRunningEvent>()
 
@@ -58,11 +58,9 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
   })
 
   private readonly TIME_UNIT = inject(TIME_UNIT)
+  private readonly destroyRef = inject(DestroyRef)
 
-  private readonly subscriptions: Subscription[] = []
-
-  constructor() {
-
+  ngOnInit(): void {
     const isValidStatus = this.inputGroup.statusChanges.pipe(map(it => it === 'VALID'))
     const valueChanges = this.inputGroup.valueChanges.pipe(
       filter(it => it.minutes !== undefined && it.seconds !== undefined && it.milliseconds !== undefined),
@@ -80,9 +78,9 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
       })
     )
 
-    const expectedObserver = combineLatest([isValidStatus, valueChanges])
-
-    const expectedSubscribes = expectedObserver.subscribe((it) => {
+    combineLatest([isValidStatus, valueChanges]).pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe((it) => {
       if (it[0] === false) {
         this.somethingChange.emit({valid: false, time: -1})
         return
@@ -97,13 +95,6 @@ export class TimeUsedForFinnishRunning implements OnDestroy {
         time: time
       })
     })
-
-    this.subscriptions.push(expectedSubscribes)
-
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(it => it.unsubscribe())
   }
 
 }

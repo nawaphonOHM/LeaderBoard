@@ -71,7 +71,7 @@ npm test
 ## Project Structure
 
 - `src/dashboard`: Root container for the leaderboard view.
-  - `dashboard.ts`: Main entry point for the dashboard UI.
+  - `dashboard.component.ts`: Main entry point for the dashboard UI.
   - `dashboard-header`: Dashboard header component.
   - `dashboard-add-new-runner-coordinator`: Orchestrates runner addition and table updates.
     - `dashboard-add-new-runner-button`: Triggers the registration dialog.
@@ -81,8 +81,8 @@ npm test
       - `time-used-for-finnish-running`: Specialized input for recording runner completion time.
 - `src/services`: Communication services using Angular Signals (Radio Tower pattern).
 - `src/pipes`: Custom data transformation pipes.
-  - `fulName-pipe.ts`: Combines runner's first and last name.
-  - `time-min-second-milli-second-pipe.ts`: Formats time in milliseconds to a readable string.
+  - `full-name.pipe.ts`: Combines runner's first and last name (`FullNamePipe`).
+  - `time-min-second-milli-second.pipe.ts`: Formats time in milliseconds to a readable string (`TimeMinSecondMilliSecondPipe`).
 - `src/interfaces`: TypeScript interfaces for data modeling and communication envelopes.
 - `src/variables`: Configuration constants (e.g., flag APIs) and shared time units.
 - `src/errors`: Custom error types for enhanced debugging.

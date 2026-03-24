@@ -6,9 +6,9 @@ import {MatCardHeader, MatCardTitle} from "@angular/material/card";
   imports: [
     MatCardTitle
   ],
-  templateUrl: './dashboard-header.html',
-  styleUrl: './dashboard-header.scss'
+  templateUrl: './dashboard-header.component.html',
+  styleUrl: './dashboard-header.component.scss'
 })
-export class DashboardHeader {
+export class DashboardHeaderComponent {
 
 }

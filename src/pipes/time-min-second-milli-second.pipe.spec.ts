@@ -1,6 +1,6 @@
-import { TimeMinSecondMilliSecondPipe } from './time-min-second-milli-second-pipe';
+import { TimeMinSecondMilliSecondPipe } from './time-min-second-milli-second.pipe';
 import { TestBed } from '@angular/core/testing';
-import { TIME_UNIT } from '../variables/timeUnit';
+import { TIME_UNIT } from '../variables/time-unit';
 
 describe('TimeMinSecondMilliSecondPipe', () => {
   let pipe: TimeMinSecondMilliSecondPipe;

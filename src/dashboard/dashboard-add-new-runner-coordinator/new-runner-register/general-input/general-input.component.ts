@@ -9,13 +9,12 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
     MatFormField,
     MatInput,
     MatLabel,
-    ReactiveFormsModule,
-    MatFormField
+    ReactiveFormsModule
   ],
-  templateUrl: './general-input.html',
-  styleUrl: './general-input.scss'
+  templateUrl: './general-input.component.html',
+  styleUrl: './general-input.component.scss'
 })
-export class GeneralInput {
+export class GeneralInputComponent {
 
   inputSignal = input.required<FormControl>({ alias: 'input' });
 
