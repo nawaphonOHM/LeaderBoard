@@ -33,7 +33,7 @@
     "@angular/cli": "21.2.3",
     "@angular/compiler-cli": "21.2.4",
     "@nx/angular": "22.6.0",
-    "@nx/workspace": "22.6.0",
+    "@nx/workspace": "22.6.1",
     "@schematics/angular": "21.2.3",
     "@types/jasmine": "6.0.0",
     "jasmine-core": "6.0.1",
