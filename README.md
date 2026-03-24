@@ -1,3 +1,6 @@
+
+[![Node.js CI](https://github.com/nawaphonOHM/LeaderBoard/actions/workflows/node.js.yml/badge.svg)](https://github.com/nawaphonOHM/LeaderBoard/actions/workflows/node.js.yml)
+
 # Running Leaderboard
 
 A web application designed to track and display a leaderboard for runners. Built with **Angular 21** and **Nx 22**, it features a clean and modern dashboard using **Angular Material 21**.
