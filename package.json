@@ -7,6 +7,7 @@
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
+    "test:no-watch": "nx test --watch=false",
     "analyze-source-map": "source-map-explorer dist/**/*.js --no-border-checks"
   },
   "private": true,
