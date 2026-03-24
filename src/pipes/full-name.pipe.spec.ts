@@ -17,7 +17,7 @@ describe('FullNamePipe', () => {
       firstName: 'John',
       lastName: 'Doe',
       nationalityUrlImage: 'test.png',
-      timeUsedInMillisecond: 1000
+      timeUsedInMillisecond: 1000,
     };
     expect(pipe.transform(data)).toBe('John Doe');
   });
@@ -27,7 +27,7 @@ describe('FullNamePipe', () => {
       firstName: '',
       lastName: '',
       nationalityUrlImage: 'test.png',
-      timeUsedInMillisecond: 0
+      timeUsedInMillisecond: 0,
     };
     expect(pipe.transform(data)).toBe(' ');
   });

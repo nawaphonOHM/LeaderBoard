@@ -9,9 +9,8 @@ describe('GeneralInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GeneralInputComponent, NoopAnimationsModule]
-    })
-    .compileComponents();
+      imports: [GeneralInputComponent, NoopAnimationsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GeneralInputComponent);
     component = fixture.componentInstance;

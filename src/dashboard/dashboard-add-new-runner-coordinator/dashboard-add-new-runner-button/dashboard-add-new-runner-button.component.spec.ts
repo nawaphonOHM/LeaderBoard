@@ -10,9 +10,8 @@ describe('DashboardAddNewRunnerButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardAddNewRunnerButtonComponent],
-      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService]
-    })
-    .compileComponents();
+      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardAddNewRunnerButtonComponent);
     component = fixture.componentInstance;
@@ -29,7 +28,7 @@ describe('DashboardAddNewRunnerButtonComponent', () => {
     component.askForNewRunner();
     expect(radioTower.emitMessage).toHaveBeenCalledWith({
       state: 'RESPONSE_DATA',
-      data: null
+      data: null,
     });
   });
 

@@ -1,7 +1,9 @@
 @use '@angular/material' as mat;
 
 :host {
-  @include mat.button-overrides((
-    filled-container-color: green,
-  ));
+  @include mat.button-overrides(
+    (
+      filled-container-color: green,
+    )
+  );
 }

@@ -1,18 +1,29 @@
 import { Component, input, forwardRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewRunnerRegisterComponent } from './new-runner-register.component';
-import { MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose,
+} from '@angular/material/dialog';
 import { CONFIGURATION } from '../../../variables/configurations';
 import { UnexpectedToReachHere } from '../../../errors/unexpected-to-reach-here';
 import { Country } from '@wlucha/ng-country-select';
 import { TIME_UNIT } from '../../../variables/time-unit';
-import { ReactiveFormsModule, FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+} from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-general-input',
   standalone: true,
-  template: ''
+  template: '',
 })
 class MockGeneralInput {
   input = input.required<FormControl>();
@@ -23,7 +34,7 @@ class MockGeneralInput {
 @Component({
   selector: 'app-time-used-for-finnish-running',
   standalone: true,
-  template: ''
+  template: '',
 })
 class MockTimeUsedForFinnishRunning {
   input = input.required<FormControl>();
@@ -37,9 +48,9 @@ class MockTimeUsedForFinnishRunning {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => MockCountrySelect),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 class MockCountrySelect implements ControlValueAccessor {
   requiredErrorMessage = input<string | null>(null);
@@ -63,35 +74,35 @@ describe('NewRunnerRegisterComponent', () => {
     matDialogRefMock = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     await TestBed.configureTestingModule({
-      imports: [
-        NewRunnerRegisterComponent
-      ],
+      imports: [NewRunnerRegisterComponent],
       providers: [
         { provide: MatDialogRef, useValue: matDialogRefMock },
         {
           provide: CONFIGURATION,
-          useValue: { flagUrl: 'https://flagsapi.com/__nationality__/flat/32.png' }
+          useValue: { flagUrl: 'https://flagsapi.com/__nationality__/flat/32.png' },
         },
         {
           provide: TIME_UNIT,
-          useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 }
-        }
-      ]
-    }).overrideComponent(NewRunnerRegisterComponent, {
-      set: {
-        imports: [
-          ReactiveFormsModule,
-          MatDialogTitle,
-          MatDialogContent,
-          MatDialogActions,
-          MatButton,
-          MatDialogClose,
-          MockGeneralInput,
-          MockTimeUsedForFinnishRunning,
-          MockCountrySelect
-        ]
-      }
-    }).compileComponents();
+          useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 },
+        },
+      ],
+    })
+      .overrideComponent(NewRunnerRegisterComponent, {
+        set: {
+          imports: [
+            ReactiveFormsModule,
+            MatDialogTitle,
+            MatDialogContent,
+            MatDialogActions,
+            MatButton,
+            MatDialogClose,
+            MockGeneralInput,
+            MockTimeUsedForFinnishRunning,
+            MockCountrySelect,
+          ],
+        },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(NewRunnerRegisterComponent);
     component = fixture.componentInstance;
@@ -105,17 +116,21 @@ describe('NewRunnerRegisterComponent', () => {
 
   describe('Form Initialization', () => {
     it('should initialize inputGroup with default values', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
+      const inputGroup = (
+        component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }
+      ).inputGroup;
       expect(inputGroup.getRawValue()).toEqual({
         firstName: '',
         lastName: '',
         nationality: null,
-        timeUsedInMillisecond: -1
+        timeUsedInMillisecond: -1,
       });
     });
 
     it('should have required validators on all fields except timeUsedInMillisecond', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
+      const inputGroup = (
+        component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }
+      ).inputGroup;
 
       inputGroup.controls.firstName.setValue('');
       expect(inputGroup.controls.firstName.valid).toBeFalse();
@@ -128,7 +143,9 @@ describe('NewRunnerRegisterComponent', () => {
     });
 
     it('should have min(0) validator on timeUsedInMillisecond', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
+      const inputGroup = (
+        component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }
+      ).inputGroup;
       inputGroup.controls.timeUsedInMillisecond.setValue(-2);
       expect(inputGroup.controls.timeUsedInMillisecond.valid).toBeFalse();
     });
@@ -143,12 +160,14 @@ describe('NewRunnerRegisterComponent', () => {
 
   describe('save', () => {
     it('should close the dialog with runner data when nationality is valid', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
+      const inputGroup = (
+        component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }
+      ).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
         lastName: 'Doe',
         nationality: { alpha2: 'US' } as Country,
-        timeUsedInMillisecond: 12345
+        timeUsedInMillisecond: 12345,
       });
 
       component.save();
@@ -157,22 +176,24 @@ describe('NewRunnerRegisterComponent', () => {
         firstName: 'John',
         lastName: 'Doe',
         nationalityUrlImage: 'https://flagsapi.com/US/flat/32.png',
-        timeUsedInMillisecond: 12345
+        timeUsedInMillisecond: 12345,
       });
     });
 
     it('should throw UnexpectedToReachHere when nationality is missing alpha2', () => {
-      const inputGroup = (component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }).inputGroup;
+      const inputGroup = (
+        component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }
+      ).inputGroup;
       inputGroup.patchValue({
         firstName: 'John',
         lastName: 'Doe',
         nationality: {} as unknown as Country,
-        timeUsedInMillisecond: 12345
+        timeUsedInMillisecond: 12345,
       });
 
       expect(() => {
         component.save();
-      }).toThrowError(UnexpectedToReachHere, "nationality should has a value.");
+      }).toThrowError(UnexpectedToReachHere, 'nationality should has a value.');
     });
   });
 });

@@ -1,14 +1,10 @@
-import {Component} from '@angular/core';
-import {MatCardHeader, MatCardTitle} from "@angular/material/card";
+import { Component } from '@angular/core';
+import { MatCardHeader, MatCardTitle } from '@angular/material/card';
 
 @Component({
   selector: 'app-dashboard-header',
-  imports: [
-    MatCardTitle
-  ],
+  imports: [MatCardTitle],
   templateUrl: './dashboard-header.component.html',
-  styleUrl: './dashboard-header.component.scss'
+  styleUrl: './dashboard-header.component.scss',
 })
-export class DashboardHeaderComponent {
-
-}
+export class DashboardHeaderComponent {}

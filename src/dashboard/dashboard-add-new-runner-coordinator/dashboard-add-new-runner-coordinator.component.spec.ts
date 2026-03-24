@@ -13,9 +13,8 @@ describe('DashboardAddNewRunnerCoordinatorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardAddNewRunnerCoordinatorComponent, MatDialogModule],
-      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService]
-    })
-    .compileComponents();
+      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardAddNewRunnerCoordinatorComponent);
     component = fixture.componentInstance;
@@ -33,7 +32,7 @@ describe('DashboardAddNewRunnerCoordinatorComponent', () => {
 
     radioTower.emitMessage({
       state: 'RESPONSE_DATA',
-      data: null
+      data: null,
     });
 
     tick();
@@ -53,7 +52,7 @@ describe('DashboardAddNewRunnerCoordinatorComponent', () => {
     expect(matDialog.open).toHaveBeenCalled();
     expect(radioTower.emitMessage).toHaveBeenCalledWith({
       state: 'SEND_REQUEST',
-      data: dialogResult as unknown
+      data: dialogResult as unknown,
     });
   });
 });

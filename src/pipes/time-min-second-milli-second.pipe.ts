@@ -1,13 +1,11 @@
-import {inject, Pipe, PipeTransform} from '@angular/core';
-import {TIME_UNIT} from '../variables/time-unit';
+import { inject, Pipe, PipeTransform } from '@angular/core';
+import { TIME_UNIT } from '../variables/time-unit';
 
 @Pipe({
-  name: 'timeMinSecondMilliSecond'
+  name: 'timeMinSecondMilliSecond',
 })
 export class TimeMinSecondMilliSecondPipe implements PipeTransform {
-
-  private readonly TIME_UNIT = inject(TIME_UNIT)
-
+  private readonly TIME_UNIT = inject(TIME_UNIT);
 
   transform(value: number, ...args: unknown[]): string {
     // Ensure non-negative input and normalize null/undefined
@@ -26,5 +24,4 @@ export class TimeMinSecondMilliSecondPipe implements PipeTransform {
       .toString()
       .padStart(3, '0')}`;
   }
-
 }

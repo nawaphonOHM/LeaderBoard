@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>{{ label() }}</mat-label>
-  <input matInput [formControl]="inputSignal()">
+  <input matInput [formControl]="inputSignal()" />
   @if (inputSignal().invalid) {
     <mat-error>{{ errorMessage() }}</mat-error>
   }

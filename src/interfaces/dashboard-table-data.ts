@@ -1,6 +1,6 @@
 export interface DashboardTableData {
-  firstName: string
-  lastName: string
-  nationalityUrlImage: string
-  timeUsedInMillisecond: number
+  firstName: string;
+  lastName: string;
+  nationalityUrlImage: string;
+  timeUsedInMillisecond: number;
 }

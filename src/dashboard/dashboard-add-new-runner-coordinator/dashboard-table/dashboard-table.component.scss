@@ -1,7 +1,9 @@
 @use '@angular/material' as mat;
 
 :host {
-  @include mat.sort-overrides ((
-    arrow-color: #ffff,
-  ));
+  @include mat.sort-overrides(
+    (
+      arrow-color: #ffff,
+    )
+  );
 }

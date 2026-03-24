@@ -1,7 +1,5 @@
-
-
 export interface Time {
-  minutes: number
-  seconds: number
-  milliseconds: number
+  minutes: number;
+  seconds: number;
+  milliseconds: number;
 }

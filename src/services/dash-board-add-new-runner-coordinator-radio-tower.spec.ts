@@ -21,7 +21,10 @@ describe('DashBoardAddNewRunnerCoordinatorRadioTowerService', () => {
   });
 
   it('should emit messages', () => {
-    const message: DashBoardAddNewRunnerInformationEnvelop<number> = { state: 'SEND_REQUEST', data: 123 };
+    const message: DashBoardAddNewRunnerInformationEnvelop<number> = {
+      state: 'SEND_REQUEST',
+      data: 123,
+    };
     const signalValue = service.requestNewObservable();
     service.emitMessage(message);
     expect(signalValue()).toBe(message);

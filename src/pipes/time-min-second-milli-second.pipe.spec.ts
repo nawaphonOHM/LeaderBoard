@@ -11,9 +11,9 @@ describe('TimeMinSecondMilliSecondPipe', () => {
         TimeMinSecondMilliSecondPipe,
         {
           provide: TIME_UNIT,
-          useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 }
-        }
-      ]
+          useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 },
+        },
+      ],
     });
     pipe = TestBed.inject(TimeMinSecondMilliSecondPipe);
   });
@@ -41,7 +41,7 @@ describe('TimeMinSecondMilliSecondPipe', () => {
   });
 
   it('should format complex time correctly', () => {
-    const time = (5 * 60 * 1000) + (42 * 1000) + 123;
+    const time = 5 * 60 * 1000 + 42 * 1000 + 123;
     expect(pipe.transform(time)).toBe('5:42.123');
   });
 

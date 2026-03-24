@@ -1,5 +1,5 @@
 export interface DashBoardAddNewRunnerInformationEnvelop<T> {
-  state: 'SEND_REQUEST' | 'RESPONSE_DATA'
+  state: 'SEND_REQUEST' | 'RESPONSE_DATA';
 
-  data: T | null
+  data: T | null;
 }

@@ -1,4 +1,4 @@
 export interface TimeUsedForFinnishRunningEvent {
-  valid: boolean
+  valid: boolean;
   time: number;
 }

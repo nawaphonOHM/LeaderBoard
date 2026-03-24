@@ -1,12 +1,11 @@
-import {InjectionToken} from '@angular/core';
-
+import { InjectionToken } from '@angular/core';
 
 export interface Configuration {
-  flagUrl: string
+  flagUrl: string;
 }
 
-export const ConfigurationMain: Configuration =  {
-  flagUrl: 'https://flagsapi.com/__nationality__/flat/32.png'
-}
+export const ConfigurationMain: Configuration = {
+  flagUrl: 'https://flagsapi.com/__nationality__/flat/32.png',
+};
 
-export const CONFIGURATION = new InjectionToken<Configuration>('CONFIGURATION')
+export const CONFIGURATION = new InjectionToken<Configuration>('CONFIGURATION');

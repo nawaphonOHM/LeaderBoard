@@ -17,11 +17,10 @@ describe('DashboardTableComponent', () => {
         DashBoardAddNewRunnerCoordinatorRadioTowerService,
         {
           provide: TIME_UNIT,
-          useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 }
-        }
-      ]
-    })
-    .compileComponents();
+          useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardTableComponent);
     component = fixture.componentInstance;
@@ -38,30 +37,38 @@ describe('DashboardTableComponent', () => {
       firstName: 'Jane',
       lastName: 'Smith',
       nationalityUrlImage: 'us.png',
-      timeUsedInMillisecond: 50000
+      timeUsedInMillisecond: 50000,
     };
 
     radioTower.emitMessage({
       state: 'SEND_REQUEST',
-      data: newData
+      data: newData,
     });
 
     fixture.detectChanges();
 
-    expect((component as unknown as { data: DashboardTableComponent['data'] }).data).toContain(newData);
-    expect((component as unknown as { sortedData: DashboardTableComponent['sortedData'] }).sortedData.data).toContain(newData);
+    expect((component as unknown as { data: DashboardTableComponent['data'] }).data).toContain(
+      newData,
+    );
+    expect(
+      (component as unknown as { sortedData: DashboardTableComponent['sortedData'] }).sortedData
+        .data,
+    ).toContain(newData);
   });
 
   it('should not add data when state is not SEND_REQUEST', () => {
-    const initialCount = (component as unknown as { data: DashboardTableComponent['data'] }).data.length;
+    const initialCount = (component as unknown as { data: DashboardTableComponent['data'] }).data
+      .length;
 
     radioTower.emitMessage({
       state: 'RESPONSE_DATA',
-      data: null
+      data: null,
     });
 
     fixture.detectChanges();
 
-    expect((component as unknown as { data: DashboardTableComponent['data'] }).data.length).toBe(initialCount);
+    expect((component as unknown as { data: DashboardTableComponent['data'] }).data.length).toBe(
+      initialCount,
+    );
   });
 });

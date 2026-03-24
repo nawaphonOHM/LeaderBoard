@@ -1,4 +1,3 @@
-
 [![Node.js CI](https://github.com/nawaphonOHM/LeaderBoard/actions/workflows/node.js.yml/badge.svg)](https://github.com/nawaphonOHM/LeaderBoard/actions/workflows/node.js.yml)
 
 # Running Leaderboard
