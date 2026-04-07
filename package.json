@@ -34,7 +34,7 @@
     "@angular/build": "21.2.5",
     "@angular/cli": "21.2.3",
     "@angular/compiler-cli": "21.2.5",
-    "@nx/angular": "22.6.0",
+    "@nx/angular": "22.6.4",
     "@nx/workspace": "22.6.1",
     "@schematics/angular": "21.2.5",
     "@types/jasmine": "6.0.0",
