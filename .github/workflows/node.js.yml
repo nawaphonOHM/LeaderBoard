@@ -33,7 +33,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies with
+      - name: Install dependencies
         id: install-dependencies
         continue-on-error: true
         run: npm ci
