@@ -17,7 +17,7 @@ env:
   NODE_VERSION: 22.x
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
