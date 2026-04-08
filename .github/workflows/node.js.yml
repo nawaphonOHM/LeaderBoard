@@ -23,12 +23,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ env.NODE_VERSION }}
+      - name: checkout codebase
+        uses: actions/checkout@v4
+
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-      - run: npm ci --legacy-peer-deps
-      - run: npm run build
-      - run: npm run test:no-watch
+
+      - name: Install dependencies with
+        id: install-dependencies
+        continue-on-error: true
+        run: npm ci
+
+      - name: Install dependencies with legacy-peer-deps flag
+        if: steps.install-dependencies.outcome == 'failure'
+        run: npm ci --legacy-peer-deps
+
+      - name: run build
+        run: npm run build
+
+      - name: run tests
+        run: npm run test:no-watch
