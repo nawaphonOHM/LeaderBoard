@@ -31,7 +31,7 @@
   "devDependencies": {
     "@angular-devkit/core": "21.2.7",
     "@angular-devkit/schematics": "21.2.7",
-    "@angular/build": "21.2.5",
+    "@angular/build": "21.2.8",
     "@angular/cli": "21.2.3",
     "@angular/compiler-cli": "21.2.5",
     "@nx/angular": "22.6.5",
