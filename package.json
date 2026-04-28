@@ -46,7 +46,7 @@
     "karma-jasmine-html-reporter": "2.2.0",
     "nx": "22.6.3",
     "source-map-explorer": "2.5.3",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "prettier": "3.8.3"
   }
 }
