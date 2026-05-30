@@ -54,3 +54,5 @@ src/**/*.css
 .claude/worktrees
 .claude/settings.local.json
 .angular
+
+.junie
