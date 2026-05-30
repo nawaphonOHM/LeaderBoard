@@ -35,7 +35,6 @@ jobs:
 
       - name: Install dependencies
         id: install-dependencies
-        continue-on-error: true
         run: npm ci
 
       - name: run build
