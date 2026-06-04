@@ -21,7 +21,7 @@
     "@angular/core": "21.2.15",
     "@angular/forms": "21.2.15",
     "@angular/material": "21.2.13",
-    "@angular/platform-browser": "21.2.15",
+    "@angular/platform-browser": "22.0.0",
     "@angular/router": "21.2.15",
     "@wlucha/ng-country-select": "4.1.0",
     "rxjs": "7.8.2",
