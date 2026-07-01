@@ -1,91 +1,111 @@
 [![Node.js CI](https://github.com/nawaphonOHM/LeaderBoard/actions/workflows/node.js.yml/badge.svg)](https://github.com/nawaphonOHM/LeaderBoard/actions/workflows/node.js.yml)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
-# Running Leaderboard
+# LeaderBoard
 
-A web application designed to track and display a leaderboard for runners. Built with **Angular 21** and **Nx 22**, it features a clean and modern dashboard using **Angular Material 21**.
+A simple web application for tracking and displaying a leaderboard for runners. Built with Angular and Nx, with a responsive dashboard using Angular Material.
 
 ## Features
 
-- **Dashboard**: View a sorted leaderboard of runners with their rank, full name, nationality, and time.
-- **Add New Runner**: Integrated form to register new runners with ease.
-- **Sorting and Formatting**: Automatic sorting by finish time (ascending) and custom pipes for:
+- Dashboard: View a sorted leaderboard of runners with rank, full name, nationality, and time.
+- Add New Runner: Integrated form to register new runners.
+- Sorting and Formatting: Automatic sorting by finish time (ascending) and custom pipes for:
   - Full Name: Displays first and last name combined.
   - Time Formatting: Converts milliseconds into a readable `mm:ss.SSS` format.
-- **Nationalities Support**: Built-in support for country flags using `flagsapi.com` and `@wlucha/ng-country-select`.
-- **Responsive Layout**: Designed to look great on various screen sizes using Angular Material's grid and card components.
+- Nationalities Support: Country flags displayed using an external flags API and a country-select library.
+- Responsive Layout: Designed to look great on various screen sizes using Angular Material components.
 
 ## Tech Stack
 
-- **Framework**: [Angular 21](https://angular.dev/)
-- **Monorepo Management**: [Nx 22](https://nx.dev/)
-- **UI Components**: [Angular Material 21](https://material.angular.io/)
-- **State Management**: Angular Signals (used for component communication).
-- **Styling**: SCSS (pre-compiled to CSS).
-- **Third-party Libraries**:
-  - `rxjs`: For reactive data flows.
-  - `@wlucha/ng-country-select`: For selecting runner nationalities.
-  - `flag-icons`: For displaying country flags in the selection dropdown.
-  - `flagsapi.com`: For providing country flags in the leaderboard table.
+- Framework: Angular
+- Monorepo Management: Nx
+- UI Components: Angular Material
+- State Management: Angular Signals
+- Styling: SCSS
+- Third-party Libraries:
+  - `rxjs`
+  - `@wlucha/ng-country-select`
+  - `flag-icons`
+  - `flagsapi.com`
 
 ## Getting Started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (LTS version recommended)
-- [npm](https://www.npmjs.com/)
+- Node.js (LTS recommended)
+- npm (or pnpm/yarn)
 
 ### Installation
 
-1. Clone the repository.
-2. Install the project dependencies:
-   ```bash
-   npm install
-   ```
+1. Clone the repository:
+
+```bash
+git clone https://github.com/nawaphonOHM/LeaderBoard.git
+cd LeaderBoard
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
 
 ### Development Server
 
-To start a local development server, run:
+Start the local development server:
 
 ```bash
 npm start
 ```
 
-Once the server is running, navigate to `http://localhost:4200/` in your browser. The application will automatically reload if you modify any source files.
+Note: The app runs on http://localhost:4200 by default. If this project is managed with Nx, you may also use `nx serve` for workspace-aware commands.
 
 ### Building
 
-To build the project for production, run:
+Build for production:
 
 ```bash
 npm run build
 ```
 
-The compiled build artifacts will be stored in the `dist/` directory.
+The compiled artifacts will be stored in `dist/`.
 
-### Running Unit Tests
+### Running Tests
 
-To execute the project's unit tests using Nx and Karma, run:
+Run unit tests:
 
 ```bash
 npm test
 ```
 
+## Usage
+
+- Open http://localhost:4200 in your browser.
+- Use the Dashboard to view runners, add a new runner with the Add button, and observe automatic sorting by time.
+
 ## Project Structure
 
-- `src/dashboard`: Root container for the leaderboard view.
-  - `dashboard.component.ts`: Main entry point for the dashboard UI.
-  - `dashboard-header`: Dashboard header component.
-  - `dashboard-add-new-runner-coordinator`: Orchestrates runner addition and table updates.
-    - `dashboard-add-new-runner-button`: Triggers the registration dialog.
-    - `dashboard-table`: Displays sorted runner data using `MatTable`.
-    - `new-runner-register`: Form for new runner registration.
-      - `general-input`: Reusable input field component.
-      - `time-used-for-finnish-running`: Specialized input for recording runner completion time.
-- `src/services`: Communication services using Angular Signals (Radio Tower pattern).
-- `src/pipes`: Custom data transformation pipes.
-  - `full-name.pipe.ts`: Combines runner's first and last name (`FullNamePipe`).
-  - `time-min-second-milli-second.pipe.ts`: Formats time in milliseconds to a readable string (`TimeMinSecondMilliSecondPipe`).
-- `src/interfaces`: TypeScript interfaces for data modeling and communication envelopes.
-- `src/variables`: Configuration constants (e.g., flag APIs) and shared time units.
-- `src/errors`: Custom error types for enhanced debugging.
+- `src/dashboard`: Leaderboard UI and related components.
+  - `dashboard.component.ts`
+  - `dashboard-header`
+  - `dashboard-add-new-runner-coordinator`
+  - `dashboard-table`
+  - `new-runner-register`
+- `src/services`: Communication services and state management.
+- `src/pipes`: Custom transformation pipes (`FullNamePipe`, `TimeMinSecondMilliSecondPipe`).
+- `src/interfaces`: TypeScript interfaces for data models.
+- `src/variables`: Configuration constants.
+- `src/errors`: Custom error types.
+
+## Contributing
+
+Contributions are welcome. Please open an issue or submit a pull request. If you plan larger changes, open an issue first to discuss the approach.
+
+## Screenshots / Demo
+
+_Add screenshots or a demo link here._
+
+## License
+
+This project is provided under the MIT License. See the LICENSE file for details.
