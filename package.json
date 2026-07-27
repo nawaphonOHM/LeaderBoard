@@ -29,7 +29,7 @@
     "zone.js": "0.16.2"
   },
   "devDependencies": {
-    "@angular-devkit/core": "21.2.13",
+    "@angular-devkit/core": "22.0.8",
     "@angular-devkit/schematics": "21.2.13",
     "@angular/build": "21.2.18",
     "@angular/cli": "21.2.13",
