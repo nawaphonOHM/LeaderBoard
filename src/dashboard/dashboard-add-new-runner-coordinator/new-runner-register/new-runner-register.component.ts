@@ -13,7 +13,7 @@ import { Country, CountrySelectComponent } from '@wlucha/ng-country-select';
 import { TimeUsedForFinnishRunningComponent } from './time-used-for-finnish-running/time-used-for-finnish-running.component';
 import { CONFIGURATION, ConfigurationMain } from './configurations';
 import { UnexpectedToReachHere } from './unexpected-to-reach-here';
-import { TimeUsedForFinnishRunningEvent } from '../../../interfaces/time-used-for-finnish-running-event';
+import { TimeUsedForFinnishRunningEvent } from './time-used-for-finnish-running-event';
 
 @Component({
   selector: 'app-new-runner-register',

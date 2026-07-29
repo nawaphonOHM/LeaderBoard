@@ -11,7 +11,7 @@ import {
 import { CONFIGURATION } from './configurations';
 import { UnexpectedToReachHere } from './unexpected-to-reach-here';
 import { Country } from '@wlucha/ng-country-select';
-import { TIME_UNIT } from '../../../variables/time-unit';
+import { TIME_UNIT } from '../time-unit';
 import {
   ReactiveFormsModule,
   FormControl,

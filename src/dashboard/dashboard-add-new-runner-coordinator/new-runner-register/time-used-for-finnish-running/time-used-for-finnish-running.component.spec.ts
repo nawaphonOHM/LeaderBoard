@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TimeUsedForFinnishRunningComponent } from './time-used-for-finnish-running.component';
-import { TIME_UNIT } from '../../../../variables/time-unit';
+import { TIME_UNIT } from '../../time-unit';
 
 describe('TimeUsedForFinnishRunningComponent', () => {
   let component: TimeUsedForFinnishRunningComponent;
