@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TIME_UNIT } from '../../../../variables/time-unit';
 import { TimeUsedForFinnishRunningEvent } from '../../../../interfaces/time-used-for-finnish-running-event';
 import { combineLatest, filter, map } from 'rxjs';
-import { Time } from '../../../../interfaces/time';
+import { Time } from './time';
 
 @Component({
   selector: 'app-time-used-for-finnish-running',
