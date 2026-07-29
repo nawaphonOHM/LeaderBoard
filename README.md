@@ -3,7 +3,7 @@
 
 # Running Leaderboard
 
-A web application designed to track and display a leaderboard for runners. Built with **Angular 21** and **Nx 22**, it features a clean and modern dashboard using **Angular Material 21**.
+A web application designed to track and display a leaderboard for runners. Built with **Angular 21** and **Nx 23**, it features a clean and modern dashboard using **Angular Material 21**.
 
 ## Features
 
@@ -18,7 +18,7 @@ A web application designed to track and display a leaderboard for runners. Built
 ## Tech Stack
 
 - **Framework**: [Angular 21](https://angular.dev/)
-- **Monorepo Management**: [Nx 22](https://nx.dev/)
+- **Monorepo Management**: [Nx 23](https://nx.dev/)
 - **UI Components**: [Angular Material 21](https://material.angular.io/)
 - **State Management**: Angular Signals (used for component communication).
 - **Styling**: SCSS (pre-compiled to CSS).
@@ -77,15 +77,18 @@ npm test
   - `dashboard.component.ts`: Main entry point for the dashboard UI.
   - `dashboard-header`: Dashboard header component.
   - `dashboard-add-new-runner-coordinator`: Orchestrates runner addition and table updates.
+    - `dash-board-add-new-runner-coordinator-radio-tower.service.ts`: Communication service using Angular Signals (Radio Tower pattern).
+    - `dash-board-add-new-runner-information-envelop.ts`: Envelope type for the radio-tower service's messages.
+    - `dashboard-table-data.ts`: Shared runner data model (`DashboardTableData`).
+    - `time-unit.ts`: Shared time unit used across the coordinator's children.
     - `dashboard-add-new-runner-button`: Triggers the registration dialog.
     - `dashboard-table`: Displays sorted runner data using `MatTable`.
+      - `full-name.pipe.ts`: Combines runner's first and last name (`FullNamePipe`).
+      - `time-min-second-milli-second.pipe.ts`: Formats time in milliseconds to a readable string (`TimeMinSecondMilliSecondPipe`).
     - `new-runner-register`: Form for new runner registration.
+      - `configurations.ts`: Configuration constants (e.g., flag APIs).
+      - `time-used-for-finnish-running-event.ts`: Event contract for a completed run.
+      - `unexpected-to-reach-here.ts`: Custom error type for enhanced debugging.
       - `general-input`: Reusable input field component.
       - `time-used-for-finnish-running`: Specialized input for recording runner completion time.
-- `src/services`: Communication services using Angular Signals (Radio Tower pattern).
-- `src/pipes`: Custom data transformation pipes.
-  - `full-name.pipe.ts`: Combines runner's first and last name (`FullNamePipe`).
-  - `time-min-second-milli-second.pipe.ts`: Formats time in milliseconds to a readable string (`TimeMinSecondMilliSecondPipe`).
-- `src/interfaces`: TypeScript interfaces for data modeling and communication envelopes.
-- `src/variables`: Configuration constants (e.g., flag APIs) and shared time units.
-- `src/errors`: Custom error types for enhanced debugging.
+        - `time.ts`: Time-related type used by the completion time input.
