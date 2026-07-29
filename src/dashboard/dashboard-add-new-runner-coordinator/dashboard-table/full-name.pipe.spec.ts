@@ -1,5 +1,5 @@
 import { FullNamePipe } from './full-name.pipe';
-import { DashboardTableData } from '../interfaces/dashboard-table-data';
+import { DashboardTableData } from '../dashboard-table-data';
 
 describe('FullNamePipe', () => {
   let pipe: FullNamePipe;

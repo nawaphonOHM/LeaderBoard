@@ -1,5 +1,5 @@
 import { Component, effect, viewChild, inject } from '@angular/core';
-import { DashboardTableData } from '../../../interfaces/dashboard-table-data';
+import { DashboardTableData } from '../dashboard-table-data';
 import {
   MatCell,
   MatCellDef,
@@ -14,11 +14,11 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { FullNamePipe } from '../../../pipes/full-name.pipe';
+import { FullNamePipe } from './full-name.pipe';
 import { NgOptimizedImage } from '@angular/common';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
-import { TimeMinSecondMilliSecondPipe } from '../../../pipes/time-min-second-milli-second.pipe';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../../../services/dash-board-add-new-runner-coordinator-radio-tower.service';
+import { TimeMinSecondMilliSecondPipe } from './time-min-second-milli-second.pipe';
+import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board-add-new-runner-coordinator-radio-tower.service';
 
 @Component({
   selector: 'app-dashboard-table',

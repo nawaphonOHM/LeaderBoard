@@ -1,5 +1,5 @@
 import { Injectable, Signal, signal } from '@angular/core';
-import { DashBoardAddNewRunnerInformationEnvelop } from '../interfaces/dash-board-add-new-runner-information-envelop';
+import { DashBoardAddNewRunnerInformationEnvelop } from './dash-board-add-new-runner-information-envelop';
 
 @Injectable({
   providedIn: 'root',
