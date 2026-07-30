@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardTableComponent } from './dashboard-table.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../../../services/dash-board-add-new-runner-coordinator-radio-tower.service';
-import { TIME_UNIT } from '../../../variables/time-unit';
-import { DashboardTableData } from '../../../interfaces/dashboard-table-data';
+import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board-add-new-runner-coordinator-radio-tower.service';
+import { TIME_UNIT } from '../time-unit';
+import { DashboardTableData } from '../dashboard-table-data';
 
 describe('DashboardTableComponent', () => {
   let component: DashboardTableComponent;

@@ -2,10 +2,10 @@ import { Component, DestroyRef, inject, OnInit, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TIME_UNIT } from '../../../../variables/time-unit';
-import { TimeUsedForFinnishRunningEvent } from '../../../../interfaces/time-used-for-finnish-running-event';
+import { TIME_UNIT } from '../../time-unit';
+import { TimeUsedForFinnishRunningEvent } from '../time-used-for-finnish-running-event';
 import { combineLatest, filter, map } from 'rxjs';
-import { Time } from '../../../../interfaces/time';
+import { Time } from './time';
 
 @Component({
   selector: 'app-time-used-for-finnish-running',

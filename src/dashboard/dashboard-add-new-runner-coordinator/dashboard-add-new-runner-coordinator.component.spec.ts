@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { DashboardAddNewRunnerCoordinatorComponent } from './dashboard-add-new-runner-coordinator.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../../services/dash-board-add-new-runner-coordinator-radio-tower.service';
+import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from './dash-board-add-new-runner-coordinator-radio-tower.service';
 import { of } from 'rxjs';
 
 describe('DashboardAddNewRunnerCoordinatorComponent', () => {

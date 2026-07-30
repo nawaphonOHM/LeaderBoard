@@ -1,8 +1,8 @@
 import { Component, effect, inject } from '@angular/core';
 import { filter } from 'rxjs';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../../services/dash-board-add-new-runner-coordinator-radio-tower.service';
+import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from './dash-board-add-new-runner-coordinator-radio-tower.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DashBoardAddNewRunnerData } from '../../interfaces/dash-board-add-new-runner-data';
+import { DashboardTableData } from './dashboard-table-data';
 
 @Component({
   selector: 'app-dashboard-add-new-runner-coordinator',
@@ -36,7 +36,7 @@ export class DashboardAddNewRunnerCoordinatorComponent {
       .open(NewRunnerRegisterComponent, { disableClose: true })
       .afterClosed()
       .pipe(filter((it) => it !== undefined && it !== null))
-      .subscribe((result: DashBoardAddNewRunnerData) => {
+      .subscribe((result: DashboardTableData) => {
         console.log(`Dialog is closed: ${JSON.stringify(result)}`);
         this.dashBoardAddNewRunnerCoordinatorRadioTower.emitMessage({
           state: 'SEND_REQUEST',

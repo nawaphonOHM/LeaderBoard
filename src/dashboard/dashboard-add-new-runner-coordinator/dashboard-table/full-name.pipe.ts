@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DashboardTableData } from '../interfaces/dashboard-table-data';
+import { DashboardTableData } from '../dashboard-table-data';
 
 @Pipe({
   name: 'fullName',

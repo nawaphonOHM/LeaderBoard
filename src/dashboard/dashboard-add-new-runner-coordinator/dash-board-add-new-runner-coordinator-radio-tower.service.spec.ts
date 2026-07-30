@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DashBoardAddNewRunnerInformationEnvelop } from '../interfaces/dash-board-add-new-runner-information-envelop';
+import { DashBoardAddNewRunnerInformationEnvelop } from './dash-board-add-new-runner-information-envelop';
 import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from './dash-board-add-new-runner-coordinator-radio-tower.service';
 
 describe('DashBoardAddNewRunnerCoordinatorRadioTowerService', () => {
