@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardAddNewRunnerButtonComponent } from './dashboard-add-new-runner-button.component';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board-add-new-runner-coordinator-radio-tower.service';
+import { DashboardStateService } from '../dashboard-state.service';
 
 describe('DashboardAddNewRunnerButtonComponent', () => {
   let component: DashboardAddNewRunnerButtonComponent;
   let fixture: ComponentFixture<DashboardAddNewRunnerButtonComponent>;
-  let radioTower: DashBoardAddNewRunnerCoordinatorRadioTowerService;
+  let dashboardState: DashboardStateService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardAddNewRunnerButtonComponent],
-      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService],
+      providers: [DashboardStateService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardAddNewRunnerButtonComponent);
     component = fixture.componentInstance;
-    radioTower = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTowerService);
+    dashboardState = TestBed.inject(DashboardStateService);
     fixture.detectChanges();
   });
 
@@ -23,13 +23,10 @@ describe('DashboardAddNewRunnerButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit message when askForNewRunner is called', () => {
-    spyOn(radioTower, 'emitMessage');
+  it('should request a new runner when askForNewRunner is called', () => {
+    spyOn(dashboardState, 'requestNewRunner');
     component.askForNewRunner();
-    expect(radioTower.emitMessage).toHaveBeenCalledWith({
-      state: 'RESPONSE_DATA',
-      data: null,
-    });
+    expect(dashboardState.requestNewRunner).toHaveBeenCalled();
   });
 
   it('should call askForNewRunner when button is clicked', () => {

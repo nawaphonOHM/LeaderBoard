@@ -1,23 +1,23 @@
-<h2 mat-dialog-title>Add Runner who finishes line. here</h2>
+<h2 mat-dialog-title>Add runner who finished the race</h2>
 <mat-dialog-content>
   <form [formGroup]="inputGroup">
     <div>
       <app-general-input
         [input]="inputGroup.controls.firstName"
         label="First Name"
-        errorMessage="You must to give a first name"
+        errorMessage="Enter a first name"
       />
     </div>
     <div>
       <app-general-input
         [input]="inputGroup.controls.lastName"
         label="Last Name"
-        errorMessage="You must to give a last name"
+        errorMessage="Enter a last name"
       />
     </div>
     <div>
       <ng-country-select
-        requiredErrorMessage="Runner should has a nationality"
+        requiredErrorMessage="Select the runner's nationality"
         [showRequiredErrorMessage]="true"
         [required]="true"
         [formControl]="inputGroup.controls.nationality"
@@ -30,6 +30,6 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button matButton (click)="cancelCallback()">Next time</button>
-  <button matButton (click)="save()" mat-dialog-close [disabled]="inputGroup.invalid">Save</button>
+  <button matButton (click)="cancelCallback()">Cancel</button>
+  <button matButton (click)="save()" [disabled]="inputGroup.invalid">Save</button>
 </mat-dialog-actions>

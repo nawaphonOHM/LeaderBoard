@@ -4,7 +4,7 @@ import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/in
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TIME_UNIT } from '../../time-unit';
 import { TimeUsedForFinnishRunningEvent } from '../time-used-for-finnish-running-event';
-import { combineLatest, filter, map } from 'rxjs';
+import { startWith } from 'rxjs';
 import { Time } from './time';
 
 @Component({
@@ -13,23 +13,22 @@ import { Time } from './time';
   templateUrl: './time-used-for-finnish-running.component.html',
   styleUrl: './time-used-for-finnish-running.component.scss',
 })
+/** Edits a running time as separate minute, second, and millisecond fields. */
 export class TimeUsedForFinnishRunningComponent implements OnInit {
+  /** Emits the current validity and total millisecond value of the time form. */
   somethingChange = output<TimeUsedForFinnishRunningEvent>();
 
+  /** Reactive controls used to edit the three time components. */
   protected readonly inputGroup = new FormGroup({
     minutes: new FormControl<string>('', {
       nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.pattern('^0{1}$|^([1-9][0-9]*)$|^-{1}([1-9][0-9]*)$'),
-        Validators.min(0),
-      ],
+      validators: [Validators.required, Validators.pattern(/^\d+$/), Validators.min(0)],
     }),
     seconds: new FormControl<string>('', {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern('^0{1}$|^([1-9][0-9]*)$|^-{1}([1-9][0-9]*)$'),
+        Validators.pattern(/^\d+$/),
         Validators.min(0),
         Validators.max(59),
       ],
@@ -38,7 +37,7 @@ export class TimeUsedForFinnishRunningComponent implements OnInit {
       nonNullable: true,
       validators: [
         Validators.required,
-        Validators.pattern('^0{1}$|^([1-9][0-9]*)$|^-{1}([1-9][0-9]*)$'),
+        Validators.pattern(/^\d+$/),
         Validators.min(0),
         Validators.max(999),
       ],
@@ -48,43 +47,32 @@ export class TimeUsedForFinnishRunningComponent implements OnInit {
   private readonly TIME_UNIT = inject(TIME_UNIT);
   private readonly destroyRef = inject(DestroyRef);
 
+  /** Starts emitting an initial result and subsequent form-value changes. */
   ngOnInit(): void {
-    const isValidStatus = this.inputGroup.statusChanges.pipe(map((it) => it === 'VALID'));
-    const valueChanges = this.inputGroup.valueChanges.pipe(
-      filter(
-        (it) =>
-          it.minutes !== undefined && it.seconds !== undefined && it.milliseconds !== undefined,
-      ),
-      map((it) => ({
-        minutes: it.minutes as string,
-        seconds: it.seconds as string,
-        milliseconds: it.milliseconds as string,
-      })),
-      map((it): Time => {
-        return {
-          minutes: parseInt(it.minutes),
-          seconds: parseInt(it.seconds),
-          milliseconds: parseInt(it.milliseconds),
-        };
-      }),
-    );
+    this.inputGroup.valueChanges
+      .pipe(startWith(this.inputGroup.getRawValue()), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        const value = this.inputGroup.getRawValue();
 
-    combineLatest([isValidStatus, valueChanges])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((it) => {
-        if (it[0] === false) {
+        if (this.inputGroup.invalid) {
           this.somethingChange.emit({ valid: false, time: -1 });
           return;
         }
 
-        const time =
-          it[1].minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND +
-          it[1].seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND +
-          it[1].milliseconds;
+        const time: Time = {
+          minutes: Number(value.minutes),
+          seconds: Number(value.seconds),
+          milliseconds: Number(value.milliseconds),
+        };
+
+        const timeInMilliseconds =
+          time.minutes * this.TIME_UNIT.SECOND_IN_MINUTE * this.TIME_UNIT.MILLISECONDS_IN_SECOND +
+          time.seconds * this.TIME_UNIT.MILLISECONDS_IN_SECOND +
+          time.milliseconds;
 
         this.somethingChange.emit({
           valid: true,
-          time: time,
+          time: timeInMilliseconds,
         });
       });
   }
