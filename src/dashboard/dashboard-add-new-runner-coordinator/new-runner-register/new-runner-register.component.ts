@@ -30,7 +30,9 @@ import { DashboardTableData } from '../dashboard-table-data';
   styleUrl: './new-runner-register.component.scss',
   providers: [{ provide: CONFIGURATION, useValue: ConfigurationMain }],
 })
+/** Collects and validates the data needed to add a runner to the leaderboard. */
 export class NewRunnerRegisterComponent {
+  /** Form controls for the runner identity, nationality, and finish time. */
   protected readonly inputGroup = new FormGroup({
     firstName: new FormControl<string>('', {
       nonNullable: true,
@@ -53,10 +55,18 @@ export class NewRunnerRegisterComponent {
 
   private readonly configuration = inject(CONFIGURATION);
 
+  /** Closes the registration dialog without adding a runner. */
   cancelCallback(): void {
     this.matDialog.close();
   }
 
+  /**
+   * Validates the form and closes the dialog with a normalized runner record.
+   *
+   * @remarks
+   * Invalid forms remain open and are marked as touched so their validation
+   * messages become visible.
+   */
   save(): void {
     if (this.inputGroup.invalid) {
       this.inputGroup.markAllAsTouched();
@@ -83,6 +93,11 @@ export class NewRunnerRegisterComponent {
     });
   }
 
+  /**
+   * Synchronizes the child time editor's result with the registration form.
+   *
+   * @param newValue Validation state and millisecond value emitted by the time editor.
+   */
   onTimeChange(newValue: TimeUsedForFinnishRunningEvent): void {
     if (!newValue.valid) {
       this.inputGroup.controls.timeUsedInMillisecond.setValue(null);

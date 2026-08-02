@@ -43,15 +43,20 @@ import { DashboardTableData } from '../dashboard-table-data';
   templateUrl: './dashboard-table.component.html',
   styleUrl: './dashboard-table.component.scss',
 })
+/** Renders and sorts the runners held by the dashboard state service. */
 export class DashboardTableComponent {
+  /** Column identifiers used by the table header and row definitions. */
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
+  /** Material table data source populated from the current runner signal. */
   protected readonly sortedData = new MatTableDataSource<DashboardTableData>([]);
 
+  /** Required view query for the table's Material sort controller. */
   protected readonly matSortSignal = viewChild.required(MatSort);
 
   private readonly dashboardState = inject(DashboardStateService);
 
+  /** Connects dashboard state and the table's default sort order. */
   constructor() {
     effect(() => {
       this.sortedData.data = [...this.dashboardState.runners()];

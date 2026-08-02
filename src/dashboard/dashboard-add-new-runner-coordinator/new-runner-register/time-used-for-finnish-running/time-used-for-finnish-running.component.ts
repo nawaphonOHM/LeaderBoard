@@ -13,9 +13,12 @@ import { Time } from './time';
   templateUrl: './time-used-for-finnish-running.component.html',
   styleUrl: './time-used-for-finnish-running.component.scss',
 })
+/** Edits a running time as separate minute, second, and millisecond fields. */
 export class TimeUsedForFinnishRunningComponent implements OnInit {
+  /** Emits the current validity and total millisecond value of the time form. */
   somethingChange = output<TimeUsedForFinnishRunningEvent>();
 
+  /** Reactive controls used to edit the three time components. */
   protected readonly inputGroup = new FormGroup({
     minutes: new FormControl<string>('', {
       nonNullable: true,
@@ -44,6 +47,7 @@ export class TimeUsedForFinnishRunningComponent implements OnInit {
   private readonly TIME_UNIT = inject(TIME_UNIT);
   private readonly destroyRef = inject(DestroyRef);
 
+  /** Starts emitting an initial result and subsequent form-value changes. */
   ngOnInit(): void {
     this.inputGroup.valueChanges
       .pipe(startWith(this.inputGroup.getRawValue()), takeUntilDestroyed(this.destroyRef))

@@ -20,4 +20,5 @@ import { DashboardAddNewRunnerCoordinatorComponent } from './dashboard-add-new-r
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
+/** Root component for the running leaderboard screen. */
 export class DashboardComponent {}

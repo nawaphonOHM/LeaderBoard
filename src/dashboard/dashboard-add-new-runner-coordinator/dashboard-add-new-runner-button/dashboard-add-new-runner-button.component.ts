@@ -8,9 +8,11 @@ import { DashboardStateService } from '../dashboard-state.service';
   templateUrl: './dashboard-add-new-runner-button.component.html',
   styleUrl: './dashboard-add-new-runner-button.component.scss',
 })
+/** Publishes the user's request to register a new leaderboard runner. */
 export class DashboardAddNewRunnerButtonComponent {
   private readonly dashboardState = inject(DashboardStateService);
 
+  /** Notifies the dashboard coordinator that the registration dialog should open. */
   askForNewRunner(): void {
     this.dashboardState.requestNewRunner();
   }

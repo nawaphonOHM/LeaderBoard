@@ -12,17 +12,27 @@ import type { NewRunnerRegisterComponent as NewRunnerRegisterComponentType } fro
   templateUrl: './dashboard-add-new-runner-coordinator.component.html',
   styleUrl: './dashboard-add-new-runner-coordinator.component.scss',
 })
+/** Coordinates runner-registration requests and the registration dialog. */
 export class DashboardAddNewRunnerCoordinatorComponent {
   private readonly dashboardState = inject(DashboardStateService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly matDialog = inject(MatDialog);
 
+  /** Subscribes to registration requests for the lifetime of this component. */
   constructor() {
     this.dashboardState.newRunnerRequested$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => void this.openNewRunnerDialog());
   }
 
+  /**
+   * Opens the lazy-loaded registration dialog and stores a submitted runner.
+   *
+   * @remarks
+   * Closing the dialog without saving produces no state change.
+   *
+   * @returns A promise that settles after the dialog result has been handled.
+   */
   async openNewRunnerDialog(): Promise<void> {
     const { NewRunnerRegisterComponent } =
       await import('./new-runner-register/new-runner-register.component');
