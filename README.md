@@ -20,7 +20,7 @@ A web application designed to track and display a leaderboard for runners. Built
 - **Framework**: [Angular 21](https://angular.dev/)
 - **Monorepo Management**: [Nx 23](https://nx.dev/)
 - **UI Components**: [Angular Material 21](https://material.angular.io/)
-- **State Management**: Angular Signals (used for component communication).
+- **State Management**: Angular Signals for runner state and RxJS for one-time UI commands.
 - **Styling**: SCSS (pre-compiled to CSS).
 - **Third-party Libraries**:
   - `rxjs`: For reactive data flows.
@@ -77,8 +77,7 @@ npm test
   - `dashboard.component.ts`: Main entry point for the dashboard UI.
   - `dashboard-header`: Dashboard header component.
   - `dashboard-add-new-runner-coordinator`: Orchestrates runner addition and table updates.
-    - `dash-board-add-new-runner-coordinator-radio-tower.service.ts`: Communication service using Angular Signals (Radio Tower pattern).
-    - `dash-board-add-new-runner-information-envelop.ts`: Envelope type for the radio-tower service's messages.
+    - `dashboard-state.service.ts`: Shared runner state and one-time registration requests.
     - `dashboard-table-data.ts`: Shared runner data model (`DashboardTableData`).
     - `time-unit.ts`: Shared time unit used across the coordinator's children.
     - `dashboard-add-new-runner-button`: Triggers the registration dialog.
@@ -88,7 +87,6 @@ npm test
     - `new-runner-register`: Form for new runner registration.
       - `configurations.ts`: Configuration constants (e.g., flag APIs).
       - `time-used-for-finnish-running-event.ts`: Event contract for a completed run.
-      - `unexpected-to-reach-here.ts`: Custom error type for enhanced debugging.
       - `general-input`: Reusable input field component.
       - `time-used-for-finnish-running`: Specialized input for recording runner completion time.
         - `time.ts`: Time-related type used by the completion time input.

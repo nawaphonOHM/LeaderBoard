@@ -1,8 +1,10 @@
-import { Component, effect, inject } from '@angular/core';
-import { filter } from 'rxjs';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from './dash-board-add-new-runner-coordinator-radio-tower.service';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { firstValueFrom } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DashboardTableData } from './dashboard-table-data';
+import { DashboardStateService } from './dashboard-state.service';
+import type { NewRunnerRegisterComponent as NewRunnerRegisterComponentType } from './new-runner-register/new-runner-register.component';
 
 @Component({
   selector: 'app-dashboard-add-new-runner-coordinator',
@@ -11,37 +13,31 @@ import { DashboardTableData } from './dashboard-table-data';
   styleUrl: './dashboard-add-new-runner-coordinator.component.scss',
 })
 export class DashboardAddNewRunnerCoordinatorComponent {
-  private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(
-    DashBoardAddNewRunnerCoordinatorRadioTowerService,
-  );
+  private readonly dashboardState = inject(DashboardStateService);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly matDialog = inject(MatDialog);
 
   constructor() {
-    effect(() => {
-      const signal = this.dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable();
-
-      if (signal()?.state !== 'RESPONSE_DATA') {
-        return;
-      }
-
-      this.openNewRunnerDialog().then(() => console.log('NewRunnerRegisterComponent works'));
-    });
+    this.dashboardState.newRunnerRequested$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => void this.openNewRunnerDialog());
   }
 
-  async openNewRunnerDialog() {
+  async openNewRunnerDialog(): Promise<void> {
     const { NewRunnerRegisterComponent } =
       await import('./new-runner-register/new-runner-register.component');
 
-    this.matDialog
-      .open(NewRunnerRegisterComponent, { disableClose: true })
-      .afterClosed()
-      .pipe(filter((it) => it !== undefined && it !== null))
-      .subscribe((result: DashboardTableData) => {
-        console.log(`Dialog is closed: ${JSON.stringify(result)}`);
-        this.dashBoardAddNewRunnerCoordinatorRadioTower.emitMessage({
-          state: 'SEND_REQUEST',
-          data: result,
-        });
-      });
+    const result = await firstValueFrom(
+      this.matDialog
+        .open<NewRunnerRegisterComponentType, undefined, DashboardTableData>(
+          NewRunnerRegisterComponent,
+          { disableClose: true },
+        )
+        .afterClosed(),
+    );
+
+    if (result !== undefined) {
+      this.dashboardState.addRunner(result);
+    }
   }
 }

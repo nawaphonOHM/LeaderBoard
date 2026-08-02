@@ -1,24 +1,25 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { DashboardAddNewRunnerCoordinatorComponent } from './dashboard-add-new-runner-coordinator.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from './dash-board-add-new-runner-coordinator-radio-tower.service';
+import { DashboardStateService } from './dashboard-state.service';
+import { DashboardTableData } from './dashboard-table-data';
 import { of } from 'rxjs';
 
 describe('DashboardAddNewRunnerCoordinatorComponent', () => {
   let component: DashboardAddNewRunnerCoordinatorComponent;
   let fixture: ComponentFixture<DashboardAddNewRunnerCoordinatorComponent>;
-  let radioTower: DashBoardAddNewRunnerCoordinatorRadioTowerService;
+  let dashboardState: DashboardStateService;
   let matDialog: MatDialog;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardAddNewRunnerCoordinatorComponent, MatDialogModule],
-      providers: [DashBoardAddNewRunnerCoordinatorRadioTowerService],
+      providers: [DashboardStateService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardAddNewRunnerCoordinatorComponent);
     component = fixture.componentInstance;
-    radioTower = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTowerService);
+    dashboardState = TestBed.inject(DashboardStateService);
     matDialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
   });
@@ -27,13 +28,10 @@ describe('DashboardAddNewRunnerCoordinatorComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should open dialog when radio tower emits RESPONSE_DATA', fakeAsync(() => {
+  it('should open dialog when a new runner is requested', fakeAsync(() => {
     spyOn(component, 'openNewRunnerDialog').and.returnValue(Promise.resolve());
 
-    radioTower.emitMessage({
-      state: 'RESPONSE_DATA',
-      data: null,
-    });
+    dashboardState.requestNewRunner();
 
     tick();
     fixture.detectChanges();
@@ -41,18 +39,30 @@ describe('DashboardAddNewRunnerCoordinatorComponent', () => {
     expect(component.openNewRunnerDialog).toHaveBeenCalled();
   }));
 
-  it('should emit SEND_REQUEST when dialog is closed with data', async () => {
-    const dialogResult = { firstName: 'John' };
+  it('should add the runner when the dialog is closed with data', async () => {
+    const dialogResult: DashboardTableData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      nationalityUrlImage: 'us.png',
+      timeUsedInMillisecond: 12345,
+    };
     const dialogRefSpy = jasmine.createSpyObj({ afterClosed: of(dialogResult) });
     spyOn(matDialog, 'open').and.returnValue(dialogRefSpy);
-    spyOn(radioTower, 'emitMessage');
+    spyOn(dashboardState, 'addRunner');
 
     await component.openNewRunnerDialog();
 
     expect(matDialog.open).toHaveBeenCalled();
-    expect(radioTower.emitMessage).toHaveBeenCalledWith({
-      state: 'SEND_REQUEST',
-      data: dialogResult as unknown,
-    });
+    expect(dashboardState.addRunner).toHaveBeenCalledWith(dialogResult);
+  });
+
+  it('should not add a runner when the dialog is cancelled', async () => {
+    const dialogRefSpy = jasmine.createSpyObj({ afterClosed: of(undefined) });
+    spyOn(matDialog, 'open').and.returnValue(dialogRefSpy);
+    spyOn(dashboardState, 'addRunner');
+
+    await component.openNewRunnerDialog();
+
+    expect(dashboardState.addRunner).not.toHaveBeenCalled();
   });
 });

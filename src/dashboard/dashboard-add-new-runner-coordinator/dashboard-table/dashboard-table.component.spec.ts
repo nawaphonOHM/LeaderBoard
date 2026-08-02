@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardTableComponent } from './dashboard-table.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board-add-new-runner-coordinator-radio-tower.service';
+import { DashboardStateService } from '../dashboard-state.service';
 import { TIME_UNIT } from '../time-unit';
 import { DashboardTableData } from '../dashboard-table-data';
 
 describe('DashboardTableComponent', () => {
   let component: DashboardTableComponent;
   let fixture: ComponentFixture<DashboardTableComponent>;
-  let radioTower: DashBoardAddNewRunnerCoordinatorRadioTowerService;
+  let dashboardState: DashboardStateService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardTableComponent, NoopAnimationsModule],
       providers: [
-        DashBoardAddNewRunnerCoordinatorRadioTowerService,
+        DashboardStateService,
         {
           provide: TIME_UNIT,
           useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 },
@@ -24,7 +24,7 @@ describe('DashboardTableComponent', () => {
 
     fixture = TestBed.createComponent(DashboardTableComponent);
     component = fixture.componentInstance;
-    radioTower = TestBed.inject(DashBoardAddNewRunnerCoordinatorRadioTowerService);
+    dashboardState = TestBed.inject(DashboardStateService);
     fixture.detectChanges();
   });
 
@@ -32,7 +32,7 @@ describe('DashboardTableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should add new data when radio tower emits SEND_REQUEST', () => {
+  it('should reflect runners added to the dashboard state', () => {
     const newData: DashboardTableData = {
       firstName: 'Jane',
       lastName: 'Smith',
@@ -40,35 +40,26 @@ describe('DashboardTableComponent', () => {
       timeUsedInMillisecond: 50000,
     };
 
-    radioTower.emitMessage({
-      state: 'SEND_REQUEST',
-      data: newData,
-    });
+    dashboardState.addRunner(newData);
 
     fixture.detectChanges();
 
-    expect((component as unknown as { data: DashboardTableComponent['data'] }).data).toContain(
-      newData,
-    );
-    expect(
-      (component as unknown as { sortedData: DashboardTableComponent['sortedData'] }).sortedData
-        .data,
-    ).toContain(newData);
+    expect(component['sortedData'].data).toContain(newData);
   });
 
-  it('should not add data when state is not SEND_REQUEST', () => {
-    const initialCount = (component as unknown as { data: DashboardTableComponent['data'] }).data
-      .length;
+  it('should not duplicate runners when the view updates', () => {
+    const newData: DashboardTableData = {
+      firstName: 'Jane',
+      lastName: 'Smith',
+      nationalityUrlImage: 'us.png',
+      timeUsedInMillisecond: 50000,
+    };
 
-    radioTower.emitMessage({
-      state: 'RESPONSE_DATA',
-      data: null,
-    });
+    dashboardState.addRunner(newData);
 
     fixture.detectChanges();
+    fixture.detectChanges();
 
-    expect((component as unknown as { data: DashboardTableComponent['data'] }).data.length).toBe(
-      initialCount,
-    );
+    expect(component['sortedData'].data).toEqual([newData]);
   });
 });

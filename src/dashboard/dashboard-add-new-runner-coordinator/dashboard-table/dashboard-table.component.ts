@@ -1,5 +1,4 @@
 import { Component, effect, viewChild, inject } from '@angular/core';
-import { DashboardTableData } from '../dashboard-table-data';
 import {
   MatCell,
   MatCellDef,
@@ -18,7 +17,8 @@ import { FullNamePipe } from './full-name.pipe';
 import { NgOptimizedImage } from '@angular/common';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { TimeMinSecondMilliSecondPipe } from './time-min-second-milli-second.pipe';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board-add-new-runner-coordinator-radio-tower.service';
+import { DashboardStateService } from '../dashboard-state.service';
+import { DashboardTableData } from '../dashboard-table-data';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -46,29 +46,15 @@ import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board
 export class DashboardTableComponent {
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
-  protected readonly data: DashboardTableData[] = [];
-
-  protected readonly sortedData = new MatTableDataSource(this.data);
+  protected readonly sortedData = new MatTableDataSource<DashboardTableData>([]);
 
   protected readonly matSortSignal = viewChild.required(MatSort);
 
-  private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(
-    DashBoardAddNewRunnerCoordinatorRadioTowerService,
-  );
+  private readonly dashboardState = inject(DashboardStateService);
 
   constructor() {
     effect(() => {
-      const signal = this.dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable();
-
-      const dataFromSignal = signal();
-
-      if (dataFromSignal?.state !== 'SEND_REQUEST') {
-        return;
-      }
-
-      this.data.push(dataFromSignal.data as DashboardTableData);
-
-      this.sortedData.data = this.data;
+      this.sortedData.data = [...this.dashboardState.runners()];
     });
 
     effect(() => {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { MatCardTitle } from '@angular/material/card';
 
 @Component({
   selector: 'app-dashboard-header',

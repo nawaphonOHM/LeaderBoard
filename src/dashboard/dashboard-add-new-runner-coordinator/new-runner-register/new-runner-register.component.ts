@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
@@ -12,8 +11,8 @@ import { GeneralInputComponent } from './general-input/general-input.component';
 import { Country, CountrySelectComponent } from '@wlucha/ng-country-select';
 import { TimeUsedForFinnishRunningComponent } from './time-used-for-finnish-running/time-used-for-finnish-running.component';
 import { CONFIGURATION, ConfigurationMain } from './configurations';
-import { UnexpectedToReachHere } from './unexpected-to-reach-here';
 import { TimeUsedForFinnishRunningEvent } from './time-used-for-finnish-running-event';
+import { DashboardTableData } from '../dashboard-table-data';
 
 @Component({
   selector: 'app-new-runner-register',
@@ -22,7 +21,6 @@ import { TimeUsedForFinnishRunningEvent } from './time-used-for-finnish-running-
     MatDialogContent,
     MatDialogActions,
     MatButton,
-    MatDialogClose,
     ReactiveFormsModule,
     GeneralInputComponent,
     CountrySelectComponent,
@@ -34,54 +32,60 @@ import { TimeUsedForFinnishRunningEvent } from './time-used-for-finnish-running-
 })
 export class NewRunnerRegisterComponent {
   protected readonly inputGroup = new FormGroup({
-    firstName: new FormControl('', {
+    firstName: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required],
+      validators: [Validators.required, Validators.pattern(/\S/), Validators.maxLength(80)],
     }),
-    lastName: new FormControl('', {
+    lastName: new FormControl<string>('', {
       nonNullable: true,
-      validators: [Validators.required],
+      validators: [Validators.required, Validators.pattern(/\S/), Validators.maxLength(80)],
     }),
     nationality: new FormControl<Country | null>(null, {
       nonNullable: false,
       validators: [Validators.required],
     }),
-    timeUsedInMillisecond: new FormControl(-1, {
-      nonNullable: true,
-      validators: [Validators.min(0)],
+    timeUsedInMillisecond: new FormControl<number | null>(null, {
+      validators: [Validators.required, Validators.min(0)],
     }),
   });
 
-  private readonly matDialog = inject(MatDialogRef<NewRunnerRegisterComponent>);
+  private readonly matDialog = inject(MatDialogRef<NewRunnerRegisterComponent, DashboardTableData>);
 
   private readonly configuration = inject(CONFIGURATION);
 
-  cancelCallback() {
+  cancelCallback(): void {
     this.matDialog.close();
   }
 
-  save() {
-    const rawInput = this.inputGroup.getRawValue();
+  save(): void {
+    if (this.inputGroup.invalid) {
+      this.inputGroup.markAllAsTouched();
+      return;
+    }
 
-    if (rawInput.nationality?.alpha2 === undefined) {
-      console.log('invalid nationality');
-      throw new UnexpectedToReachHere('nationality should has a value.');
+    const rawInput = this.inputGroup.getRawValue();
+    const nationalityCode = rawInput.nationality?.alpha2;
+    const timeUsedInMillisecond = rawInput.timeUsedInMillisecond;
+
+    if (nationalityCode === undefined || timeUsedInMillisecond === null) {
+      this.inputGroup.markAllAsTouched();
+      return;
     }
 
     this.matDialog.close({
-      firstName: rawInput.firstName,
-      lastName: rawInput.lastName,
+      firstName: rawInput.firstName.trim(),
+      lastName: rawInput.lastName.trim(),
       nationalityUrlImage: this.configuration.flagUrl.replaceAll(
         '__nationality__',
-        rawInput.nationality?.alpha2.toUpperCase(),
+        nationalityCode.toUpperCase(),
       ),
-      timeUsedInMillisecond: rawInput.timeUsedInMillisecond,
+      timeUsedInMillisecond,
     });
   }
 
-  onTimeChange(newValue: TimeUsedForFinnishRunningEvent) {
+  onTimeChange(newValue: TimeUsedForFinnishRunningEvent): void {
     if (!newValue.valid) {
-      this.inputGroup.controls.timeUsedInMillisecond.setValue(-1);
+      this.inputGroup.controls.timeUsedInMillisecond.setValue(null);
     } else {
       this.inputGroup.controls.timeUsedInMillisecond.setValue(newValue.time);
     }
