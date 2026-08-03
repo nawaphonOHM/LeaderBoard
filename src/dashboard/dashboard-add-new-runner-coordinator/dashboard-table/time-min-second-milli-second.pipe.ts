@@ -4,9 +4,19 @@ import { TIME_UNIT } from '../time-unit';
 @Pipe({
   name: 'timeMinSecondMilliSecond',
 })
+/** Formats elapsed milliseconds as minutes, seconds, and milliseconds. */
 export class TimeMinSecondMilliSecondPipe implements PipeTransform {
   private readonly TIME_UNIT = inject(TIME_UNIT);
 
+  /**
+   * Converts elapsed time to the `minutes:seconds.milliseconds` format.
+   *
+   * @param value Elapsed time in milliseconds.
+   * @returns A zero-padded elapsed-time string, clamped to zero for negative values.
+   *
+   * @example
+   * `65001` becomes `1:05.001`.
+   */
   transform(value: number, ...args: unknown[]): string {
     // Ensure non-negative input and normalize null/undefined
     const totalMs = Math.max(value || 0, 0);

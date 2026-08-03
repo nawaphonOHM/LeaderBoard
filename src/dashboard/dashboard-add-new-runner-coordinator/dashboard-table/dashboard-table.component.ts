@@ -1,5 +1,4 @@
 import { Component, effect, viewChild, inject } from '@angular/core';
-import { DashboardTableData } from '../dashboard-table-data';
 import {
   MatCell,
   MatCellDef,
@@ -18,7 +17,8 @@ import { FullNamePipe } from './full-name.pipe';
 import { NgOptimizedImage } from '@angular/common';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { TimeMinSecondMilliSecondPipe } from './time-min-second-milli-second.pipe';
-import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board-add-new-runner-coordinator-radio-tower.service';
+import { DashboardStateService } from '../dashboard-state.service';
+import { DashboardTableData } from '../dashboard-table-data';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -43,32 +43,23 @@ import { DashBoardAddNewRunnerCoordinatorRadioTowerService } from '../dash-board
   templateUrl: './dashboard-table.component.html',
   styleUrl: './dashboard-table.component.scss',
 })
+/** Renders and sorts the runners held by the dashboard state service. */
 export class DashboardTableComponent {
+  /** Column identifiers used by the table header and row definitions. */
   protected readonly columnDefs = ['no', 'fullName', 'nationality', 'timeUsedInMillisecond'];
 
-  protected readonly data: DashboardTableData[] = [];
+  /** Material table data source populated from the current runner signal. */
+  protected readonly sortedData = new MatTableDataSource<DashboardTableData>([]);
 
-  protected readonly sortedData = new MatTableDataSource(this.data);
-
+  /** Required view query for the table's Material sort controller. */
   protected readonly matSortSignal = viewChild.required(MatSort);
 
-  private readonly dashBoardAddNewRunnerCoordinatorRadioTower = inject(
-    DashBoardAddNewRunnerCoordinatorRadioTowerService,
-  );
+  private readonly dashboardState = inject(DashboardStateService);
 
+  /** Connects dashboard state and the table's default sort order. */
   constructor() {
     effect(() => {
-      const signal = this.dashBoardAddNewRunnerCoordinatorRadioTower.requestNewObservable();
-
-      const dataFromSignal = signal();
-
-      if (dataFromSignal?.state !== 'SEND_REQUEST') {
-        return;
-      }
-
-      this.data.push(dataFromSignal.data as DashboardTableData);
-
-      this.sortedData.data = this.data;
+      this.sortedData.data = [...this.dashboardState.runners()];
     });
 
     effect(() => {

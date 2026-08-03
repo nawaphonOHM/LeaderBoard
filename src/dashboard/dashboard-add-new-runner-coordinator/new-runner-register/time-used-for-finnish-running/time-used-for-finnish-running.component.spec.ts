@@ -66,4 +66,44 @@ describe('TimeUsedForFinnishRunningComponent', () => {
       time: -1,
     });
   });
+
+  it('should accept the maximum seconds and milliseconds values', () => {
+    const spy = spyOn(component.somethingChange, 'emit');
+    const inputGroup = (
+      component as unknown as { inputGroup: TimeUsedForFinnishRunningComponent['inputGroup'] }
+    ).inputGroup;
+
+    inputGroup.patchValue({
+      minutes: '1',
+      seconds: '59',
+      milliseconds: '999',
+    });
+
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalledWith({
+      valid: true,
+      time: 119999,
+    });
+  });
+
+  it('should reject seconds and milliseconds above their limits', () => {
+    const spy = spyOn(component.somethingChange, 'emit');
+    const inputGroup = (
+      component as unknown as { inputGroup: TimeUsedForFinnishRunningComponent['inputGroup'] }
+    ).inputGroup;
+
+    inputGroup.patchValue({
+      minutes: '1',
+      seconds: '60',
+      milliseconds: '1000',
+    });
+
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalledWith({
+      valid: false,
+      time: -1,
+    });
+  });
 });

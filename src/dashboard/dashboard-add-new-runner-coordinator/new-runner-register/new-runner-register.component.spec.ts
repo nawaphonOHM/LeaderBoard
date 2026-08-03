@@ -6,12 +6,9 @@ import {
   MatDialogTitle,
   MatDialogContent,
   MatDialogActions,
-  MatDialogClose,
 } from '@angular/material/dialog';
 import { CONFIGURATION } from './configurations';
-import { UnexpectedToReachHere } from './unexpected-to-reach-here';
 import { Country } from '@wlucha/ng-country-select';
-import { TIME_UNIT } from '../time-unit';
 import {
   ReactiveFormsModule,
   FormControl,
@@ -81,10 +78,6 @@ describe('NewRunnerRegisterComponent', () => {
           provide: CONFIGURATION,
           useValue: { flagUrl: 'https://flagsapi.com/__nationality__/flat/32.png' },
         },
-        {
-          provide: TIME_UNIT,
-          useValue: { MILLISECONDS_IN_SECOND: 1000, SECOND_IN_MINUTE: 60 },
-        },
       ],
     })
       .overrideComponent(NewRunnerRegisterComponent, {
@@ -95,7 +88,6 @@ describe('NewRunnerRegisterComponent', () => {
             MatDialogContent,
             MatDialogActions,
             MatButton,
-            MatDialogClose,
             MockGeneralInput,
             MockTimeUsedForFinnishRunning,
             MockCountrySelect,
@@ -123,16 +115,19 @@ describe('NewRunnerRegisterComponent', () => {
         firstName: '',
         lastName: '',
         nationality: null,
-        timeUsedInMillisecond: -1,
+        timeUsedInMillisecond: null,
       });
     });
 
-    it('should have required validators on all fields except timeUsedInMillisecond', () => {
+    it('should reject empty and whitespace-only names', () => {
       const inputGroup = (
         component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }
       ).inputGroup;
 
       inputGroup.controls.firstName.setValue('');
+      expect(inputGroup.controls.firstName.valid).toBeFalse();
+
+      inputGroup.controls.firstName.setValue('   ');
       expect(inputGroup.controls.firstName.valid).toBeFalse();
 
       inputGroup.controls.lastName.setValue('');
@@ -178,9 +173,10 @@ describe('NewRunnerRegisterComponent', () => {
         nationalityUrlImage: 'https://flagsapi.com/US/flat/32.png',
         timeUsedInMillisecond: 12345,
       });
+      expect(matDialogRefMock.close).toHaveBeenCalledTimes(1);
     });
 
-    it('should throw UnexpectedToReachHere when nationality is missing alpha2', () => {
+    it('should not close when nationality is missing alpha2', () => {
       const inputGroup = (
         component as unknown as { inputGroup: NewRunnerRegisterComponent['inputGroup'] }
       ).inputGroup;
@@ -191,9 +187,15 @@ describe('NewRunnerRegisterComponent', () => {
         timeUsedInMillisecond: 12345,
       });
 
-      expect(() => {
-        component.save();
-      }).toThrowError(UnexpectedToReachHere, 'nationality should has a value.');
+      component.save();
+
+      expect(matDialogRefMock.close).not.toHaveBeenCalled();
+    });
+
+    it('should not close when the form is invalid', () => {
+      component.save();
+
+      expect(matDialogRefMock.close).not.toHaveBeenCalled();
     });
   });
 });
