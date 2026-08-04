@@ -273,7 +273,7 @@ The script returns `{ cycleCount, agentTriggered, envRerunCount, approachingLimi
 
 #### Progress Tracking
 
-- `no_progress_count`, circuit breaker (5 polls), and backoff reset are handled by ci-poll-decide.mjs (progress = any change in cipeStatus, selfHealingStatus, verificationStatus, or failureClassification)
+- `no_progress_count`, circuit_breaker (13 polls), and backoff reset are handled by ci-poll-decide.mjs (progress = any change in cipeStatus, selfHealingStatus, verificationStatus, or failureClassification)
 - `env_rerun_count` reset on non-environment status is handled by ci-state-update.mjs cycle-check
 - On new CI Attempt detected (poll script returns `newCipeDetected`) → reset `local_verify_count = 0`, `env_rerun_count = 0`
 
