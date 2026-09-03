@@ -36,7 +36,7 @@
     "@angular/compiler-cli": "21.2.15",
     "@nx/angular": "23.1.2",
     "@nx/workspace": "23.1.2",
-    "@schematics/angular": "21.2.13",
+    "@schematics/angular": "22.1.6",
     "@types/jasmine": "6.0.0",
     "jasmine-core": "6.3.0",
     "karma": "6.4.4",
