@@ -1,7 +1,7 @@
 <mat-form-field>
   <mat-label>{{ label() }}</mat-label>
-  <input matInput [formControl]="inputSignal()" />
-  @if (inputSignal().invalid && (inputSignal().dirty || inputSignal().touched)) {
+  <input matInput [formField]="inputSignal()" />
+  @if (inputSignal()().invalid() && (inputSignal()().dirty() || inputSignal()().touched())) {
     <mat-error>{{ errorMessage() }}</mat-error>
   }
 </mat-form-field>

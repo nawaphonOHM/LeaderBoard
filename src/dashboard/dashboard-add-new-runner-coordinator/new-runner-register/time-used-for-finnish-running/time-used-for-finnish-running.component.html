@@ -1,79 +1,77 @@
-<form [formGroup]="inputGroup">
-  <mat-form-field>
-    <mat-label>Time used (minutes)</mat-label>
-    <input matInput inputmode="numeric" formControlName="minutes" />
+<mat-form-field>
+  <mat-label>Time used (minutes)</mat-label>
+  <input matInput inputmode="numeric" [formField]="timeForm.minutes" />
 
-    @if (
-      inputGroup.controls.minutes.invalid &&
-      (inputGroup.controls.minutes.dirty || inputGroup.controls.minutes.touched) &&
-      inputGroup.controls.minutes.hasError('required')
-    ) {
-      <mat-error>This field is required.</mat-error>
-    } @else if (
-      inputGroup.controls.minutes.invalid &&
-      (inputGroup.controls.minutes.dirty || inputGroup.controls.minutes.touched) &&
-      inputGroup.controls.minutes.hasError('pattern')
-    ) {
-      <mat-error>Enter a whole number.</mat-error>
-    } @else if (
-      inputGroup.controls.minutes.invalid &&
-      (inputGroup.controls.minutes.dirty || inputGroup.controls.minutes.touched) &&
-      inputGroup.controls.minutes.hasError('min')
-    ) {
-      <mat-error
-        >You entered invalid minutes. Minutes must be a number greater than or equal to 0.
-      </mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Time used (seconds)</mat-label>
-    <input matInput inputmode="numeric" formControlName="seconds" />
+  @if (
+    timeForm.minutes().invalid() &&
+    (timeForm.minutes().dirty() || timeForm.minutes().touched()) &&
+    timeForm.minutes().getError('required')
+  ) {
+    <mat-error>This field is required.</mat-error>
+  } @else if (
+    timeForm.minutes().invalid() &&
+    (timeForm.minutes().dirty() || timeForm.minutes().touched()) &&
+    timeForm.minutes().getError('pattern')
+  ) {
+    <mat-error>Enter a whole number.</mat-error>
+  } @else if (
+    timeForm.minutes().invalid() &&
+    (timeForm.minutes().dirty() || timeForm.minutes().touched()) &&
+    timeForm.minutes().getError('min')
+  ) {
+    <mat-error
+      >You entered invalid minutes. Minutes must be a number greater than or equal to 0.
+    </mat-error>
+  }
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Time used (seconds)</mat-label>
+  <input matInput inputmode="numeric" [formField]="timeForm.seconds" />
 
-    @if (
-      inputGroup.controls.seconds.invalid &&
-      (inputGroup.controls.seconds.dirty || inputGroup.controls.seconds.touched) &&
-      inputGroup.controls.seconds.hasError('required')
-    ) {
-      <mat-error>This field is required.</mat-error>
-    } @else if (
-      inputGroup.controls.seconds.invalid &&
-      (inputGroup.controls.seconds.dirty || inputGroup.controls.seconds.touched) &&
-      inputGroup.controls.seconds.hasError('pattern')
-    ) {
-      <mat-error>Enter a whole number.</mat-error>
-    } @else if (
-      inputGroup.controls.seconds.invalid &&
-      (inputGroup.controls.seconds.dirty || inputGroup.controls.seconds.touched) &&
-      (inputGroup.controls.seconds.hasError('min') || inputGroup.controls.seconds.hasError('max'))
-    ) {
-      <mat-error>You entered invalid seconds. Seconds must be between 0 and 59. </mat-error>
-    }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Time used (milliseconds)</mat-label>
-    <input matInput inputmode="numeric" formControlName="milliseconds" />
+  @if (
+    timeForm.seconds().invalid() &&
+    (timeForm.seconds().dirty() || timeForm.seconds().touched()) &&
+    timeForm.seconds().getError('required')
+  ) {
+    <mat-error>This field is required.</mat-error>
+  } @else if (
+    timeForm.seconds().invalid() &&
+    (timeForm.seconds().dirty() || timeForm.seconds().touched()) &&
+    timeForm.seconds().getError('pattern')
+  ) {
+    <mat-error>Enter a whole number.</mat-error>
+  } @else if (
+    timeForm.seconds().invalid() &&
+    (timeForm.seconds().dirty() || timeForm.seconds().touched()) &&
+    (timeForm.seconds().getError('min') || timeForm.seconds().getError('max'))
+  ) {
+    <mat-error>You entered invalid seconds. Seconds must be between 0 and 59. </mat-error>
+  }
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Time used (milliseconds)</mat-label>
+  <input matInput inputmode="numeric" [formField]="timeForm.milliseconds" />
 
-    @if (
-      inputGroup.controls.milliseconds.invalid &&
-      (inputGroup.controls.milliseconds.dirty || inputGroup.controls.milliseconds.touched) &&
-      inputGroup.controls.milliseconds.hasError('required')
-    ) {
-      <mat-error>This field is required.</mat-error>
-    } @else if (
-      inputGroup.controls.milliseconds.invalid &&
-      (inputGroup.controls.milliseconds.dirty || inputGroup.controls.milliseconds.touched) &&
-      inputGroup.controls.milliseconds.hasError('pattern')
-    ) {
-      <mat-error>Enter a whole number.</mat-error>
-    } @else if (
-      inputGroup.controls.milliseconds.invalid &&
-      (inputGroup.controls.milliseconds.dirty || inputGroup.controls.milliseconds.touched) &&
-      (inputGroup.controls.milliseconds.hasError('min') ||
-        inputGroup.controls.milliseconds.hasError('max'))
-    ) {
-      <mat-error
-        >You entered invalid milliseconds. Milliseconds must be between 0 and 999.
-      </mat-error>
-    }
-  </mat-form-field>
-</form>
+  @if (
+    timeForm.milliseconds().invalid() &&
+    (timeForm.milliseconds().dirty() || timeForm.milliseconds().touched()) &&
+    timeForm.milliseconds().getError('required')
+  ) {
+    <mat-error>This field is required.</mat-error>
+  } @else if (
+    timeForm.milliseconds().invalid() &&
+    (timeForm.milliseconds().dirty() || timeForm.milliseconds().touched()) &&
+    timeForm.milliseconds().getError('pattern')
+  ) {
+    <mat-error>Enter a whole number.</mat-error>
+  } @else if (
+    timeForm.milliseconds().invalid() &&
+    (timeForm.milliseconds().dirty() || timeForm.milliseconds().touched()) &&
+    (timeForm.milliseconds().getError('min') ||
+      timeForm.milliseconds().getError('max'))
+  ) {
+    <mat-error
+      >You entered invalid milliseconds. Milliseconds must be between 0 and 999.
+    </mat-error>
+  }
+</mat-form-field>

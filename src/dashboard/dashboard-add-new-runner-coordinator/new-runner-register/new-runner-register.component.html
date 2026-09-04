@@ -1,16 +1,16 @@
 <h2 mat-dialog-title>Add runner who finished the race</h2>
 <mat-dialog-content>
-  <form [formGroup]="inputGroup">
+  <form>
     <div>
       <app-general-input
-        [input]="inputGroup.controls.firstName"
+        [input]="runnerForm.firstName"
         label="First Name"
         errorMessage="Enter a first name"
       />
     </div>
     <div>
       <app-general-input
-        [input]="inputGroup.controls.lastName"
+        [input]="runnerForm.lastName"
         label="Last Name"
         errorMessage="Enter a last name"
       />
@@ -20,7 +20,7 @@
         requiredErrorMessage="Select the runner's nationality"
         [showRequiredErrorMessage]="true"
         [required]="true"
-        [formControl]="inputGroup.controls.nationality"
+        [formField]="runnerForm.nationality"
         placeholder="What is runner nationality?"
       />
     </div>
@@ -31,5 +31,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button matButton (click)="cancelCallback()">Cancel</button>
-  <button matButton (click)="save()" [disabled]="inputGroup.invalid">Save</button>
+  <button matButton (click)="save()" [disabled]="runnerForm().invalid()">Save</button>
 </mat-dialog-actions>
