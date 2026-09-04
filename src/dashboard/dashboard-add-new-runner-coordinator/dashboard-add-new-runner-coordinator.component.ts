@@ -1,7 +1,7 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, inject, injectAsync } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { firstValueFrom } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import type { MatDialog } from '@angular/material/dialog';
 import { DashboardTableData } from './dashboard-table-data';
 import { DashboardStateService } from './dashboard-state.service';
 import type { NewRunnerRegisterComponent as NewRunnerRegisterComponentType } from './new-runner-register/new-runner-register.component';
@@ -16,7 +16,9 @@ import type { NewRunnerRegisterComponent as NewRunnerRegisterComponentType } fro
 export class DashboardAddNewRunnerCoordinatorComponent {
   private readonly dashboardState = inject(DashboardStateService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly matDialog = inject(MatDialog);
+  private readonly matDialog = injectAsync(
+    () => import('@angular/material/dialog').then((m) => m.MatDialog),
+  );
 
   /** Subscribes to registration requests for the lifetime of this component. */
   constructor() {
@@ -34,11 +36,13 @@ export class DashboardAddNewRunnerCoordinatorComponent {
    * @returns A promise that settles after the dialog result has been handled.
    */
   async openNewRunnerDialog(): Promise<void> {
-    const { NewRunnerRegisterComponent } =
-      await import('./new-runner-register/new-runner-register.component');
+    const [{ NewRunnerRegisterComponent }, matDialog] = await Promise.all([
+      import('./new-runner-register/new-runner-register.component'),
+      this.matDialog(),
+    ]);
 
     const result = await firstValueFrom(
-      this.matDialog
+      matDialog
         .open<NewRunnerRegisterComponentType, undefined, DashboardTableData>(
           NewRunnerRegisterComponent,
           { disableClose: true },
