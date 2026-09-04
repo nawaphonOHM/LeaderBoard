@@ -1,12 +1,10 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Service, Signal, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DashboardTableData } from './dashboard-table-data';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 /** Owns the in-memory runner state shared by dashboard controls. */
-export class DashboardStateService {
+export default class DashboardStateService {
   private readonly newRunnerRequests = new Subject<void>();
 
   /** Emits whenever a consumer asks to open the new-runner registration flow. */
