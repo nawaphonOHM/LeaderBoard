@@ -4,7 +4,7 @@ import { DashboardTableData } from './dashboard-table-data';
 
 @Service()
 /** Owns the in-memory runner state shared by dashboard controls. */
-export default class DashboardStateService {
+export class DashboardStateService {
   private readonly newRunnerRequests = new Subject<void>();
 
   /** Emits whenever a consumer asks to open the new-runner registration flow. */
@@ -29,3 +29,5 @@ export default class DashboardStateService {
     this.runnersState.update((runners) => [...runners, runner]);
   }
 }
+
+export default DashboardStateService;

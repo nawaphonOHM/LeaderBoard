@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, injectAsync } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { DashboardStateService } from '../dashboard-state.service';
 
 @Component({
   selector: 'app-dashboard-add-new-runner-button',
@@ -10,10 +9,11 @@ import { DashboardStateService } from '../dashboard-state.service';
 })
 /** Publishes the user's request to register a new leaderboard runner. */
 export class DashboardAddNewRunnerButtonComponent {
-  private readonly dashboardState = inject(DashboardStateService);
+  private readonly dashboardStateToken = injectAsync(() => import('../dashboard-state.service'));
 
   /** Notifies the dashboard coordinator that the registration dialog should open. */
-  askForNewRunner(): void {
-    this.dashboardState.requestNewRunner();
+  async askForNewRunner(): Promise<void> {
+    const dashboardState = await this.dashboardStateToken();
+    dashboardState.requestNewRunner();
   }
 }
