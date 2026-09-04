@@ -23,9 +23,9 @@ describe('DashboardAddNewRunnerButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should request a new runner when askForNewRunner is called', () => {
+  it('should request a new runner when askForNewRunner is called', async () => {
     spyOn(dashboardState, 'requestNewRunner');
-    component.askForNewRunner();
+    await component.askForNewRunner();
     expect(dashboardState.requestNewRunner).toHaveBeenCalled();
   });
 
