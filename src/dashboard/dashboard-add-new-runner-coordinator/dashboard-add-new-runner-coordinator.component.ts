@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject, injectAsync } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { firstValueFrom } from 'rxjs';
-import type { MatDialog } from '@angular/material/dialog';
 import { DashboardTableData } from './dashboard-table-data';
 import { DashboardStateService } from './dashboard-state.service';
 import type { NewRunnerRegisterComponent as NewRunnerRegisterComponentType } from './new-runner-register/new-runner-register.component';

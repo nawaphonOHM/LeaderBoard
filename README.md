@@ -3,7 +3,7 @@
 
 # Running Leaderboard
 
-A web application designed to track and display a leaderboard for runners. Built with **Angular 21** and **Nx 23**, it features a clean and modern dashboard using **Angular Material 21**.
+A web application designed to track and display a leaderboard for runners. Built with **Angular 22** and **Nx 23**, it features a clean and modern dashboard using **Angular Material 22**.
 
 ## Features
 
@@ -17,9 +17,9 @@ A web application designed to track and display a leaderboard for runners. Built
 
 ## Tech Stack
 
-- **Framework**: [Angular 21](https://angular.dev/)
+- **Framework**: [Angular 22](https://angular.dev/)
 - **Monorepo Management**: [Nx 23](https://nx.dev/)
-- **UI Components**: [Angular Material 21](https://material.angular.io/)
+- **UI Components**: [Angular Material 22](https://material.angular.io/)
 - **State Management**: Angular Signals for runner state and RxJS for one-time UI commands.
 - **Styling**: SCSS (pre-compiled to CSS).
 - **Third-party Libraries**:
