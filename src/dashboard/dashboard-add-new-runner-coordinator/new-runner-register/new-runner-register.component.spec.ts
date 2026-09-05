@@ -341,7 +341,9 @@ describe('NewRunnerRegisterComponent', () => {
 
   describe('Save button state', () => {
     it('should disable the save button when form is invalid and enable when valid', () => {
-      const saveButton = fixture.nativeElement.querySelector('button:last-child') as HTMLButtonElement;
+      const saveButton = fixture.nativeElement.querySelector(
+        'button:last-child',
+      ) as HTMLButtonElement;
       expect(saveButton.disabled).toBeTrue();
 
       runnerModel.set({

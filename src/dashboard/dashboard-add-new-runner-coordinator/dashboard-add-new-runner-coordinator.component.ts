@@ -15,8 +15,8 @@ import type { NewRunnerRegisterComponent as NewRunnerRegisterComponentType } fro
 export class DashboardAddNewRunnerCoordinatorComponent {
   private readonly dashboardState = inject(DashboardStateService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly matDialog = injectAsync(
-    () => import('@angular/material/dialog').then((m) => m.MatDialog),
+  private readonly matDialog = injectAsync(() =>
+    import('@angular/material/dialog').then((m) => m.MatDialog),
   );
 
   /** Subscribes to registration requests for the lifetime of this component. */
