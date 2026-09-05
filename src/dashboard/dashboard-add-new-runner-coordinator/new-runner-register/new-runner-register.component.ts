@@ -1,11 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   MatDialogActions,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  form,
+  FormField,
+  maxLength,
+  min,
+  pattern,
+  required,
+  submit,
+  validate,
+} from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { GeneralInputComponent } from './general-input/general-input.component';
 import { Country, CountrySelectComponent } from '@wlucha/ng-country-select';
@@ -21,7 +30,7 @@ import { DashboardTableData } from '../dashboard-table-data';
     MatDialogContent,
     MatDialogActions,
     MatButton,
-    ReactiveFormsModule,
+    FormField,
     GeneralInputComponent,
     CountrySelectComponent,
     TimeUsedForFinnishRunningComponent,
@@ -32,23 +41,47 @@ import { DashboardTableData } from '../dashboard-table-data';
 })
 /** Collects and validates the data needed to add a runner to the leaderboard. */
 export class NewRunnerRegisterComponent {
-  /** Form controls for the runner identity, nationality, and finish time. */
-  protected readonly inputGroup = new FormGroup({
-    firstName: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.pattern(/\S/), Validators.maxLength(80)],
-    }),
-    lastName: new FormControl<string>('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.pattern(/\S/), Validators.maxLength(80)],
-    }),
-    nationality: new FormControl<Country | null>(null, {
-      nonNullable: false,
-      validators: [Validators.required],
-    }),
-    timeUsedInMillisecond: new FormControl<number | null>(null, {
-      validators: [Validators.required, Validators.min(0)],
-    }),
+  /** Signal-based data model for the runner. */
+  protected readonly runnerModel = signal({
+    firstName: '',
+    lastName: '',
+    nationality: {
+      alpha2: '',
+      alpha3: '',
+      translations: {
+        de: '',
+        en: '',
+        fr: '',
+        it: '',
+        es: '',
+        ar: '',
+        zh: '',
+        hi: '',
+        bn: '',
+        pt: '',
+        ru: '',
+      },
+    } as Country,
+    timeUsedInMillisecond: -1,
+  });
+
+  /** Signal form for the runner identity, nationality, and finish time. */
+  protected readonly runnerForm = form(this.runnerModel, (s) => {
+    required(s.firstName, { message: 'Enter a first name' });
+    pattern(s.firstName, /\S/, { message: 'Enter a first name' });
+    maxLength(s.firstName, 80);
+
+    required(s.lastName, { message: 'Enter a last name' });
+    pattern(s.lastName, /\S/, { message: 'Enter a last name' });
+    maxLength(s.lastName, 80);
+
+    validate(s.nationality, ({ value }) =>
+      !value()?.alpha2
+        ? { kind: 'required', message: "Select the runner's nationality" }
+        : undefined,
+    );
+
+    min(s.timeUsedInMillisecond, 0);
   });
 
   private readonly matDialog = inject(MatDialogRef<NewRunnerRegisterComponent, DashboardTableData>);
@@ -68,28 +101,24 @@ export class NewRunnerRegisterComponent {
    * messages become visible.
    */
   save(): void {
-    if (this.inputGroup.invalid) {
-      this.inputGroup.markAllAsTouched();
-      return;
-    }
+    submit(this.runnerForm, async () => {
+      const rawInput = this.runnerModel();
+      const nationalityCode = rawInput.nationality?.alpha2;
+      const timeUsedInMillisecond = rawInput.timeUsedInMillisecond;
 
-    const rawInput = this.inputGroup.getRawValue();
-    const nationalityCode = rawInput.nationality?.alpha2;
-    const timeUsedInMillisecond = rawInput.timeUsedInMillisecond;
+      if (!nationalityCode || timeUsedInMillisecond < 0) {
+        return;
+      }
 
-    if (nationalityCode === undefined || timeUsedInMillisecond === null) {
-      this.inputGroup.markAllAsTouched();
-      return;
-    }
-
-    this.matDialog.close({
-      firstName: rawInput.firstName.trim(),
-      lastName: rawInput.lastName.trim(),
-      nationalityUrlImage: this.configuration.flagUrl.replaceAll(
-        '__nationality__',
-        nationalityCode.toUpperCase(),
-      ),
-      timeUsedInMillisecond,
+      this.matDialog.close({
+        firstName: rawInput.firstName.trim(),
+        lastName: rawInput.lastName.trim(),
+        nationalityUrlImage: this.configuration.flagUrl.replaceAll(
+          '__nationality__',
+          nationalityCode.toUpperCase(),
+        ),
+        timeUsedInMillisecond,
+      });
     });
   }
 
@@ -99,10 +128,9 @@ export class NewRunnerRegisterComponent {
    * @param newValue Validation state and millisecond value emitted by the time editor.
    */
   onTimeChange(newValue: TimeUsedForFinnishRunningEvent): void {
-    if (!newValue.valid) {
-      this.inputGroup.controls.timeUsedInMillisecond.setValue(null);
-    } else {
-      this.inputGroup.controls.timeUsedInMillisecond.setValue(newValue.time);
-    }
+    this.runnerModel.update((m) => ({
+      ...m,
+      timeUsedInMillisecond: newValue.valid ? newValue.time : -1,
+    }));
   }
 }

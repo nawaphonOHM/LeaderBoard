@@ -8,7 +8,8 @@ A web application designed to track and display a leaderboard for runners. Built
 ## Features
 
 - **Dashboard**: View a sorted leaderboard of runners with their rank, full name, nationality, and time.
-- **Add New Runner**: Integrated form to register new runners with ease.
+- **Add New Runner**: Model-driven Angular Signal Form for registering runners with declarative validation for names, nationality, and finish time.
+- **Signal Forms**: Uses Angular 22's `@angular/forms/signals` API for fine-grained form state, automatic validation, and signal-based submission handling.
 - **Sorting and Formatting**: Automatic sorting by finish time (ascending) and custom pipes for:
   - Full Name: Displays first and last name combined.
   - Time Formatting: Converts milliseconds into a readable `mm:ss.SSS` format.
@@ -20,7 +21,7 @@ A web application designed to track and display a leaderboard for runners. Built
 - **Framework**: [Angular 22](https://angular.dev/)
 - **Monorepo Management**: [Nx 23](https://nx.dev/)
 - **UI Components**: [Angular Material 22](https://material.angular.io/)
-- **State Management**: Angular Signals for runner state and RxJS for one-time UI commands.
+- **Forms and State Management**: Angular Signals and Angular 22 Signal Forms (`@angular/forms/signals`) for model-driven form state and validation; RxJS for one-time UI commands.
 - **Styling**: SCSS (pre-compiled to CSS).
 - **Third-party Libraries**:
   - `rxjs`: For reactive data flows.
@@ -84,9 +85,9 @@ npm test
     - `dashboard-table`: Displays sorted runner data using `MatTable`.
       - `full-name.pipe.ts`: Combines runner's first and last name (`FullNamePipe`).
       - `time-min-second-milli-second.pipe.ts`: Formats time in milliseconds to a readable string (`TimeMinSecondMilliSecondPipe`).
-    - `new-runner-register`: Form for new runner registration.
+    - `new-runner-register`: Signal Form for new runner registration, built from a writable `runnerModel` and its `runnerForm` field tree.
       - `configurations.ts`: Configuration constants (e.g., flag APIs).
       - `time-used-for-finnish-running-event.ts`: Event contract for a completed run.
-      - `general-input`: Reusable input field component.
-      - `time-used-for-finnish-running`: Specialized input for recording runner completion time.
+      - `general-input`: Reusable `FieldTree<string>` input component bound with the Signal Forms `[formField]` directive.
+      - `time-used-for-finnish-running`: Specialized Signal Form for recording runner completion time; derives milliseconds through an `effect()` and emits validity updates.
         - `time.ts`: Time-related type used by the completion time input.
