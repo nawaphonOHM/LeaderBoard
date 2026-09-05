@@ -5,6 +5,12 @@
 
 A web application designed to track and display a leaderboard for runners. Built with **Angular 22** and **Nx 23**, it features a clean and modern dashboard using **Angular Material 22**.
 
+## Demo
+
+<video src="assets/videos/leaderboard-e2e.webm" width="100%" controls autoplay loop muted playsinline>
+  Your browser does not support the video tag.
+</video>
+
 ## Features
 
 - **Dashboard**: View a sorted leaderboard of runners with their rank, full name, nationality, and time.
@@ -15,6 +21,7 @@ A web application designed to track and display a leaderboard for runners. Built
   - Time Formatting: Converts milliseconds into a readable `mm:ss.SSS` format.
 - **Nationalities Support**: Built-in support for country flags using `flagsapi.com` and `@wlucha/ng-country-select`.
 - **Responsive Layout**: Designed to look great on various screen sizes using Angular Material's grid and card components.
+- **Automated End-to-End Testing**: Comprehensive test suite with [Playwright](https://playwright.dev/) verifying all core user flows, form validations, sorting behavior, and video recordings.
 
 ## Tech Stack
 
@@ -22,6 +29,7 @@ A web application designed to track and display a leaderboard for runners. Built
 - **Monorepo Management**: [Nx 23](https://nx.dev/)
 - **UI Components**: [Angular Material 22](https://material.angular.io/)
 - **Forms and State Management**: Angular Signals and Angular 22 Signal Forms (`@angular/forms/signals`) for model-driven form state and validation; RxJS for one-time UI commands.
+- **E2E Testing**: [Playwright](https://playwright.dev/) (`@playwright/test`) with Page Object Model architecture and video recording.
 - **Styling**: SCSS (pre-compiled to CSS).
 - **Third-party Libraries**:
   - `rxjs`: For reactive data flows.
@@ -72,6 +80,53 @@ To execute the project's unit tests using Nx and Karma, run:
 npm test
 ```
 
+For a single non-watching run in headless Chrome:
+
+```bash
+npm run test:no-watch
+```
+
+### Running End-to-End (E2E) Tests
+
+End-to-End tests are built using **Playwright** and validate user flows such as initial dashboard loading, form validations, dialog cancellation, runner creation, and automatic leaderboard table sorting.
+
+To run the full E2E test suite:
+
+```bash
+npm run e2e
+# or via Nx directly
+npm exec nx e2e LeaderBoard
+```
+
+Playwright will automatically launch the Angular dev server on `http://localhost:4200` via its `webServer` configuration.
+
+#### Interactive UI Mode
+
+To run Playwright in interactive UI mode for visual debugging:
+
+```bash
+npm run e2e:ui
+# or via Nx directly
+npm exec nx e2e LeaderBoard --configuration=ui
+```
+
+#### Viewing Test Reports
+
+To view the generated HTML test report:
+
+```bash
+npm run e2e:report
+# or
+npx playwright show-report
+```
+
+#### Video Recordings
+
+Playwright is configured with `video: 'on'` to record video files of all test executions.
+
+- Generated test videos are stored in `test-results/<test-name>/video.webm`.
+- A showcase demo video is preserved under `assets/videos/leaderboard-e2e.webm`.
+
 ## Project Structure
 
 - `src/dashboard`: Root container for the leaderboard view.
@@ -91,3 +146,9 @@ npm test
       - `general-input`: Reusable `FieldTree<string>` input component bound with the Signal Forms `[formField]` directive.
       - `time-used-for-finnish-running`: Specialized Signal Form for recording runner completion time; derives milliseconds through an `effect()` and emits validity updates.
         - `time.ts`: Time-related type used by the completion time input.
+- `e2e`: End-to-End test suites using Playwright.
+  - `pages/leaderboard.page.ts`: Page Object Model encapsulating dashboard locators and actions.
+  - `specs/leaderboard-initial-state.spec.ts`: Tests header display and empty leaderboard state.
+  - `specs/runner-registration-validation.spec.ts`: Tests form validation rules, bounds checks, and dialog cancellation.
+  - `specs/runner-registration-sorting.spec.ts`: Tests runner addition, formatting, and ascending leaderboard sorting.
+- `assets/videos`: Contains recorded demonstration videos (`leaderboard-e2e.webm`).

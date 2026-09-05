@@ -8,6 +8,9 @@
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "test:no-watch": "nx test --watch=false --browsers=ChromeHeadless",
+    "e2e": "nx e2e LeaderBoard",
+    "e2e:ui": "nx e2e LeaderBoard --configuration=ui",
+    "e2e:report": "playwright show-report",
     "analyze-source-map": "source-map-explorer dist/**/*.js --no-border-checks",
     "format": "nx format:write --all"
   },
@@ -36,6 +39,7 @@
     "@angular/compiler-cli": "22.1.5",
     "@nx/angular": "23.2.0",
     "@nx/workspace": "23.2.0",
+    "@playwright/test": "1.63.0",
     "@schematics/angular": "22.1.7",
     "@types/jasmine": "6.0.0",
     "istanbul-lib-instrument": "6.0.3",
