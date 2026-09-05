@@ -56,3 +56,6 @@ src/**/*.css
 .angular
 
 .junie
+
+playwright-report/
+test-results/

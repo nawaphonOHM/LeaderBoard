@@ -67,8 +67,7 @@
   } @else if (
     timeForm.milliseconds().invalid() &&
     (timeForm.milliseconds().dirty() || timeForm.milliseconds().touched()) &&
-    (timeForm.milliseconds().getError('min') ||
-      timeForm.milliseconds().getError('max'))
+    (timeForm.milliseconds().getError('min') || timeForm.milliseconds().getError('max'))
   ) {
     <mat-error
       >You entered invalid milliseconds. Milliseconds must be between 0 and 999.
