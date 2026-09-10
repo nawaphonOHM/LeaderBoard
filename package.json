@@ -8,6 +8,7 @@
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "test:no-watch": "nx test --watch=false --browsers=ChromeHeadless",
+    "test-no-watch-ci": "nx test --watch=false --browsers=ChromeHeadlessCI",
     "e2e": "nx e2e LeaderBoard",
     "e2e:ui": "nx e2e LeaderBoard --configuration=ui",
     "e2e:report": "playwright show-report",
