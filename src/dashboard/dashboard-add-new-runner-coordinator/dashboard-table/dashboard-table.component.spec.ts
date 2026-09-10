@@ -36,7 +36,7 @@ describe('DashboardTableComponent', () => {
     const newData: DashboardTableData = {
       firstName: 'Jane',
       lastName: 'Smith',
-      nationalityUrlImage: 'us.png',
+      nationalityUrlImage: 'about:blank',
       timeUsedInMillisecond: 50000,
     };
 
@@ -51,7 +51,7 @@ describe('DashboardTableComponent', () => {
     const newData: DashboardTableData = {
       firstName: 'Jane',
       lastName: 'Smith',
-      nationalityUrlImage: 'us.png',
+      nationalityUrlImage: 'about:blank',
       timeUsedInMillisecond: 50000,
     };
 
