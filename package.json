@@ -37,7 +37,7 @@
     "@angular/build": "22.1.7",
     "@angular/cli": "22.1.7",
     "@angular/compiler-cli": "22.1.5",
-    "@nx/angular": "23.2.0",
+    "@nx/angular": "23.2.1",
     "@nx/workspace": "23.2.0",
     "@playwright/test": "1.63.0",
     "@schematics/angular": "22.1.7",
