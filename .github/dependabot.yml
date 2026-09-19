@@ -5,7 +5,29 @@
 
 version: 2
 updates:
-  - package-ecosystem: 'npm' # See documentation for possible values
+  - package-ecosystem: npm # See documentation for possible values
     directory: '/' # Location of package manifests
     schedule:
       interval: 'weekly'
+    groups:
+      angular-core:
+        patterns:
+          - "@angular/*"
+        update-types:
+          - "patch"
+          - "minor"
+      angular-material:
+        patterns:
+          - "@angular/material*"
+          - "@angular/cdk*"
+        update-types:
+          - "patch"
+          - "minor"
+      major-update:
+        patterns:
+          - "@angular/*"
+          - "@angular/material*"
+          - "@angular/cdk*"
+          - "@wlucha/ng-country-select"
+        update-types:
+          - "major"
