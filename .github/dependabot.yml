@@ -37,3 +37,4 @@ updates:
         update-types:
           - "patch"
           - "minor"
+    versioning-strategy: increase
