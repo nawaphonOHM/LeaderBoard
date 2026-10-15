@@ -10,9 +10,10 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      angular-core:
+      angular-core-and-angular-animation:
         patterns:
-          - "@angular/*"
+          - "@angular/core"
+          - "@angular/animations"
         update-types:
           - "patch"
           - "minor"
