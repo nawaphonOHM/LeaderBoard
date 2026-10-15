@@ -17,10 +17,10 @@ updates:
         update-types:
           - "patch"
           - "minor"
-      angular-material:
+      angular-material-and-angular-cdk:
         patterns:
-          - "@angular/material*"
-          - "@angular/cdk*"
+          - "@angular/material"
+          - "@angular/cdk"
         update-types:
           - "patch"
           - "minor"
