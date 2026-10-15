@@ -10,24 +10,23 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      angular-core:
+      angular-core-and-angular-animation:
         patterns:
-          - "@angular/*"
+          - "@angular/core"
+          - "@angular/animations"
         update-types:
           - "patch"
           - "minor"
-      angular-material:
+      angular-material-and-angular-cdk:
         patterns:
-          - "@angular/material*"
-          - "@angular/cdk*"
+          - "@angular/material"
+          - "@angular/cdk"
         update-types:
           - "patch"
           - "minor"
       major-update:
         patterns:
           - "@angular/*"
-          - "@angular/material*"
-          - "@angular/cdk*"
           - "@wlucha/ng-country-select"
         update-types:
           - "major"
@@ -38,3 +37,4 @@ updates:
         update-types:
           - "patch"
           - "minor"
+    versioning-strategy: increase
