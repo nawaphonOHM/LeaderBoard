@@ -27,8 +27,6 @@ updates:
       major-update:
         patterns:
           - "@angular/*"
-          - "@angular/material*"
-          - "@angular/cdk*"
           - "@wlucha/ng-country-select"
         update-types:
           - "major"
