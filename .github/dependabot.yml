@@ -37,4 +37,11 @@ updates:
         update-types:
           - "patch"
           - "minor"
+      angular-form-and-platform-browser:
+        patterns:
+          - "@angular/forms"
+          - "@angular/platform-browser"
+        update-types:
+          - "patch"
+          - "minor"
     versioning-strategy: increase
