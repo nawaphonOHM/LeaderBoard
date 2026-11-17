@@ -30,7 +30,7 @@ updates:
           - "@wlucha/ng-country-select"
         update-types:
           - "major"
-      angulat-common-and-angular-router:
+      angular-common-and-angular-router:
         patterns:
           - "@angular/common"
           - "@angular/router"
