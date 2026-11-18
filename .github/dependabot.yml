@@ -12,36 +12,26 @@ updates:
     groups:
       angular-core-and-angular-animation:
         patterns:
-          - "@angular/core"
-          - "@angular/animations"
+          - '@angular/core'
+          - '@angular/animations'
         update-types:
-          - "patch"
-          - "minor"
-      angular-material-and-angular-cdk:
+          - 'patch'
+          - 'minor'
+      angular-material-and-angular-cdk-and-angular-common-and-angular-router-and-angular-forms-and-angular-platform-browser:
         patterns:
-          - "@angular/material"
-          - "@angular/cdk"
+          - '@angular/material'
+          - '@angular/cdk'
+          - '@angular/common'
+          - '@angular/router'
+          - '@angular/forms'
+          - '@angular/platform-browser'
         update-types:
-          - "patch"
-          - "minor"
+          - 'patch'
+          - 'minor'
       major-update:
         patterns:
-          - "@angular/*"
-          - "@wlucha/ng-country-select"
+          - '@angular/*'
+          - '@wlucha/ng-country-select'
         update-types:
-          - "major"
-      angular-common-and-angular-router:
-        patterns:
-          - "@angular/common"
-          - "@angular/router"
-        update-types:
-          - "patch"
-          - "minor"
-      angular-form-and-platform-browser:
-        patterns:
-          - "@angular/forms"
-          - "@angular/platform-browser"
-        update-types:
-          - "patch"
-          - "minor"
+          - 'major'
     versioning-strategy: increase
