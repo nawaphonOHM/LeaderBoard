@@ -10,14 +10,7 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      angular-core-and-angular-animation:
-        patterns:
-          - '@angular/core'
-          - '@angular/animations'
-        update-types:
-          - 'patch'
-          - 'minor'
-      angular-material-and-angular-cdk-and-angular-common-and-angular-router-and-angular-forms-and-angular-platform-browser:
+      angular-material-and-angular-cdk-and-angular-common-and-angular-router-and-angular-forms-and-angular-platform-browser-and-angular-core-and-angular-animation:
         patterns:
           - '@angular/material'
           - '@angular/cdk'
@@ -25,6 +18,8 @@ updates:
           - '@angular/router'
           - '@angular/forms'
           - '@angular/platform-browser'
+          - '@angular/core'
+          - '@angular/animations'
         update-types:
           - 'patch'
           - 'minor'
