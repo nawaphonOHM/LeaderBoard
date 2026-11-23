@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      angular-material-and-angular-cdk-and-angular-common-and-angular-router-and-angular-forms-and-angular-platform-browser-and-angular-core-and-angular-animation:
+      angular-material-and-angular-cdk-and-angular-common-and-angular-router-and-angular-forms-and-angular-platform-browser-and-angular-core-and-angular-animation-and-angular-compiler-cli:
         patterns:
           - '@angular/material'
           - '@angular/cdk'
@@ -21,6 +21,7 @@ updates:
           - '@angular/core'
           - '@angular/animations'
           - '@angular/compiler'
+          - '@angular/compiler-cli'
         update-types:
           - 'patch'
           - 'minor'
