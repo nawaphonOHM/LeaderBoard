@@ -39,7 +39,7 @@
     "@angular/compiler-cli": "22.3.0",
     "@nx/angular": "24.0.6",
     "@nx/workspace": "24.0.6",
-    "@playwright/test": "1.63.0",
+    "@playwright/test": "1.65.1",
     "@schematics/angular": "22.1.8",
     "@types/jasmine": "7.0.0",
     "@types/node": "26.6.4",
