@@ -35,7 +35,7 @@
     "@angular-devkit/core": "22.3.0",
     "@angular-devkit/schematics": "22.3.0",
     "@angular/build": "22.2.5",
-    "@angular/cli": "22.2.5",
+    "@angular/cli": "22.3.0",
     "@angular/compiler-cli": "22.3.0",
     "@nx/angular": "24.0.6",
     "@nx/workspace": "24.0.6",
