@@ -40,7 +40,7 @@
     "@nx/angular": "24.0.6",
     "@nx/workspace": "24.0.6",
     "@playwright/test": "1.65.1",
-    "@schematics/angular": "22.1.8",
+    "@schematics/angular": "22.3.0",
     "@types/jasmine": "7.0.0",
     "@types/node": "26.6.4",
     "istanbul-lib-instrument": "6.0.3",
